@@ -4,11 +4,13 @@ import pandas as pd
 
 
 class Model:
-    def __init__(self, name,dist_border,dens_factor):
+    def __init__(self, name,dist_border,dens_factor, down_scope, up_scope):
         self.name = name
 
         self.dist_border = dist_border
         self.dens_factor = dens_factor
+        self.down_scope = down_scope
+        self.up_scope = up_scope
 
 
 

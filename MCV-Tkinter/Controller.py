@@ -166,7 +166,7 @@ class Controller:
 
 
         self.model.dist_border.set(self.view.dist_border_var.get())
-
+        print (f'distance  {self.model.dist_border.set(self.view.dist_border_var.get())}')
 
         x_exam_pts_2, y_exam_pts_2, x_trend_pts_1, y_trend_pts_1 = main_proces(x_exam_pts, y_exam_pts, int(self.model.dist_border.get()))
 
@@ -177,19 +177,28 @@ class Controller:
 
         # hier set % scope of slice
 
-        down_procent = 30
-        up_procent = 100
+        self.model.down_scope.set(self.view.down_scope_var.get())
+        print(f'zakres dół {self.model.down_scope.set(self.view.down_scope_var.get())}')
 
-        down = int(len(x_exam_pts_3) * (down_procent / 100))
-        up = int(len(x_exam_pts_3) * (up_procent / 100))
+        self.model.up_scope.set(self.view.up_scope_var.get())
+        print(f' zakres góra {self.model.up_scope.set(self.view.up_scope_var.get())}')
+
+
+
+
+        down = int(len(x_exam_pts_3) * (float(self.model.down_scope.get()) / 100))
+        up = int(len(x_exam_pts_3) * (float(self.model.up_scope.get()) / 100))
 
         x_slice, y_slice = x_exam_pts_3[down:up], y_exam_pts_3[down:up]
 
         #  Here set density of slice
-        density_factor = 0.02
+
+
 
         self.model.dens_factor.set(self.view.density_var.get())
 
+
+        print(f' gęstość {self.model.dens_factor.set(self.view.density_var.get())}')
         x_slice_1, y_slice_1 = density_control(x_slice, y_slice, float(self.model.dens_factor.get()))
 
         # change data  with corrected density in described scope - down/up

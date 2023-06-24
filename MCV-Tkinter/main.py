@@ -21,10 +21,12 @@ name = view.name_var.get()
 
 dist_border = tk.StringVar()
 dens_factor = tk.StringVar()
+down_scope = tk.StringVar()
+up_scope = tk.StringVar()
 
 
 
-model = Model(name,dist_border,dens_factor)
+model = Model(name,dist_border,dens_factor,down_scope,up_scope)
 
 view = View(V.window)
 
