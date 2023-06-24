@@ -22,52 +22,79 @@ class View(ttk.Frame):
         super().__init__(parent)
 
         # create widgets
+
         #####################
 
+        self.label = ttk.Label(tab0)
+        self.label.grid(row=1,column = 0)
+
+
+
+
         self.name_label = ttk.Label(tab0, text='nazwa pliku z danymi:')
-        self.name_label.grid(row=1, column=0)
+        self.name_label.grid(row=2, column=0)
 
         self.name_var = tk.StringVar()
         self.name_entry = ttk.Entry(tab0, textvariable=self.name_var, width=30)
-        self.name_entry.grid(row=1, column=1, sticky=tk.NSEW)
+        self.name_entry.grid(row=2, column=1, sticky=tk.NSEW)
+
+
 
         #######################
+
+
+        self.label = ttk.Label(tab0)
+        self.label.grid(row=3, column=0)
+
+
 
 
         self.distance_label = ttk.Label(tab0, text='odleglość:')
-        self.distance_label.grid(row=2, column=0)
+        self.distance_label.grid(row=4, column=0)
+
+
 
         self.distance_var = tk.StringVar()
         self.distance_entry = ttk.Entry(tab0, textvariable=self.distance_var, width=30)
-        self.distance_entry.grid(row=2, column=1, sticky=tk.NSEW)
+        self.distance_entry.grid(row=4, column=1, sticky=tk.NSEW)
 
+        ######################
 
-        #######################
+        self.label = ttk.Label(tab0)
+        self.label.grid(row=5, column=0)
+
 
         self.density_label = ttk.Label(tab0, text='gęstość:')
-        self.density_label.grid(row=3, column=0)
+        self.density_label.grid(row = 6, column=0)
 
         self.density_var = tk.StringVar()
         self.density_entry = ttk.Entry(tab0, textvariable=self.density_var, width=30)
-        self.density_entry.grid(row=3, column=1, sticky=tk.NSEW)
+        self.density_entry.grid(row = 6, column=1, sticky=tk.NSEW)
 
         #######################
 
+        self.label = ttk.Label(tab0)
+        self.label.grid(row=7, column=0)
+
         self.up_scope_label = ttk.Label(tab0, text='dolny zakres:')
-        self.up_scope_label.grid(row=4, column=0)
+        self.up_scope_label.grid(row = 8, column=0)
 
         self.up_scope_var = tk.StringVar()
         self.up_scope_entry = ttk.Entry(tab0, textvariable=self.up_scope_var, width=30)
-        self.up_scope_entry.grid(row=4, column=1, sticky=tk.NSEW)
+        self.up_scope_entry.grid(row = 8, column=1, sticky=tk.NSEW)
 
         #######################
 
+        self.label = ttk.Label(tab0)
+        self.label.grid(row=9, column=0)
+
+
         self.down_scope_label = ttk.Label(tab0, text='górny zakres:')
-        self.down_scope_label.grid(row=5, column=0)
+        self.down_scope_label.grid(row = 8, column=3)
 
         self.down_scope_var = tk.StringVar()
         self.down_scope_entry = ttk.Entry(tab0, textvariable=self.down_scope_var, width=30)
-        self.down_scope_entry.grid(row=5, column=1, sticky=tk.NSEW)
+        self.down_scope_entry.grid(row = 8, column=4, sticky=tk.NSEW)
 
 
 
