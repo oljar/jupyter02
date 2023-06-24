@@ -32,7 +32,7 @@ class Controller:
 
 
 
-        self.counter()
+
 
 
     def counter(self):
@@ -164,9 +164,11 @@ class Controller:
 
         # Here set distance
 
-        dist_border = 100
 
-        x_exam_pts_2, y_exam_pts_2, x_trend_pts_1, y_trend_pts_1 = main_proces(x_exam_pts, y_exam_pts, dist_border)
+        self.model.dist_border.set(self.view.dist_border_var.get())
+
+
+        x_exam_pts_2, y_exam_pts_2, x_trend_pts_1, y_trend_pts_1 = main_proces(x_exam_pts, y_exam_pts, int(self.model.dist_border.get()))
 
         #
         x_exam_pts_3, y_exam_pts_3, x_trend_pts_1, y_trend_pts_1 = main_proces(x_exam_pts_2, y_exam_pts_2)
@@ -186,7 +188,9 @@ class Controller:
         #  Here set density of slice
         density_factor = 0.02
 
-        x_slice_1, y_slice_1 = density_control(x_slice, y_slice, density_factor)
+        self.model.dens_factor.set(self.view.density_var.get())
+
+        x_slice_1, y_slice_1 = density_control(x_slice, y_slice, float(self.model.dens_factor.get()))
 
         # change data  with corrected density in described scope - down/up
 

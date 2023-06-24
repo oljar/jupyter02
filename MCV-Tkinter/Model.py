@@ -4,9 +4,11 @@ import pandas as pd
 
 
 class Model:
-    def __init__(self, name,dist_border):
+    def __init__(self, name,dist_border,dens_factor):
         self.name = name
+
         self.dist_border = dist_border
+        self.dens_factor = dens_factor
 
 
 

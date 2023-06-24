@@ -26,6 +26,7 @@ class View(ttk.Frame):
 
         self.name_var = StringVar()
         self.dist_border_var= StringVar()
+        self.density_var = tk.StringVar()
         # create widgets
 
         #####################
@@ -79,7 +80,7 @@ class View(ttk.Frame):
         self.density_label = ttk.Label(tab0, text='gęstość:')
         self.density_label.grid(row = 60, column=0)
 
-        self.density_var = tk.StringVar()
+
         self.density_entry = ttk.Entry(tab0, textvariable=self.density_var, width=30)
         self.density_entry.grid(row = 60, column=1, sticky=tk.NSEW)
 
@@ -166,7 +167,10 @@ class View(ttk.Frame):
         """
         if self.controller:
 
+
             self.controller.open_data()
+            self.controller.counter()
+
 
     def show_error(self, message):
         """
