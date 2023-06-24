@@ -11,6 +11,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 
+
+
+
 class Controller:
     def __init__(self, model, view):
         self.model = model
@@ -149,20 +152,9 @@ class Controller:
 
             return x_set, y_set
 
-        def chart(x, y, x_trend, y_trend, x_previous):
 
-            fig = plt.figure()
-            ax1 = fig.add_subplot(111)
-            ax2 = ax1.twiny()
 
-            ax1.plot(x, y, "-o")
-            ax1.plot(x_trend, y_trend, "-s")
 
-            ax2.set_xlim(0, 100)
-
-            plt.show()
-
-        # Here set distance
 
 
         self.model.dist_border.set(self.view.dist_border_var.get())
@@ -173,21 +165,24 @@ class Controller:
         #
         x_exam_pts_3, y_exam_pts_3, x_trend_pts_1, y_trend_pts_1 = main_proces(x_exam_pts_2, y_exam_pts_2)
 
-        chart(x_exam_pts_3, y_exam_pts_3, x_trend_pts_1, y_trend_pts_1, x_exam_pts_2)
+        #chart(x_exam_pts_3, y_exam_pts_3, x_trend_pts_1, y_trend_pts_1, x_exam_pts_2)
 
         # hier set % scope of slice
 
         self.model.down_scope.set(self.view.down_scope_var.get())
-        print(f'zakres dół {self.model.down_scope.get()}')
+
 
         self.model.up_scope.set(self.view.up_scope_var.get())
-        print(f' zakres góra {self.model.up_scope.get()}')
 
 
+        a=float(self.model.down_scope.get())
+        b=float(self.model.up_scope.get())
+        print(f'zakres dół {a}')
+        print(f'zakres góra {b}')
 
 
-        down = int(len(x_exam_pts_3) * (float(self.model.down_scope.get()) / 100))
-        up = int(len(x_exam_pts_3) * (float(self.model.up_scope.get()) / 100))
+        down = int(len(x_exam_pts_3) * (a / 100))
+        up = int(len(x_exam_pts_3) * (b / 100))
 
         x_slice, y_slice = x_exam_pts_3[down:up], y_exam_pts_3[down:up]
 
@@ -205,9 +200,27 @@ class Controller:
 
         x_exam_pts_3[down:up:1], y_exam_pts_3[down:up:1] = x_slice_1[::1], y_slice_1[::1]
 
-        x_exam_pts_4, y_exam_pts_4, x_trend_pts_4, y_trend_pts_4 = main_proces(x_exam_pts_3, y_exam_pts_3)
+        self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4 = main_proces(x_exam_pts_3, y_exam_pts_3)
 
-        chart(x_exam_pts_4, y_exam_pts_4, x_trend_pts_4, y_trend_pts_4, x_exam_pts)
+
+
+
+
+
+    def chart_execution(self):
+        def chart(x, y, x_trend, y_trend):
+            fig = plt.figure()
+            ax1 = fig.add_subplot(111)
+            ax2 = ax1.twiny()
+
+            ax1.plot(x, y, "-o")
+            ax1.plot(x_trend, y_trend, "-s")
+
+            ax2.set_xlim(0, 100)
+
+            plt.show()
+
+        chart(self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4)
 
 
 

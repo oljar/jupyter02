@@ -84,32 +84,31 @@ class View(ttk.Frame):
         self.density_entry = ttk.Entry(tab0, textvariable=self.density_var, width=30)
         self.density_entry.grid(row = 60, column=1, sticky=tk.NSEW)
 
-        #######################
-
-        self.label = ttk.Label(tab0)
-        self.label.grid(row=70, column=0)
-
-        self.up_scope_label = ttk.Label(tab0, text='dolny zakres:')
-        self.up_scope_label.grid(row = 80, column=0)
-
-        self.up_scope_var = tk.StringVar()
-        self.up_scope_entry = ttk.Entry(tab0, textvariable=self.up_scope_var, width=30)
-        self.up_scope_entry.grid(row = 80, column=1, sticky=tk.NSEW)
 
         #######################
         #
-        # self.label = ttk.Label(tab0)
-        # self.label.grid(row=90, column=0)
+        self.label = ttk.Label(tab0)
+        self.label.grid(row=70, column=0)
 
 
-        self.down_scope_label = ttk.Label(tab0, text='górny zakres:')
-        self.down_scope_label.grid(row = 80, column=3)
+        self.down_scope_label = ttk.Label(tab0, text='dolny zakres:')
+        self.down_scope_label.grid(row = 80, column=0)
 
         self.down_scope_var = tk.StringVar()
         self.down_scope_entry = ttk.Entry(tab0, textvariable=self.down_scope_var, width=30)
-        self.down_scope_entry.grid(row = 80, column=4, sticky=tk.NSEW)
+        self.down_scope_entry.grid(row = 80, column=1, sticky=tk.NSEW)
 
-        ######################
+        #######################
+
+
+
+        self.up_scope_label = ttk.Label(tab0, text='górny zakres:')
+        self.up_scope_label.grid(row = 80, column=2)
+
+        self.up_scope_var = tk.StringVar()
+        self.up_scope_entry = ttk.Entry(tab0, textvariable=self.up_scope_var, width=30)
+        self.up_scope_entry.grid(row = 80, column=3, sticky=tk.NSEW)
+
 
 
         self.label = ttk.Label(tab0)
@@ -128,16 +127,16 @@ class View(ttk.Frame):
         #
 
 
-        self.open_button = ttk.Button(tab0, text='Przelicz', command=self.open_button_clicked)
-        self.open_button.grid(row=100, column=2, padx=10)
+        self.count_button = ttk.Button(tab0, text='Przelicz', command=self.count_button_clicked)
+        self.count_button.grid(row=100, column=1, padx=10)
 
         ############################
 
         # self.label = ttk.Label(tab0)
         # self.label.grid(row=12, column=0)
 
-        self.open_button = ttk.Button(tab0, text='rysuj wykres', command=self.open_button_clicked)
-        self.open_button.grid(row=100, column=4, padx=10)
+        self.open_button = ttk.Button(tab0, text='rysuj wykres', command=self.chart_clicked)
+        self.open_button.grid(row=100, column=3, padx=10)
 
         # message
         self.message_label = ttk.Label(self, text='', foreground='red')
@@ -169,7 +168,14 @@ class View(ttk.Frame):
 
 
             self.controller.open_data()
-            self.controller.counter()
+
+
+    def count_button_clicked(self):
+
+        self.controller.counter()
+
+    def chart_clicked(self):
+        self.controller.chart_execution()
 
 
     def show_error(self, message):
