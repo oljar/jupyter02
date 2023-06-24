@@ -18,8 +18,10 @@ class Application(tk.Frame):
 
 view = View(V.window)
 name = view.name_var.get()
-print(name)
-model = Model(name)
+dist_border = (view.dist_border_var.get())
+print('sdafds')
+dist_border = 0.1
+model = Model(name,dist_border)
 
 view = View(V.window)
 

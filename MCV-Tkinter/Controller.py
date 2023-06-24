@@ -20,6 +20,7 @@ class Controller:
 
         try:
             self.model.name = self.view.name_var.get()
+
             self.df1 = self.model.open_data()
 
             print(self.df1)

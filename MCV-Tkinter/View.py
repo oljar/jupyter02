@@ -4,6 +4,9 @@ from tkinter import ttk
 import source
 from Controller import Controller
 from Model import Model
+from tkinter import *
+from tkinter.ttk import *
+from tkinter.filedialog import askopenfile
 
 
 window = tk.Tk()
@@ -21,22 +24,31 @@ class View(ttk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
 
+        self.name_var = StringVar()
+        self.dist_border_var= StringVar()
         # create widgets
 
         #####################
 
         self.label = ttk.Label(tab0)
-        self.label.grid(row=1,column = 0)
+        self.label.grid(row=10,column = 0)
 
 
 
 
-        self.name_label = ttk.Label(tab0, text='nazwa pliku z danymi:')
-        self.name_label.grid(row=2, column=0)
 
-        self.name_var = tk.StringVar()
-        self.name_entry = ttk.Entry(tab0, textvariable=self.name_var, width=30)
-        self.name_entry.grid(row=2, column=1, sticky=tk.NSEW)
+
+        self.show_file = ttk.Button(tab0, text='Wskaż plik csv', command=self.show_file_clicked)
+        self.show_file.grid(row=20, column=0, padx=10)
+
+        ######################
+
+
+        self.label = ttk.Label(tab0)
+        self.label.grid(row=24, column=0)
+
+        self.open_button = ttk.Button(tab0, text='Pobierz dane', command=self.open_button_clicked)
+        self.open_button.grid(row=25, column=0, padx=10)
 
 
 
@@ -44,70 +56,87 @@ class View(ttk.Frame):
 
 
         self.label = ttk.Label(tab0)
-        self.label.grid(row=3, column=0)
+        self.label.grid(row=30, column=0)
 
 
 
 
         self.distance_label = ttk.Label(tab0, text='odleglość:')
-        self.distance_label.grid(row=4, column=0)
+        self.distance_label.grid(row=40, column=0)
 
 
 
-        self.distance_var = tk.StringVar()
-        self.distance_entry = ttk.Entry(tab0, textvariable=self.distance_var, width=30)
-        self.distance_entry.grid(row=4, column=1, sticky=tk.NSEW)
+        self.distance_entry = ttk.Entry(tab0, textvariable=self.dist_border_var, width=30)
+        self.distance_entry.grid(row=40, column=1, sticky=tk.NSEW)
+
 
         ######################
 
         self.label = ttk.Label(tab0)
-        self.label.grid(row=5, column=0)
+        self.label.grid(row=50, column=0)
 
 
         self.density_label = ttk.Label(tab0, text='gęstość:')
-        self.density_label.grid(row = 6, column=0)
+        self.density_label.grid(row = 60, column=0)
 
         self.density_var = tk.StringVar()
         self.density_entry = ttk.Entry(tab0, textvariable=self.density_var, width=30)
-        self.density_entry.grid(row = 6, column=1, sticky=tk.NSEW)
+        self.density_entry.grid(row = 60, column=1, sticky=tk.NSEW)
 
         #######################
 
         self.label = ttk.Label(tab0)
-        self.label.grid(row=7, column=0)
+        self.label.grid(row=70, column=0)
 
         self.up_scope_label = ttk.Label(tab0, text='dolny zakres:')
-        self.up_scope_label.grid(row = 8, column=0)
+        self.up_scope_label.grid(row = 80, column=0)
 
         self.up_scope_var = tk.StringVar()
         self.up_scope_entry = ttk.Entry(tab0, textvariable=self.up_scope_var, width=30)
-        self.up_scope_entry.grid(row = 8, column=1, sticky=tk.NSEW)
+        self.up_scope_entry.grid(row = 80, column=1, sticky=tk.NSEW)
 
         #######################
-
-        self.label = ttk.Label(tab0)
-        self.label.grid(row=9, column=0)
+        #
+        # self.label = ttk.Label(tab0)
+        # self.label.grid(row=90, column=0)
 
 
         self.down_scope_label = ttk.Label(tab0, text='górny zakres:')
-        self.down_scope_label.grid(row = 8, column=3)
+        self.down_scope_label.grid(row = 80, column=3)
 
         self.down_scope_var = tk.StringVar()
         self.down_scope_entry = ttk.Entry(tab0, textvariable=self.down_scope_var, width=30)
-        self.down_scope_entry.grid(row = 8, column=4, sticky=tk.NSEW)
+        self.down_scope_entry.grid(row = 80, column=4, sticky=tk.NSEW)
+
+        ######################
 
 
+        self.label = ttk.Label(tab0)
+        self.label.grid(row=90, column=0)
 
 
+        # open_data button
+
+        self.label = ttk.Label(tab0)
+        self.label.grid(row=24, column=0)
+
+        self.open_button = ttk.Button(tab0, text='Pobierz dane', command=self.open_button_clicked)
+        self.open_button.grid(row=25, column=0, padx=10)
+
+        ##########################
+        #
 
 
+        self.open_button = ttk.Button(tab0, text='Przelicz', command=self.open_button_clicked)
+        self.open_button.grid(row=100, column=2, padx=10)
 
+        ############################
 
+        # self.label = ttk.Label(tab0)
+        # self.label.grid(row=12, column=0)
 
-
-        # open_data
-        self.open_button = ttk.Button(tab0, text='Open', command=self.open_button_clicked)
-        self.open_button.grid(row=1, column=3, padx=10)
+        self.open_button = ttk.Button(tab0, text='rysuj wykres', command=self.open_button_clicked)
+        self.open_button.grid(row=100, column=4, padx=10)
 
         # message
         self.message_label = ttk.Label(self, text='', foreground='red')
@@ -123,6 +152,12 @@ class View(ttk.Frame):
         :return:
         """
         self.controller = controller
+
+    def show_file_clicked(self):
+
+        file = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r', filetypes=[('CSV Files', '*.csv')])
+        if file is not None:
+            self.name_var.set(str(file.name))
 
     def open_button_clicked(self):
         """

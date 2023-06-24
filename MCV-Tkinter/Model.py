@@ -4,8 +4,9 @@ import pandas as pd
 
 
 class Model:
-    def __init__(self, name):
+    def __init__(self, name,dist_border):
         self.name = name
+        self.dist_border = dist_border
 
 
 
