@@ -59,6 +59,7 @@ class Controller:
 
 
 
+
         df1 = self.df1
         df1 = df1.sort_values(by=x_tag, ascending=True)
 
@@ -71,9 +72,9 @@ class Controller:
         x_points = (df1[x_tag]).tolist()  # definition of columns -x
         c = 41.1  # reducer constns
 
-        x_exam_pts = [(c * math.sqrt(x)) for x in x_points]
+        self.x_exam_pts = [(c * math.sqrt(x)) for x in x_points]
 
-        y_exam_pts = (df1[y_tag]).tolist()  # definition of columns -y
+        self.y_exam_pts = (df1[y_tag]).tolist()  # definition of columns -y
 
         def density_show(ex):
 
@@ -172,10 +173,10 @@ class Controller:
         self.model.dist_border.set(self.view.dist_border_var.get())
         print (f'distance  { int(self.model.dist_border.get())}')
 
-        x_exam_pts_2, y_exam_pts_2, x_trend_pts_1, y_trend_pts_1 = main_proces(x_exam_pts, y_exam_pts, int(self.model.dist_border.get()))
+        x_exam_pts_2, y_exam_pts_2, self.x_trend_pts_1, self.y_trend_pts_1 = main_proces(self.x_exam_pts, self.y_exam_pts, int(self.model.dist_border.get()))
 
         #
-        x_exam_pts_3, y_exam_pts_3, x_trend_pts_1, y_trend_pts_1 = main_proces(x_exam_pts_2, y_exam_pts_2)
+        x_exam_pts_3, y_exam_pts_3, self.x_trend_pts_1, self.y_trend_pts_1 = main_proces(x_exam_pts_2, y_exam_pts_2)
 
         #chart(x_exam_pts_3, y_exam_pts_3, x_trend_pts_1, y_trend_pts_1, x_exam_pts_2)
 
@@ -217,9 +218,27 @@ class Controller:
 
 
 
+    def natural_chart_execution(self):
+        def chart(x, y, x_trend, y_trend):
+            fig = plt.figure()
+            ax1 = fig.add_subplot(111)
+            ax2 = ax1.twiny()
+
+            ax1.plot(x, y, "-o")
+            ax1.plot(x_trend, y_trend, "-s")
+
+            ax2.set_xlim(0, 100)
+
+            plt.show()
+
+        chart(self.x_exam_pts, self.y_exam_pts, self.x_trend_pts_1, self.y_trend_pts_1)
 
 
-    def chart_execution(self):
+
+
+
+
+    def modified_chart_execution(self):
         def chart(x, y, x_trend, y_trend):
             fig = plt.figure()
             ax1 = fig.add_subplot(111)
@@ -233,6 +252,12 @@ class Controller:
             plt.show()
 
         chart(self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4)
+
+    def save_data(self):
+        aaa=pd.DataFrame(self.x_exam_pts_4)
+        aaa.to_csv('aaa',index=False)
+
+
 
 
 

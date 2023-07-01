@@ -18,6 +18,7 @@ class Model:
 
 
 
+
     def open_data(self):
         """
         Save the email into a file
@@ -49,8 +50,6 @@ class Model:
         df1.sort_values(by=self.x_var, ascending=True)
 
         return df1
-
-
 
 
 

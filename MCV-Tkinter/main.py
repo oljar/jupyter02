@@ -16,7 +16,10 @@ class Application(tk.Frame):
 
                 # create a model
 
+
 view = View(V.window)
+
+
 name = view.name_var.get()
 
 dist_border = tk.StringVar()
@@ -30,13 +33,15 @@ y_var = tk.StringVar()
 
 model = Model(name,dist_border,dens_factor,down_scope,up_scope,x_var,y_var)
 
-view = View(V.window)
+
 
 controller = Controller(model, view)
 
 
+
 # set the controller to view
 view.set_controller(controller)
+
 
 
 

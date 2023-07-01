@@ -75,6 +75,9 @@ class View(ttk.Frame):
 
 
 
+
+
+
         #######################
 
 
@@ -142,23 +145,37 @@ class View(ttk.Frame):
         self.label = ttk.Label(tab0)
         self.label.grid(row=24, column=0)
 
-        self.open_button = ttk.Button(tab0, text='Pobierz dane', command=self.open_button_clicked)
-        self.open_button.grid(row=25, column=0, padx=10)
+        self.open_button_get_data = ttk.Button(tab0, text='Pobierz dane', command=self.open_button_clicked)
+        self.open_button_get_data.grid(row=25, column=0, padx=10)
 
         ##########################
         #
 
 
-        self.count_button = ttk.Button(tab0, text='Przelicz', command=self.count_button_clicked)
-        self.count_button.grid(row=100, column=1, padx=10)
+        self.count_button_count = ttk.Button(tab0, text='Przelicz', command=self.count_button_clicked)
+        self.count_button_count.grid(row=100, column=0, padx=10)
+
+        #############################
+
+        self.open_button_draw_natural = ttk.Button(tab0, text='Rysuj wykres naturalny', command=self.natural_chart_clicked)
+        self.open_button_draw_natural.grid(row=100, column=1, padx=10)
 
         ############################
 
-        # self.label = ttk.Label(tab0)
-        # self.label.grid(row=12, column=0)
 
-        self.open_button = ttk.Button(tab0, text='rysuj wykres', command=self.chart_clicked)
-        self.open_button.grid(row=100, column=3, padx=10)
+
+        self.open_button_draw_modified = ttk.Button(tab0, text='Rysuj wykres obrobiony', command=self.modified_chart_clicked)
+        self.open_button_draw_modified.grid(row=100, column=2, padx=10)
+
+        ############################
+
+        self.label = ttk.Label(tab0)
+        self.label.grid(row=110, column=0)
+        #
+        self.open_button_save_data= ttk.Button(tab0, text='Zapisz dane',command=self.save_button_clicked)
+        self.open_button_save_data.grid(row=120, column=0, padx=10)
+
+
 
         # message
         self.message_label = ttk.Label(self, text='', foreground='red')
@@ -187,17 +204,24 @@ class View(ttk.Frame):
         :return:
         """
         if self.controller:
-
-
             self.controller.open_data()
+
+    def save_button_clicked(self):
+        if self.controller:
+            self.controller.save_data()
+
 
 
     def count_button_clicked(self):
 
         self.controller.counter()
 
-    def chart_clicked(self):
-        self.controller.chart_execution()
+    def natural_chart_clicked(self):
+        self.controller.natural_chart_execution()
+
+
+    def modified_chart_clicked(self):
+        self.controller.modified_chart_execution()
 
 
     def show_error(self, message):
