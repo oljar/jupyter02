@@ -4,13 +4,16 @@ import csv
 
 
 class Model:
-    def __init__(self, name,dist_border,dens_factor, down_scope, up_scope):
+    def __init__(self, name,dist_border,dens_factor, down_scope, up_scope,x_var,y_var):
         self.name = name
 
         self.dist_border = dist_border
         self.dens_factor = dens_factor
         self.down_scope = down_scope
         self.up_scope = up_scope
+        self.x_var = x_var
+        self.y_var = y_var
+
 
 
 
@@ -22,27 +25,28 @@ class Model:
         """
         # with open('emails.txt', 'a') as f:
 
-        x_tag = 'M51: Pa'
-        y_tag = 'M53: Pa'
-        name = 'data_3.csv'
 
-        value = 'M51: Pa'
+
+
+
+
+
 
         data_list = []
-        with open(name, 'r') as f:
+        with open(self.name, 'r') as f:
             data = csv.reader(f)
             for i in data:
                 data_list.append(i)
 
         result_row_number = []
         for row_number, row in enumerate(data_list):
-            if str(x_tag) in str(row):
+            if str(self.x_var) in str(row):
                 result_row_number.append(row_number)
 
         print(int(result_row_number[0]))
-        df1 = pd.read_csv(name, sep=';', decimal=',', header=int(result_row_number[0]))
+        df1 = pd.read_csv(self.name, sep=';', decimal=',', header=int(result_row_number[0]))
 
-        df1.sort_values(by=x_tag, ascending=True)
+        df1.sort_values(by=self.x_var, ascending=True)
 
         return df1
 

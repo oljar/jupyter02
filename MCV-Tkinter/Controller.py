@@ -21,8 +21,14 @@ class Controller:
 
     def open_data(self):
 
+
+
         try:
             self.model.name = self.view.name_var.get()
+            self.model.x_var = (self.view.x_var.get())
+            self.model.y_var = (self.view.y_var.get())
+
+
 
             self.df1 = self.model.open_data()
 
@@ -43,9 +49,15 @@ class Controller:
 
         # examinated points
 
-        x_tag = 'M51: Pa'
 
-        y_tag = 'M53: Pa'
+
+
+        x_tag = str(self.view.x_var.get())
+        y_tag = str(self.view.y_var.get())
+
+
+
+
 
         df1 = self.df1
         df1 = df1.sort_values(by=x_tag, ascending=True)

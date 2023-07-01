@@ -27,6 +27,10 @@ class View(ttk.Frame):
         self.name_var = StringVar()
         self.dist_border_var= StringVar()
         self.density_var = tk.StringVar()
+        self.x_var = tk.StringVar()
+        self.y_var = tk.StringVar()
+
+
         # create widgets
 
         #####################
@@ -43,6 +47,24 @@ class View(ttk.Frame):
         self.show_file.grid(row=20, column=0, padx=10)
 
         ######################
+
+        self.label = ttk.Label(tab0)
+        self.label.grid(row=21, column=0)
+
+        self.distance_label = ttk.Label(tab0, text='X')
+        self.distance_label.grid(row=22, column=0)
+
+        self.distance_entry = ttk.Entry(tab0, textvariable=self.x_var, width=10)
+        self.distance_entry.grid(row=22, column=1, sticky=tk.NSEW)
+
+        self.distance_label = ttk.Label(tab0, text='Y')
+        self.distance_label.grid(row=22, column=2)
+
+        self.distance_entry = ttk.Entry(tab0, textvariable=self.y_var, width=10)
+        self.distance_entry.grid(row=22, column=3, sticky=tk.NSEW)
+
+
+
 
 
         self.label = ttk.Label(tab0)
@@ -187,7 +209,7 @@ class View(ttk.Frame):
         self.message_label['text'] = message
         self.message_label['foreground'] = 'red'
         self.message_label.after(3000, self.hide_message)
-        self.name_entry['foreground'] = 'red'
+
 
     def show_success(self, message):
         """
