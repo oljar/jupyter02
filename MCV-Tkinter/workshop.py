@@ -5,7 +5,7 @@ x_tag = 'M51: Pa'
 y_tag = 'M53: Pa'
 name = 'data_3.csv'
 
-value = 'M51: Pa'
+
 
 
 data_list = []
