@@ -7,6 +7,7 @@ from Model import Model
 from tkinter import *
 from tkinter.ttk import *
 from tkinter.filedialog import askopenfile
+from tkinter.filedialog import asksaveasfile
 
 
 window = tk.Tk()
@@ -24,7 +25,8 @@ class View(ttk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
 
-        self.name_var = StringVar()
+        self.open_name_var = StringVar()
+        self.save_name_var = StringVar()
         self.dist_border_var= StringVar()
         self.density_var = tk.StringVar()
         self.x_var = tk.StringVar()
@@ -43,7 +45,7 @@ class View(ttk.Frame):
 
 
 
-        self.show_file = ttk.Button(tab0, text='Wskaż plik csv', command=self.show_file_clicked)
+        self.show_file = ttk.Button(tab0, text='Wskaż plik csv', command=self.show_open_file_clicked)
         self.show_file.grid(row=20, column=0, padx=10)
 
         ######################
@@ -192,11 +194,21 @@ class View(ttk.Frame):
         """
         self.controller = controller
 
-    def show_file_clicked(self):
+    def show_open_file_clicked(self):
 
-        file = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r', filetypes=[('CSV Files', '*.csv')])
-        if file is not None:
-            self.name_var.set(str(file.name))
+        file1 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r', filetypes=[('CSV Files', '*.csv')])
+        if file1 is not None:
+            self.open_name_var.set(str(file1.name))
+
+
+    def show_save_file_clicked(self):
+
+
+        file2 = asksaveasfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='w',defaultextension = '*.csv', filetypes=[('CSV Files', '*.csv')])
+
+        if file2 is not None:
+            self.save_name_var.set(str(file2.name))
+
 
     def open_button_clicked(self):
         """
@@ -247,7 +259,7 @@ class View(ttk.Frame):
 
         # reset the form
         self.name_entry['foreground'] = 'black'
-        self.name_var.set('')
+        self.open_name_var.set('')
 
     def hide_message(self):
         """

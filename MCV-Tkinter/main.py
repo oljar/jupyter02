@@ -20,7 +20,7 @@ class Application(tk.Frame):
 view = View(V.window)
 
 
-name = view.name_var.get()
+name = view.open_name_var.get()
 
 dist_border = tk.StringVar()
 dens_factor = tk.StringVar()

@@ -24,7 +24,7 @@ class Controller:
 
 
         try:
-            self.model.name = self.view.name_var.get()
+            self.model.name = self.view.open_name_var.get()
             self.model.x_var = (self.view.x_var.get())
             self.model.y_var = (self.view.y_var.get())
 
@@ -254,8 +254,12 @@ class Controller:
         chart(self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4)
 
     def save_data(self):
-        aaa=pd.DataFrame(self.x_exam_pts_4)
-        aaa.to_csv('aaa',index=False)
+        solution = pd.DataFrame()
+        solution[self.view.x_var.get()] = pd.DataFrame(self.x_exam_pts_4)
+        solution[self.view.y_var.get()] = pd.DataFrame(self.y_exam_pts_4)
+        self.view.show_save_file_clicked()
+
+        solution.to_csv(str(self.view.save_name_var.get()), sep=';', index=False)
 
 
 
