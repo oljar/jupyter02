@@ -64,6 +64,7 @@ class Controller:
         df1 = df1.sort_values(by=x_tag, ascending=True)
 
         df1 = df1[df1[x_tag] >= 0]
+
         df1 = df1[df1[y_tag] >= 0]
 
         df1[x_tag] = df1[x_tag].fillna(df1[x_tag].median())
@@ -259,7 +260,7 @@ class Controller:
         solution[self.view.y_var.get()] = pd.DataFrame(self.y_exam_pts_4)
         self.view.show_save_file_clicked()
 
-        solution.to_csv(str(self.view.save_name_var.get()), sep=';', index=False)
+        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
 
 
 
