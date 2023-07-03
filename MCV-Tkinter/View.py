@@ -32,6 +32,9 @@ class View(ttk.Frame):
         self.x_var = tk.StringVar()
         self.y_var = tk.StringVar()
 
+        self.x_math_form = tk.StringVar()
+        self.y_math_form  = tk.StringVar()
+
 
         # create widgets
 
@@ -39,10 +42,6 @@ class View(ttk.Frame):
 
         self.label = ttk.Label(tab0)
         self.label.grid(row=10,column = 0)
-
-
-
-
 
 
         self.show_file = ttk.Button(tab0, text='Wskaż plik csv', command=self.show_open_file_clicked)
@@ -53,21 +52,22 @@ class View(ttk.Frame):
         self.label = ttk.Label(tab0)
         self.label.grid(row=21, column=0)
 
-        self.distance_label = ttk.Label(tab0, text='X')
+        self.distance_label = ttk.Label(tab0, text='nazwa kolumny x')
         self.distance_label.grid(row=22, column=0)
 
-        self.distance_entry = ttk.Entry(tab0, textvariable=self.x_var, width=10)
-        self.distance_entry.grid(row=22, column=1, sticky=tk.NSEW)
+        self.name_col_x_entry = ttk.Entry(tab0, textvariable=self.x_var, width=10)
+        self.name_col_x_entry.grid(row=22, column=1, sticky=tk.NSEW)
 
-        self.distance_label = ttk.Label(tab0, text='Y')
+
+
+        self.distance_label = ttk.Label(tab0, text='nazwa kolumny y')
         self.distance_label.grid(row=22, column=2)
 
-        self.distance_entry = ttk.Entry(tab0, textvariable=self.y_var, width=10)
-        self.distance_entry.grid(row=22, column=3, sticky=tk.NSEW)
+        self.name_col_y_entry = ttk.Entry(tab0, textvariable=self.y_var, width=10)
+        self.name_col_y_entry.grid(row=22, column=3, sticky=tk.NSEW)
 
 
-
-
+        #############################################################
 
         self.label = ttk.Label(tab0)
         self.label.grid(row=24, column=0)
@@ -75,7 +75,26 @@ class View(ttk.Frame):
         self.open_button = ttk.Button(tab0, text='Pobierz dane', command=self.open_button_clicked)
         self.open_button.grid(row=25, column=0, padx=10)
 
+        ###########################################################
 
+
+
+
+        self.label = ttk.Label(tab0)
+        self.label.grid(row=26, column=0)
+
+
+        self.distance_label = ttk.Label(tab0, text='wzór korekcyjny - x')
+        self.distance_label.grid(row=27, column=0)
+
+        self.name_col_x_entry = ttk.Entry(tab0, textvariable = self.x_math_form , width=10)
+        self.name_col_x_entry.grid(row=27, column=1, sticky=tk.NSEW)
+
+        self.distance_label = ttk.Label(tab0, text='wzór korekcyjny - y')
+        self.distance_label.grid(row=27, column=2)
+
+        self.name_col_y_entry = ttk.Entry(tab0, textvariable = self.y_math_form , width=10)
+        self.name_col_y_entry.grid(row=27, column=3, sticky=tk.NSEW)
 
 
 
@@ -142,13 +161,9 @@ class View(ttk.Frame):
         self.label.grid(row=90, column=0)
 
 
-        # open_data button
 
-        self.label = ttk.Label(tab0)
-        self.label.grid(row=24, column=0)
 
-        self.open_button_get_data = ttk.Button(tab0, text='Pobierz dane', command=self.open_button_clicked)
-        self.open_button_get_data.grid(row=25, column=0, padx=10)
+
 
         ##########################
         #

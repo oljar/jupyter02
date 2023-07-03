@@ -27,6 +27,8 @@ class Controller:
             self.model.name = self.view.open_name_var.get()
             self.model.x_var = (self.view.x_var.get())
             self.model.y_var = (self.view.y_var.get())
+            self.model.x_math_form.set(self.view.x_math_form.get())
+            self.model.y_math_form.set(self.view.y_math_form.get())
 
 
 
@@ -70,12 +72,39 @@ class Controller:
         df1[x_tag] = df1[x_tag].fillna(df1[x_tag].median())
         df1[y_tag] = df1[y_tag].fillna(df1[y_tag].median())
 
-        x_points = (df1[x_tag]).tolist()  # definition of columns -x
-        c = 41.1  # reducer constns
+        self.x_exam_pts = (df1[x_tag]).tolist()  # definition of columns -x
 
-        self.x_exam_pts = [(c * math.sqrt(x)) for x in x_points]
+        cor_factor_x = str(self.model.x_math_form)
+
+
+        #self.x_exam_pts = [exec(cor_factor_x) for x in self.x_exam_pts]
+
+        #print(self.x_exam_pts)
+
+
+
 
         self.y_exam_pts = (df1[y_tag]).tolist()  # definition of columns -y
+
+
+        cor_factor_y = str(self.view.y_math_form.get())
+
+        print ('aaaa' + cor_factor_y)
+
+        #exec(cor_factor_y)=x
+
+
+        q = [ y*y for y in self.y_exam_pts]
+
+        print(q)
+
+
+        print (self.y_exam_pts)
+
+        # c = 41.1  # reducer constns
+        #
+        # self.x_exam_pts = [(c * math.sqrt(x)) for x in x_points]
+
 
         def density_show(ex):
 
