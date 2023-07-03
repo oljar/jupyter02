@@ -74,14 +74,10 @@ class Controller:
 
         self.x_exam_pts = (df1[x_tag]).tolist()  # definition of columns -x
 
-        cor_factor_x = str(self.model.x_math_form)
+        cor_factor_x = str(self.view.x_math_form.get())
 
 
-        #self.x_exam_pts = [exec(cor_factor_x) for x in self.x_exam_pts]
-
-        #print(self.x_exam_pts)
-
-
+        self.x_exam_pts = [eval(cor_factor_x) for x in self.x_exam_pts]
 
 
         self.y_exam_pts = (df1[y_tag]).tolist()  # definition of columns -y
@@ -89,14 +85,10 @@ class Controller:
 
         cor_factor_y = str(self.view.y_math_form.get())
 
-        print ('aaaa' + cor_factor_y)
 
-        #exec(cor_factor_y)=x
+        self.y_exam_pts = [ eval(cor_factor_y) for y in self.y_exam_pts]
 
 
-        q = [ y*y for y in self.y_exam_pts]
-
-        print(q)
 
 
         print (self.y_exam_pts)
