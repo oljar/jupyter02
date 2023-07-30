@@ -43,9 +43,6 @@ class Controller:
 
 
 
-
-
-
     def counter(self):
 
 
@@ -56,9 +53,6 @@ class Controller:
 
         x_tag = str(self.view.x_var.get())
         y_tag = str(self.view.y_var.get())
-
-
-
 
 
 
@@ -91,6 +85,7 @@ class Controller:
 
 
 
+
         print (self.y_exam_pts)
 
         # c = 41.1  # reducer constns
@@ -98,17 +93,15 @@ class Controller:
         # self.x_exam_pts = [(c * math.sqrt(x)) for x in x_points]
 
 
-        def density_show(ex):
 
-            density = len(ex) / (ex[(len(ex) - 1)] - ex[0])
 
-            return density
+
 
         def main_proces(ex, ey, dist_border=10000000):
 
             # input filters
 
-            deg = 2
+            deg = int(self.view.polynominal_degree.get())                      # stopień wielomianu
 
             # trend line
 
@@ -167,7 +160,7 @@ class Controller:
             # print(sol_trend)
 
             print('y trend')
-            print(f'Krzywa - y = {coefs[2]}x^2 + {coefs[1]}x + {coefs[0]}')
+            print(f'współcznimmiki lini trendu {coefs}')
 
             # distance border
             filtred = sol_exam[sol_exam['dist'] < dist_border]
