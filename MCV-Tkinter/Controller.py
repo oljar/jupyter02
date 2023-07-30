@@ -101,7 +101,10 @@ class Controller:
 
             # input filters
 
-            deg = int(self.view.polynominal_degree.get())                      # stopień wielomianu
+
+            self.model.polynominal_degree.set(self.view.polynominal_degree.get())
+
+            deg = int(self.model.polynominal_degree.get())               # stopień wielomianu
 
             # trend line
 

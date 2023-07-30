@@ -30,11 +30,12 @@ x_var = tk.StringVar()
 y_var = tk.StringVar()
 x_math_form = tk.StringVar()
 y_math_form = tk.StringVar()
+polynominal_degree = tk.StringVar()
 
 
 
 
-model = Model(name,dist_border,dens_factor,down_scope,up_scope,x_var,y_var,x_math_form,y_math_form)
+model = Model(name,dist_border,dens_factor,down_scope,up_scope,x_var,y_var,x_math_form,y_math_form,polynominal_degree)
 
 
 
