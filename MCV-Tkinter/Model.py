@@ -4,13 +4,15 @@ import csv
 
 
 class Model:
-    def __init__(self, name,dist_border,dens_factor, down_scope, up_scope,x_var,y_var,x_math_form,y_math_form,polynominal_degree):
+    def __init__(self, name, dist_border, dens_factor, modify_down_scope, modify_up_scope, x_var, y_var, x_math_form, y_math_form, polynominal_degree,limit_up_scope,limit_down_scope):
         self.name = name
 
         self.dist_border = dist_border
         self.dens_factor = dens_factor
-        self.down_scope = down_scope
-        self.up_scope = up_scope
+        self.modify_down_scope = modify_down_scope
+        self.modify_up_scope = modify_up_scope
+        self.limit_down_scope = limit_down_scope
+        self.limit_up_scope = limit_up_scope
         self.x_var = x_var
         self.y_var = y_var
         self.x_math_form = x_math_form

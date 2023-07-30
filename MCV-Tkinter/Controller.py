@@ -95,6 +95,33 @@ class Controller:
 
 
 
+        def scope_limit(self):
+
+            self.model.limit_down_scope.set(self.view.total_down_scope_var.get())
+            self.model.limit_up_scope.set(self.view.total_up_scope_var.get())
+
+            lim_a = float(self.model.limit_down_scope.get())
+            lim_b = float(self.model.limit_up_scope.get())
+            print(f'zakres dół limit {lim_a}')
+            print(f'zakres góra limit {lim_b}')
+
+            lim_down = int(len(self.x_exam_pts ) * (lim_a / 100))
+            lim_up = int(len(self.x_exam_pts ) * (lim_b / 100))
+
+
+            x_slice, y_slice = self.x_exam_pts[lim_down:lim_up], self.y_exam_pts[lim_down:lim_up]
+
+            #
+            # print (f'gora {x_slice}')
+            # print(f'dol {y_slice}')
+
+            return x_slice,y_slice
+
+
+
+        scope_limit(self)
+
+
 
 
         def main_proces(ex, ey, dist_border=10000000):
@@ -200,14 +227,13 @@ class Controller:
 
         # hier set % scope of slice
 
-        self.model.down_scope.set(self.view.down_scope_var.get())
+        self.model.modify_down_scope.set(self.view.down_scope_var.get())
 
 
-        self.model.up_scope.set(self.view.up_scope_var.get())
+        self.model.modify_up_scope.set(self.view.up_scope_var.get())
 
-
-        a=float(self.model.down_scope.get())
-        b=float(self.model.up_scope.get())
+        a=float(self.model.modify_down_scope.get())
+        b=float(self.model.modify_up_scope.get())
         print(f'zakres dół {a}')
         print(f'zakres góra {b}')
 

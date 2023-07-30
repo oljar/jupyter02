@@ -24,8 +24,10 @@ name = view.open_name_var.get()
 
 dist_border = tk.StringVar()
 dens_factor = tk.StringVar()
-down_scope = tk.StringVar()
-up_scope = tk.StringVar()
+modify_down_scope = tk.StringVar()
+modify_up_scope = tk.StringVar()
+limit_down_scope = tk.StringVar()
+limit_up_scope = tk.StringVar()
 x_var = tk.StringVar()
 y_var = tk.StringVar()
 x_math_form = tk.StringVar()
@@ -35,7 +37,7 @@ polynominal_degree = tk.StringVar()
 
 
 
-model = Model(name,dist_border,dens_factor,down_scope,up_scope,x_var,y_var,x_math_form,y_math_form,polynominal_degree)
+model = Model(name,dist_border,dens_factor,modify_down_scope,modify_up_scope,x_var,y_var,x_math_form,y_math_form,polynominal_degree, limit_down_scope, limit_up_scope)
 
 
 
