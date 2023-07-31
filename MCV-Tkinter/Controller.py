@@ -45,6 +45,10 @@ class Controller:
 
     def counter(self):
 
+        self.x_exam_pts_basic = []
+        self.y_exam_pts_basic = []
+
+
 
         # examinated points
 
@@ -102,8 +106,7 @@ class Controller:
 
             lim_a = float(self.model.limit_down_scope.get())
             lim_b = float(self.model.limit_up_scope.get())
-            print(f'zakres dół limit {lim_a}')
-            print(f'zakres góra limit {lim_b}')
+
 
             lim_down = int(len(self.x_exam_pts ) * (lim_a / 100))
             lim_up = int(len(self.x_exam_pts ) * (lim_b / 100))
@@ -115,11 +118,13 @@ class Controller:
             # print (f'gora {x_slice}')
             # print(f'dol {y_slice}')
 
+
+
             return x_slice,y_slice
 
 
 
-        scope_limit(self)
+
 
 
 
@@ -216,9 +221,43 @@ class Controller:
 
 
         self.model.dist_border.set(self.view.dist_border_var.get())
-        print (f'distance  { int(self.model.dist_border.get())}')
 
-        x_exam_pts_2, y_exam_pts_2, self.x_trend_pts_1, self.y_trend_pts_1 = main_proces(self.x_exam_pts, self.y_exam_pts, int(self.model.dist_border.get()))
+
+
+        print(f'SCOPE x {scope_limit(self)[0]}')
+        print(f'SCOPE y {scope_limit(self)[1]}')
+
+
+
+
+
+        self.x_exam_pts_basic= scope_limit(self)[0]
+        self.y_exam_pts_basic = scope_limit(self)[1]
+
+        print(f'EXAM x {self.x_exam_pts_basic}')
+        print(f'EXAM y {self.y_exam_pts_basic}')
+
+
+
+
+
+        print(f'długość x limit {len(scope_limit(self)[0])}')
+        print(f'typ x limit {type(scope_limit(self)[0])}')
+
+        print(f'długość y limit {len(scope_limit(self)[1])}')
+        print(f'typ y limit {type(scope_limit(self)[1])}')
+
+        print(f'długość x exam {len(self.x_exam_pts)}')
+
+        print(f'długość y exam {len(self.y_exam_pts)}')
+
+
+
+
+
+
+
+        x_exam_pts_2, y_exam_pts_2, self.x_trend_pts_1, self.y_trend_pts_1 = main_proces(self.x_exam_pts_basic, self.y_exam_pts_basic, int(self.model.dist_border.get()))
 
         #
         x_exam_pts_3, y_exam_pts_3, self.x_trend_pts_1, self.y_trend_pts_1 = main_proces(x_exam_pts_2, y_exam_pts_2)
@@ -251,6 +290,7 @@ class Controller:
 
 
         print(f' gęstość {self.model.dens_factor.get()}')
+
         x_slice_1, y_slice_1 = density_control(x_slice, y_slice, float(self.model.dens_factor.get()))
 
         # change data  with corrected density in described scope - down/up
@@ -275,7 +315,8 @@ class Controller:
 
             plt.show()
 
-        chart(self.x_exam_pts, self.y_exam_pts, self.x_trend_pts_1, self.y_trend_pts_1)
+
+        chart(self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1)
 
 
 
