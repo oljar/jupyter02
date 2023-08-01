@@ -45,6 +45,7 @@ class Controller:
 
     def counter(self):
 
+
         self.x_exam_pts_basic = []
         self.y_exam_pts_basic = []
 
@@ -129,7 +130,9 @@ class Controller:
 
 
 
-        def main_proces(ex, ey, dist_border=10000000):
+        def main_proces(ex, ey, dist_border = 10000):
+
+
 
             # input filters
 
@@ -206,7 +209,7 @@ class Controller:
             y_output = filtred['Y_Exam'].tolist()
             return x_output, y_output, x_trend_points, y_trend_points
 
-        def density_control(x, y, density):
+        def density_control(x, y, density=1):
 
             n = int(1 / density)
 
@@ -220,10 +223,6 @@ class Controller:
 
 
 
-        self.model.dist_border.set(self.view.dist_border_var.get())
-
-
-
         print(f'SCOPE x {scope_limit(self)[0]}')
         print(f'SCOPE y {scope_limit(self)[1]}')
 
@@ -234,45 +233,49 @@ class Controller:
         self.x_exam_pts_basic= scope_limit(self)[0]
         self.y_exam_pts_basic = scope_limit(self)[1]
 
-        print(f'EXAM x {self.x_exam_pts_basic}')
-        print(f'EXAM y {self.y_exam_pts_basic}')
 
 
 
-
-
-        print(f'długość x limit {len(scope_limit(self)[0])}')
-        print(f'typ x limit {type(scope_limit(self)[0])}')
-
-        print(f'długość y limit {len(scope_limit(self)[1])}')
-        print(f'typ y limit {type(scope_limit(self)[1])}')
-
-        print(f'długość x exam {len(self.x_exam_pts)}')
-
-        print(f'długość y exam {len(self.y_exam_pts)}')
+        try:
+            self.model.dist_border = int(self.view.dist_border_var.get())
+            dist_fact = self.model.dist_border
+        except:
+            dist_fact = 10000
 
 
 
-
-
-
-
-        x_exam_pts_2, y_exam_pts_2, self.x_trend_pts_1, self.y_trend_pts_1 = main_proces(self.x_exam_pts_basic, self.y_exam_pts_basic, int(self.model.dist_border.get()))
+        x_exam_pts_2, y_exam_pts_2, self.x_trend_pts_1, self.y_trend_pts_1 = main_proces(self.x_exam_pts_basic, self.y_exam_pts_basic,dist_fact)
 
         #
+
         x_exam_pts_3, y_exam_pts_3, self.x_trend_pts_1, self.y_trend_pts_1 = main_proces(x_exam_pts_2, y_exam_pts_2)
 
         #chart(x_exam_pts_3, y_exam_pts_3, x_trend_pts_1, y_trend_pts_1, x_exam_pts_2)
 
         # hier set % scope of slice
 
+
+
+
         self.model.modify_down_scope.set(self.view.down_scope_var.get())
-
-
         self.model.modify_up_scope.set(self.view.up_scope_var.get())
 
-        a=float(self.model.modify_down_scope.get())
-        b=float(self.model.modify_up_scope.get())
+
+
+
+
+
+        try:
+            a = float(self.model.modify_down_scope.get())
+        except:
+            a = 0
+
+        try:
+            b = float(self.model.modify_up_scope.get())
+        except:
+            b = 100
+
+
         print(f'zakres dół {a}')
         print(f'zakres góra {b}')
 
@@ -285,11 +288,12 @@ class Controller:
         #  Here set density of slice
 
 
+        try:
+            self.model.dens_factor.set(float(self.view.density_var.get()))
+        except:
+            self.model.dens_factor.set(1)
 
-        self.model.dens_factor.set(self.view.density_var.get())
 
-
-        print(f' gęstość {self.model.dens_factor.get()}')
 
         x_slice_1, y_slice_1 = density_control(x_slice, y_slice, float(self.model.dens_factor.get()))
 
@@ -345,6 +349,24 @@ class Controller:
         self.view.show_save_file_clicked()
 
         solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
+
+    def save_nature_data(self):
+        solution = pd.DataFrame()
+        solution[self.view.x_var.get()] = pd.DataFrame(self.x_exam_pts_basic)
+        solution[self.view.y_var.get()] = pd.DataFrame(self.y_exam_pts_basic)
+        self.view.show_save_file_clicked()
+
+        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
+
+
+    def save_modify_data(self):
+        solution = pd.DataFrame()
+        solution[self.view.x_var.get()] = pd.DataFrame(self.x_exam_pts_4)
+        solution[self.view.y_var.get()] = pd.DataFrame(self.y_exam_pts_4)
+        self.view.show_save_file_clicked()
+
+        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
+
 
 
 

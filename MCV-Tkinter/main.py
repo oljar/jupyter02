@@ -52,7 +52,7 @@ view.set_controller(controller)
 
 
 V.tab_parent.add(V.tab0,text = 'ustaw')
-V.tab_parent.add(V.tab1,text = 'identyfikacja')
+
 
 V.tab_parent.pack(expand = 1, fill = 'both')
 

@@ -10,13 +10,14 @@ from tkinter.filedialog import askopenfile
 from tkinter.filedialog import asksaveasfile
 
 
+
 window = tk.Tk()
-window.title("EVOT_printer")
-window.geometry('750x480')
+window.title("Data modificator")
+window.geometry('750x700')
 
 tab_parent = ttk.Notebook(window)
 tab0 = ttk.Frame(tab_parent)
-tab1 = ttk.Frame(tab_parent)
+
 
 
 
@@ -47,106 +48,139 @@ class View(ttk.Frame):
         # create widgets
 
         #####################
+        lf1 = ttk.LabelFrame(tab0, width=500, height=180, text = "Dane", )
+        lf1.grid(column = 1, row = 0, padx=15 , pady=15)
 
-        self.label = ttk.Label(tab0)
-        self.label.grid(row=10,column = 0)
+        lf2 = ttk.LabelFrame(tab0, width=500, height=180, text= "Obróbka podstawowa")
+        lf2.grid(column=1, row=2, padx=15, pady=15)
+
+        lf3 = ttk.LabelFrame(tab0, width=500, height=180, text="Modyfikacje")
+        lf3.grid(column=1, row=3, padx=15, pady=15)
 
 
-        self.show_file = ttk.Button(tab0, text='Wskaż plik csv', command=self.show_open_file_clicked)
-        self.show_file.grid(row=20, column=0, padx=10)
+
+
+        ####################
+        self.label = ttk.Label(lf1)
+        self.label.grid(row=5,column = 0)
+
+
+        self.show_file = ttk.Button(lf1, text='Wskaż plik csv', command=self.show_open_file_clicked)
+        self.show_file.grid(row=10, column=0, padx=10)
+
 
         ######################
 
-        self.label = ttk.Label(tab0)
-        self.label.grid(row=21, column=0)
+        self.label = ttk.Label(lf1)
+        self.label.grid(row=15, column=0)
 
-        self.distance_label = ttk.Label(tab0, text='nazwa kolumny x')
-        self.distance_label.grid(row=22, column=0)
+        self.distance_label = ttk.Label(lf1, text='nazwa kolumny - x')
+        self.distance_label.grid(row=20, column=0)
 
-        self.name_col_x_entry = ttk.Entry(tab0, textvariable=self.x_var, width=10)
-        self.name_col_x_entry.grid(row=22, column=1, sticky=tk.NSEW)
+        self.name_col_x_entry = ttk.Entry(lf1, textvariable=self.x_var, width=10)
+        self.name_col_x_entry.grid(row=20, column=1, sticky=tk.NSEW)
 
 
 
-        self.distance_label = ttk.Label(tab0, text='nazwa kolumny y')
-        self.distance_label.grid(row=22, column=2)
+        self.distance_label = ttk.Label(lf1, text='nazwa kolumny - y')
+        self.distance_label.grid(row=20, column=2)
 
-        self.name_col_y_entry = ttk.Entry(tab0, textvariable=self.y_var, width=10)
-        self.name_col_y_entry.grid(row=22, column=3, sticky=tk.NSEW)
+        self.name_col_y_entry = ttk.Entry(lf1, textvariable=self.y_var, width=10)
+        self.name_col_y_entry.grid(row=20, column=3, sticky=tk.NSEW)
 
 
         #############################################################
 
-        self.label = ttk.Label(tab0)
-        self.label.grid(row=23, column=0)
+        self.label = ttk.Label(lf1)
+        self.label.grid(row=22, column=0)
 
-        self.open_button = ttk.Button(tab0, text='Pobierz dane', command=self.open_button_clicked)
-        self.open_button.grid(row=24, column=0, padx=10)
+        self.open_button = ttk.Button(lf1, text='Pobierz dane', command=self.open_button_clicked)
+        self.open_button.grid(row=23, column=0, padx=10)
+
+
 
         ###########################################################
 
-        self.label = ttk.Label(tab0)
-        self.label.grid(row=25, column=0)
+        self.label = ttk.Label(lf2 )
+        self.label.grid(row=24, column=0)
 
-        self.distance_label = ttk.Label(tab0, text='st. wielomianu lini trendu')
+        self.distance_label = ttk.Label(lf2, text='st. wielomianu lini trendu')
         self.distance_label.grid(row=26, column=0)
 
-        self.name_col_x_entry = ttk.Entry(tab0, textvariable=self.polynominal_degree, width=10)
+        self.name_col_x_entry = ttk.Entry(lf2, textvariable=self.polynominal_degree, width=10)
         self.name_col_x_entry.grid(row=26, column=1, sticky=tk.NSEW)
 
         ################################################################
 
 
 
-        self.label = ttk.Label(tab0)
+        self.label = ttk.Label(lf2)
         self.label.grid(row=27, column=0)
 
-        self.total_scope_label = ttk.Label(tab0, text='dolny zakres:')
+        self.total_scope_label = ttk.Label(lf2, text='dolny zakres:')
         self.total_scope_label.grid(row=28, column=0)
 
-        self.total_scope_entry = ttk.Entry(tab0, textvariable=self.total_down_scope_var, width=30)
+        self.total_scope_entry = ttk.Entry(lf2, textvariable=self.total_down_scope_var, width=30)
         self.total_scope_entry.grid(row=28, column=1, sticky=tk.NSEW)
 
-        self.total_scope_label = ttk.Label(tab0, text='górny zakres:')
+        self.total_scope_label = ttk.Label(lf2, text='górny zakres:')
         self.total_scope_label.grid(row=28, column=2)
-        self.total_scope_entry = ttk.Entry(tab0, textvariable=self.total_up_scope_var, width=30)
+        self.total_scope_entry = ttk.Entry(lf2, textvariable=self.total_up_scope_var, width=30)
         self.total_scope_entry.grid(row=28, column=3, sticky=tk.NSEW)
 
         ############################################
 
-        self.label = ttk.Label(tab0)
+        self.label = ttk.Label(lf2)
         self.label.grid(row=29, column=0)
 
 
-        self.distance_label = ttk.Label(tab0, text='wzór korekcyjny - x')
-        self.distance_label.grid(row=30, column=0)
+        self.label = ttk.Label(lf2, text='wzór korekcyjny - x')
+        self.label.grid(row=30, column=0)
 
-        self.name_col_x_entry = ttk.Entry(tab0, textvariable = self.x_math_form , width=10)
+        self.name_col_x_entry = ttk.Entry(lf2, textvariable = self.x_math_form , width=10)
         self.name_col_x_entry.grid(row=30, column=1, sticky=tk.NSEW)
 
-        self.distance_label = ttk.Label(tab0, text='wzór korekcyjny - y')
-        self.distance_label.grid(row=30, column=2)
+        self.label = ttk.Label(lf2, text='wzór korekcyjny - y')
+        self.label.grid(row=30, column=2)
 
-        self.name_col_y_entry = ttk.Entry(tab0, textvariable = self.y_math_form , width=10)
+        self.name_col_y_entry = ttk.Entry(lf2, textvariable = self.y_math_form , width=10)
         self.name_col_y_entry.grid(row=30, column=3, sticky=tk.NSEW)
 
+        self.distance_label = ttk.Label(lf2)
+        self.distance_label.grid(row=31, column=0)
 
+        self.label = ttk.Label(lf3)
+        self.label.grid(row=32, column=0)
+
+
+        self.count_button_count = ttk.Button(lf2, text='Przelicz', command=self.count_button_clicked)
+        self.count_button_count.grid(row=35, column=0, padx=10)
+
+
+        self.open_button_draw_natural = ttk.Button(lf2, text='Rysuj wykres naturalny',
+                                                   command=self.natural_chart_clicked)
+
+        self.open_button_draw_natural.grid(row=35, column=1, padx=10)
+
+
+        self.open_button = ttk.Button(lf2, text='Zapisz', command=self.nature_data_button_clicked)
+        self.open_button.grid(row=35, column=3, padx=10)
 
 
         #######################
 
 
-        self.label = ttk.Label(tab0)
+        self.label = ttk.Label(lf3)
         self.label.grid(row=35, column=0)
 
 
 
 
-        self.distance_label = ttk.Label(tab0, text='odleglość:')
+        self.distance_label = ttk.Label(lf3, text='odleglość:')
         self.distance_label.grid(row=40, column=0)
 
 
-        self.distance_entry = ttk.Entry(tab0, textvariable=self.dist_border_var, width=30)
+        self.distance_entry = ttk.Entry(lf3, textvariable=self.dist_border_var, width=30)
         self.distance_entry.grid(row=40, column=1, sticky=tk.NSEW)
 
 
@@ -154,45 +188,45 @@ class View(ttk.Frame):
 
         ######################
 
-        self.label = ttk.Label(tab0)
+        self.label = ttk.Label(lf3)
         self.label.grid(row=50, column=0)
 
 
-        self.density_label = ttk.Label(tab0, text='gęstość:')
+        self.density_label = ttk.Label(lf3, text='gęstość:')
         self.density_label.grid(row = 60, column=0)
 
 
-        self.density_entry = ttk.Entry(tab0, textvariable=self.density_var, width=30)
+        self.density_entry = ttk.Entry(lf3, textvariable=self.density_var, width=30)
         self.density_entry.grid(row = 60, column=1, sticky=tk.NSEW)
 
 
         #######################
         #
-        self.label = ttk.Label(tab0)
+        self.label = ttk.Label(lf3)
         self.label.grid(row=70, column=0)
 
 
-        self.down_scope_label = ttk.Label(tab0, text='dolny zakres:')
+        self.down_scope_label = ttk.Label(lf3, text='dolny zakres:')
         self.down_scope_label.grid(row = 80, column=0)
 
 
-        self.down_scope_entry = ttk.Entry(tab0, textvariable=self.down_scope_var, width=30)
+        self.down_scope_entry = ttk.Entry(lf3, textvariable=self.down_scope_var, width=30)
         self.down_scope_entry.grid(row = 80, column=1, sticky=tk.NSEW)
 
         #######################
 
 
 
-        self.up_scope_label = ttk.Label(tab0, text='górny zakres:')
+        self.up_scope_label = ttk.Label(lf3, text='górny zakres:')
         self.up_scope_label.grid(row = 80, column=2)
 
 
-        self.up_scope_entry = ttk.Entry(tab0, textvariable=self.up_scope_var, width=30)
+        self.up_scope_entry = ttk.Entry(lf3, textvariable=self.up_scope_var, width=30)
         self.up_scope_entry.grid(row = 80, column=3, sticky=tk.NSEW)
 
 
 
-        self.label = ttk.Label(tab0)
+        self.label = ttk.Label(lf3)
         self.label.grid(row=90, column=0)
 
 
@@ -202,39 +236,32 @@ class View(ttk.Frame):
 
         ##########################
         #
+        self.label = ttk.Label(lf3)
+        self.label.grid(row=110, column=0)
 
 
-        self.count_button_count = ttk.Button(tab0, text='Przelicz', command=self.count_button_clicked)
+        self.count_button_count = ttk.Button(lf3, text='Przelicz', command=self.count_button_clicked)
         self.count_button_count.grid(row=100, column=0, padx=10)
 
         #############################
 
-        self.open_button_draw_natural = ttk.Button(tab0, text='Rysuj wykres naturalny', command=self.natural_chart_clicked)
-        self.open_button_draw_natural.grid(row=100, column=1, padx=10)
+
+
+
+
+
+        self.open_button_draw_modified = ttk.Button(lf3, text='Rysuj wykres obrobiony', command=self.modified_chart_clicked)
+        self.open_button_draw_modified.grid(row=100, column=1, padx=10)
 
         ############################
 
 
-
-        self.open_button_draw_modified = ttk.Button(tab0, text='Rysuj wykres obrobiony', command=self.modified_chart_clicked)
-        self.open_button_draw_modified.grid(row=100, column=2, padx=10)
-
-        ############################
-
-        self.label = ttk.Label(tab0)
-        self.label.grid(row=110, column=0)
         #
-        self.open_button_save_data= ttk.Button(tab0, text='Zapisz dane',command=self.save_button_clicked)
-        self.open_button_save_data.grid(row=120, column=0, padx=10)
+        self.open_button_save_data= ttk.Button(lf3, text='Zapisz dane', command=self.save_modify_button_clicked)
+        self.open_button_save_data.grid(row=100, column=3, padx=10)
 
+        #########################
 
-
-        # message
-        self.message_label = ttk.Label(self, text='', foreground='red')
-        self.message_label.grid(row=2, column=1, sticky=tk.W)
-
-        # set the controller
-        self.controller = None
 
     def set_controller(self, controller):
         """
@@ -268,9 +295,16 @@ class View(ttk.Frame):
         if self.controller:
             self.controller.open_data()
 
-    def save_button_clicked(self):
+
+    def nature_data_button_clicked(self):
+
         if self.controller:
-            self.controller.save_data()
+            self.controller.save_nature_data()
+
+
+    def save_modify_button_clicked(self):
+        if self.controller:
+            self.controller.save_modify_data()
 
 
 
