@@ -44,6 +44,8 @@ class View(ttk.Frame):
 
         self.polynominal_degree = tk.StringVar()
 
+        self.step = tk.StringVar()
+
 
         # create widgets
 
@@ -111,6 +113,17 @@ class View(ttk.Frame):
         self.name_col_x_entry.grid(row=26, column=1, sticky=tk.NSEW)
 
         ################################################################
+
+
+        self.distance_label = ttk.Label(lf2, text='krok')
+        self.distance_label.grid(row=26, column=2)
+
+        self.name_col_x_entry = ttk.Entry(lf2, textvariable=self.step , width=10)
+        self.name_col_x_entry.grid(row=26, column=3, sticky=tk.NSEW)
+
+
+
+
 
 
 

@@ -139,6 +139,8 @@ class Controller:
 
             self.model.polynominal_degree.set(self.view.polynominal_degree.get())
 
+            self.model.step.set(self.view.step.get())
+
             deg = int(self.model.polynominal_degree.get())               # stopień wielomianu
 
             # trend line
@@ -150,7 +152,7 @@ class Controller:
             stop = x_exam_points[(len(x_exam_points) - 1)]
 
             #  precision of sampling
-            step = 0.1
+            step = float(str(self.model.step.get()))
             sequence = list(np.arange(start, stop, step))
             x_trend_points = sequence
 
