@@ -17,6 +17,7 @@ window.geometry('750x700')
 
 tab_parent = ttk.Notebook(window)
 tab0 = ttk.Frame(tab_parent)
+tab1 = ttk.Frame(tab_parent)
 
 
 
@@ -273,8 +274,19 @@ class View(ttk.Frame):
         self.open_button_save_data= ttk.Button(lf3, text='Zapisz dane', command=self.save_modify_button_clicked)
         self.open_button_save_data.grid(row=100, column=3, padx=10)
 
-        #########################
+        #################################################################################################################
 
+        lf11 = ttk.LabelFrame(tab1, width=500, height=180, text="Dane", )
+        lf11.grid(column=1, row=0, padx=15, pady=15)
+
+
+        self.open_button_save_data = ttk.Button(lf11, text='Wskaż plik csv', command=self.show_open_file_clicked)
+        self.open_button_save_data.grid(row=100, column=3, padx=10)
+
+
+
+
+        #######################################
 
     def set_controller(self, controller):
         """
