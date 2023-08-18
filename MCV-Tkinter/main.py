@@ -20,8 +20,8 @@ class Application(tk.Frame):
 view = View(V.window)
 
 
-name = view.open_name_var.get()
 
+name = tk.StringVar()
 dist_border = tk.StringVar()
 dens_factor = tk.StringVar()
 modify_down_scope = tk.StringVar()

@@ -38,7 +38,7 @@ class Model:
 
 
 
-
+        print(f'asdsa{self.name}')
         data_list = []
         with open(self.name, 'r') as f:
             data = csv.reader(f)
