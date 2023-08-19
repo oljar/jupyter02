@@ -425,19 +425,44 @@ class Controller:
         chart(self.time_tab1_exam_pts, self.y1_tab1_exam_pts , self.y2_tab1_exam_pts)
 
     def set_data_tab_1(self):
-        self.model.down_scope_var_tab_1 = datetime.strptime(str(self.view.down_scope_var_tab_1.get()),"%H:%M:%S").time()
-        self.model.up_scope_var_tab_1 = datetime.strptime(str(self.view.up_scope_var_tab_1.get()),"%H:%M:%S").time()
+        #self.model.down_scope_var_tab_1 = datetime.strptime(str(self.view.down_scope_var_tab_1.get()),"%H:%M:%S").time()
+        #self.model.up_scope_var_tab_1 = datetime.strptime(str(self.view.up_scope_var_tab_1.get()),"%H:%M:%S").time()
+
+        self.model.down_scope_var_tab_1 = str(self.view.down_scope_var_tab_1.get())
+        self.model.up_scope_var_tab_1 = str(self.view.up_scope_var_tab_1.get())
+
+
         df101 = pd.DataFrame(self.model.open_data_tab_1())
         df101 = df101.loc[:,[self.model.time_var_tab1,self.model.y1_var_tab1,self.model.y2_var_tab1]]
 
-        #df101 = df101[(df101[self.model.time_var_tab1] > self.model.down_scope_var_tab_1) & (df101[self.model.time_var_tab1] < self.model.up_scope_var_tab_1)]
+        df101 = df101[(df101[self.model.time_var_tab1] > (self.model.down_scope_var_tab_1)) & (df101[self.model.time_var_tab1] < self.model.up_scope_var_tab_1)]
+
+        #df101 = df101[df101[self.model.time_var_tab1].between_time(self.model.down_scope_var_tab_1, self.model.up_scope_var_tab_1)]
+        #
+        self.time_modyfied_tab1_exam_pts = (df101[self.model.time_var_tab1]).tolist()
+        self.y1_modyfied_tab1_exam_pts = (df101[self.model.y1_var_tab1]).tolist()
+        self.y2_modyfied_tab1_exam_pts = (df101[self.model.y2_var_tab1]).tolist()
+        #
 
 
 
 
+    def draw_slice_data_tab_1(self):
 
-        print (df101)
+        def chart(x, y1, y2):
+            fig = plt.figure()
+            ax1 = fig.add_subplot(111)
+            ax2 = ax1.twiny()
 
+            ax1.plot(x, y1, "-o")
+            ax1.plot(x, y2, "-s")
+
+            ax2.set_xlim(0, 100)
+            plt.gcf().autofmt_xdate()
+            ax1.set_xticks(np.arange(-5, 200, 10))
+            plt.show()
+
+        chart( self.time_modyfied_tab1_exam_pts ,  self.y1_modyfied_tab1_exam_pts, self.y2_modyfied_tab1_exam_pts)
 
 
 

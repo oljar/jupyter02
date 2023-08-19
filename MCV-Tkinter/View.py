@@ -519,7 +519,7 @@ class View(ttk.Frame):
             self.controller.set_data_tab_1()
 
     def draw_slice_button_clicked_tab_1(self):
-        print('ok')
+        self.controller.draw_slice_data_tab_1()
 
     def save_button_clicked_tab_1(self):
         print('ok')
