@@ -378,8 +378,15 @@ class Controller:
 
 
             self.model.name = self.view.open_name_var.get()
-            #self.model.name.set(self.view.open_name_var.get())
-            self.df11 = self.model.open_data()
+            self.model.time_var_tab1 =  self.view.time_var_tab1.get()
+            self.model.y1_var_tab1 = self.view.y1_var_tab1.get()
+            self.model.y2_var_tab1 = self.view.y2_var_tab1.get()
+            self.df11 = self.model.open_data_tab_1()
+
+            print(self.model.y1_var_tab1)
+            print(self.model.y2_var_tab1)
+
+            print(self.df11)
 
 
 
