@@ -28,6 +28,7 @@ print (df1)
 
 
 
+
 # result = print(df1.eq(value).any(axis=1))
 
 

@@ -404,6 +404,8 @@ class Controller:
         self.y1_tab1_exam_pts = df11[y1_tag_tab1].tolist()  # definition of column -y1
         self.y2_tab1_exam_pts = df11[y2_tag_tab1].tolist()  # definition of column -y2
 
+        return self.time_tab1_exam_pts,self.y1_tab1_exam_pts,self.y2_tab1_exam_pts
+
 
     def draw_data_tab_1(self):
 
@@ -425,8 +427,18 @@ class Controller:
     def set_data_tab_1(self):
         self.model.down_scope_var_tab_1 = datetime.strptime(str(self.view.down_scope_var_tab_1.get()),"%H:%M:%S").time()
         self.model.up_scope_var_tab_1 = datetime.strptime(str(self.view.up_scope_var_tab_1.get()),"%H:%M:%S").time()
-        print(self.model.down_scope_var_tab_1)
-        print(self.model.up_scope_var_tab_1)
+        df101 = pd.DataFrame(self.model.open_data_tab_1())
+        df101 = df101.loc[:,[self.model.time_var_tab1,self.model.y1_var_tab1,self.model.y2_var_tab1]]
+
+        #df101 = df101[(df101[self.model.time_var_tab1] > self.model.down_scope_var_tab_1) & (df101[self.model.time_var_tab1] < self.model.up_scope_var_tab_1)]
+
+
+
+
+
+        print (df101)
+
+
 
 
 
