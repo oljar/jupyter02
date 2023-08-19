@@ -5,7 +5,7 @@ import csv
 
 class Model:
     def __init__(self, name, dist_border, dens_factor, modify_down_scope, modify_up_scope, x_var, y_var, x_math_form, y_math_form, polynominal_degree,limit_up_scope,limit_down_scope,step,
-                 time_var_tab1,y1_var_tab1,y2_var_tab1):
+                 time_var_tab1,y1_var_tab1,y2_var_tab1,down_scope_var_tab_1,up_scope_var_tab_1):
         self.name = name
 
         self.dist_border = dist_border
@@ -24,6 +24,9 @@ class Model:
         self.time_var_tab1 = time_var_tab1
         self.y1_var_tab1 = y1_var_tab1
         self.y2_var_tab1 = y2_var_tab1
+
+        self.down_scope_var_tab_1 = down_scope_var_tab_1
+        self.up_scope_var_tab_1 = up_scope_var_tab_1
 
 
 
@@ -58,12 +61,6 @@ class Model:
         return df1
 
     def open_data_tab_1(self):
-        """
-        Save the email into a file
-        :return:
-        """
-        # with open('emails.txt', 'a') as f:
-        print(f'zszszzsz{self.time_var_tab1}')
 
         data_list = []
         with open(self.name, 'r') as f:

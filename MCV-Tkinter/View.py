@@ -510,12 +510,13 @@ class View(ttk.Frame):
 
     def natural_chart_clicked_tab_1(self):
         #self.controller.natural_chart_execution()
-        print('ok')
+        self.controller.draw_data_tab_1()
 
     def set_button_clicked_tab_1(self):
         if self.controller:
             #self.controller.open_data()
-            print('ok')
+
+            self.controller.set_data_tab_1()
 
     def draw_slice_button_clicked_tab_1(self):
         print('ok')

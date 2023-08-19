@@ -38,11 +38,13 @@ step = tk.StringVar()
 time_var_tab1 = tk.StringVar()
 y1_var_tab1 = tk.StringVar()
 y2_var_tab1 = tk.StringVar()
+down_scope_var_tab_1 = tk.StringVar()
+up_scope_var_tab_1 =  tk.StringVar()
 
 
 
 model = Model(name,dist_border,dens_factor,modify_down_scope,modify_up_scope,x_var,y_var,x_math_form,y_math_form,polynominal_degree, limit_down_scope, limit_up_scope
-              ,step, time_var_tab1, y1_var_tab1, y2_var_tab1)
+              ,step, time_var_tab1, y1_var_tab1, y2_var_tab1, down_scope_var_tab_1, up_scope_var_tab_1)
 
 
 
@@ -56,9 +58,9 @@ view.set_controller(controller)
 
 
 
-V.tab_parent.add(V.tab0,text = 'ustawienia')
-V.tab_parent.add(V.tab1,text = 'zakres')
 
+V.tab_parent.add(V.tab1,text = 'zakres')
+V.tab_parent.add(V.tab0,text = 'ustawienia')
 V.tab_parent.pack(expand = 1, fill = 'both')
 
 app =Application(V.window)

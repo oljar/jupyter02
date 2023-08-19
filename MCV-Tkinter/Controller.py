@@ -10,6 +10,7 @@ import numpy.polynomial.polynomial as poly
 import matplotlib.pyplot as plt
 import numpy as np
 import math
+from datetime import datetime
 
 
 
@@ -377,16 +378,56 @@ class Controller:
     def open_data_tab_1(self):
 
 
-            self.model.name = self.view.open_name_var.get()
-            self.model.time_var_tab1 =  self.view.time_var_tab1.get()
-            self.model.y1_var_tab1 = self.view.y1_var_tab1.get()
-            self.model.y2_var_tab1 = self.view.y2_var_tab1.get()
-            self.df11 = self.model.open_data_tab_1()
+        self.model.name = self.view.open_name_var.get()
+        self.model.time_var_tab1 =  self.view.time_var_tab1.get()
+        self.model.y1_var_tab1 = self.view.y1_var_tab1.get()
+        self.model.y2_var_tab1 = self.view.y2_var_tab1.get()
+        self.df11 = self.model.open_data_tab_1()
 
-            print(self.model.y1_var_tab1)
-            print(self.model.y2_var_tab1)
 
-            print(self.df11)
+        time_tag_tab1 = self.model.time_var_tab1
+        y1_tag_tab1 = str(self.model.y1_var_tab1)
+        y2_tag_tab1 = str(self.model.y2_var_tab1)
+
+
+        df11 = self.df11
+        df11 = df11.sort_values(by=time_tag_tab1, ascending=True)
+
+        df11 = df11[df11[y1_tag_tab1] >= 0]
+        df11 = df11[df11[y2_tag_tab1] >= 0]
+
+        df11[y1_tag_tab1] = df11[y1_tag_tab1].fillna(df11[y1_tag_tab1].median())
+        df11[y2_tag_tab1] = df11[y2_tag_tab1].fillna(df11[y2_tag_tab1].median())
+
+
+        self.time_tab1_exam_pts = df11[time_tag_tab1].tolist()  # definition of column - time
+        self.y1_tab1_exam_pts = df11[y1_tag_tab1].tolist()  # definition of column -y1
+        self.y2_tab1_exam_pts = df11[y2_tag_tab1].tolist()  # definition of column -y2
+
+
+    def draw_data_tab_1(self):
+
+        def chart(x, y1, y2):
+            fig = plt.figure()
+            ax1 = fig.add_subplot(111)
+            ax2 = ax1.twiny()
+
+            ax1.plot(x, y1, "-o")
+            ax1.plot(x, y2, "-s")
+
+            ax2.set_xlim(0, 100)
+            plt.gcf().autofmt_xdate()
+            ax1.set_xticks(np.arange(-5, 200, 10))
+            plt.show()
+
+        chart(self.time_tab1_exam_pts, self.y1_tab1_exam_pts , self.y2_tab1_exam_pts)
+
+    def set_data_tab_1(self):
+        self.model.down_scope_var_tab_1 = datetime.strptime(str(self.view.down_scope_var_tab_1.get()),"%H:%M:%S").time()
+        self.model.up_scope_var_tab_1 = datetime.strptime(str(self.view.up_scope_var_tab_1.get()),"%H:%M:%S").time()
+        print(self.model.down_scope_var_tab_1)
+        print(self.model.up_scope_var_tab_1)
+
 
 
 
