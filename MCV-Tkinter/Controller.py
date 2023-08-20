@@ -22,7 +22,8 @@ class Controller:
 
     def open_data(self):
 
-        if self.model.time_var_tab1:
+        if  isinstance(self.model.time_var_tab1, str):
+
 
             try:
                 self.view.x_var.set(self.view.y1_var_tab1.get())
