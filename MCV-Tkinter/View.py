@@ -13,7 +13,7 @@ from tkinter.filedialog import asksaveasfile
 
 window = tk.Tk()
 window.title("Data modificator")
-window.geometry('750x700')
+window.geometry('790x700')
 
 tab_parent = ttk.Notebook(window)
 tab0 = ttk.Frame(tab_parent)
@@ -312,14 +312,15 @@ class View(ttk.Frame):
         self.name_col_x_entry_tab_1.grid(row=20, column=1, sticky=tk.NSEW)
 
 
-        self.label = ttk.Label(lf101, text='nazwa kolumny - y1')
+
+        self.label = ttk.Label(lf101, text='nazwa kolumny - x')
         self.label.grid(row=20, column=2)
 
         self.name_col_y1_entry_tab_1 = ttk.Entry(lf101, textvariable=self.y1_var_tab1, width=10)
         self.name_col_y1_entry_tab_1.grid(row=20, column=3, sticky=tk.NSEW)
 
 
-        self.label = ttk.Label(lf101, text='nazwa kolumny - y2')
+        self.label = ttk.Label(lf101, text='nazwa kolumny - y')
         self.label.grid(row=20, column=4)
 
         self.name_col_y2_entry_tab_1 = ttk.Entry(lf101, textvariable=self.y2_var_tab1, width=10)
@@ -381,7 +382,7 @@ class View(ttk.Frame):
         self.draw_slice_button_count_tab_1 = ttk.Button(lf102, text='Rysuj wykres', command=self.draw_slice_button_clicked_tab_1)
         self.draw_slice_button_count_tab_1.grid(row=20, column=1, padx=10)
 
-        self.save_button_tab_1 = ttk.Button(lf102, text='Zapisz', command=self.save_button_clicked_tab_1)
+        self.save_button_tab_1 = ttk.Button(lf102, text='Zapisz', command=self.save_modyfied_data_clicked_tab_1)
         self.save_button_tab_1.grid(row=20, column=2, padx=10)
 
         self.export_button_tab_1 = ttk.Button(lf102, text='Export', command=self.export_button_clicked_tab_1)
@@ -521,8 +522,8 @@ class View(ttk.Frame):
     def draw_slice_button_clicked_tab_1(self):
         self.controller.draw_slice_data_tab_1()
 
-    def save_button_clicked_tab_1(self):
-        print('ok')
+    def save_modyfied_data_clicked_tab_1(self):
+        self.controller.save_modyfied_data_clicked_tab_1()
 
     def export_button_clicked_tab_1(self):
-        print('ok')
+        self.controller.export_data_tab_1()

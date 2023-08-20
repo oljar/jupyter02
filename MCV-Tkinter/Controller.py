@@ -22,24 +22,43 @@ class Controller:
 
     def open_data(self):
 
+        if self.model.time_var_tab1:
+
+            try:
+                self.view.x_var.set(self.view.y1_var_tab1.get())
+                self.view.y_var.set(self.view.y2_var_tab1.get())
+
+                self.model.x_var = (self.view.x_var.get())
+                self.model.y_var = (self.view.y_var.get())
+                self.df1 = pd.DataFrame()
+                self.df1[self.model.time_var_tab1] = pd.DataFrame(self.time_modyfied_tab1_exam_pts)
+                self.df1[self.model.y1_var_tab1] = pd.DataFrame(self.y1_modyfied_tab1_exam_pts)
+                self.df1[self.model.y2_var_tab1] = pd.DataFrame(self.y2_modyfied_tab1_exam_pts)
+
+                print(self.df1)
+
+            except ValueError as error:
+                # show an error message
+                self.view.show_error(error)
+
+        else:
 
 
-        try:
-            self.model.name = self.view.open_name_var.get()
-            self.model.x_var = (self.view.x_var.get())
-            self.model.y_var = (self.view.y_var.get())
-            self.model.x_math_form.set(self.view.x_math_form.get())
-            self.model.y_math_form.set(self.view.y_math_form.get())
+            try:
+                self.model.name = self.view.open_name_var.get()
+
+                self.model.x_var = (self.view.x_var.get())
+                self.model.y_var = (self.view.y_var.get())
 
 
 
-            self.df1 = self.model.open_data()
+                self.df1 = self.model.open_data()
 
-            print(self.df1)
+                print(self.df1)
 
-        except ValueError as error:
-            # show an error message
-            self.view.show_error(error)
+            except ValueError as error:
+                # show an error message
+                self.view.show_error(error)
 
 
 
@@ -47,9 +66,14 @@ class Controller:
     def counter(self):
 
 
+
+
         self.x_exam_pts_basic = []
         self.y_exam_pts_basic = []
 
+
+        self.model.x_math_form.set(self.view.x_math_form.get())
+        self.model.y_math_form.set(self.view.y_math_form.get())
 
 
         # examinated points
@@ -71,6 +95,8 @@ class Controller:
 
         df1[x_tag] = df1[x_tag].fillna(df1[x_tag].median())
         df1[y_tag] = df1[y_tag].fillna(df1[y_tag].median())
+
+
 
         self.x_exam_pts = (df1[x_tag]).tolist()  # definition of columns -x
 
@@ -371,8 +397,7 @@ class Controller:
         solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
 
 
-
-######################################################################################################################
+    ######################################################################################################################
 ######################################################################################################################
 
     def open_data_tab_1(self):
@@ -404,7 +429,7 @@ class Controller:
         self.y1_tab1_exam_pts = df11[y1_tag_tab1].tolist()  # definition of column -y1
         self.y2_tab1_exam_pts = df11[y2_tag_tab1].tolist()  # definition of column -y2
 
-        return self.time_tab1_exam_pts,self.y1_tab1_exam_pts,self.y2_tab1_exam_pts
+
 
 
     def draw_data_tab_1(self):
@@ -464,7 +489,15 @@ class Controller:
 
         chart( self.time_modyfied_tab1_exam_pts ,  self.y1_modyfied_tab1_exam_pts, self.y2_modyfied_tab1_exam_pts)
 
+    def save_modyfied_data_clicked_tab_1(self):
+        solution = pd.DataFrame()
+        solution[self.model.time_var_tab1] = pd.DataFrame(self.time_modyfied_tab1_exam_pts)
+        solution[self.model.y1_var_tab1] = pd.DataFrame(self.y1_modyfied_tab1_exam_pts)
+        solution[self.model.y2_var_tab1] = pd.DataFrame(self.y2_modyfied_tab1_exam_pts)
 
+        self.view.show_save_file_clicked()
 
+        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
 
-
+    def export_data_tab_1(self):
+        print('ok')
