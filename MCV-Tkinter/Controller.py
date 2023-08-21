@@ -20,6 +20,14 @@ class Controller:
         self.model = model
         self.view = view
 
+        self.temporary_chart_1_data = 0
+        self.temporary_chart_2_data = 0
+        self.temporary_chart_3_data = 0
+        self.temporary_chart_4_data = 0
+        self.temporary_chart_5_data = 0
+        self.temporary_chart_6_data = 0
+
+
     def open_data(self):
 
         if  isinstance(self.model.time_var_tab1, str):
@@ -336,7 +344,7 @@ class Controller:
 
 
 
-    def natural_chart_execution(self):
+    def natural_chart_execution_tab_0(self):
         def chart(x, y, x_trend, y_trend):
             fig = plt.figure()
             ax1 = fig.add_subplot(111)
@@ -349,15 +357,9 @@ class Controller:
 
             plt.show()
 
-
         chart(self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1)
 
-
-
-
-
-
-    def modified_chart_execution(self):
+    def modyfied_chart_execution_tab_0(self):
         def chart(x, y, x_trend, y_trend):
             fig = plt.figure()
             ax1 = fig.add_subplot(111)
@@ -372,15 +374,16 @@ class Controller:
 
         chart(self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4)
 
-    def save_data(self):
-        solution = pd.DataFrame()
-        solution[self.view.x_var.get()] = pd.DataFrame(self.x_exam_pts_4)
-        solution[self.view.y_var.get()] = pd.DataFrame(self.y_exam_pts_4)
-        self.view.show_save_file_clicked()
 
-        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
 
-    def save_nature_data(self):
+
+    def export_nature_data_tab_0(self):
+        return(self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1)
+
+
+
+
+    def save_nature_data_tab_0(self):
         solution = pd.DataFrame()
         solution[self.view.x_var.get()] = pd.DataFrame(self.x_exam_pts_basic)
         solution[self.view.y_var.get()] = pd.DataFrame(self.y_exam_pts_basic)
@@ -389,7 +392,7 @@ class Controller:
         solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
 
 
-    def save_modify_data(self):
+    def save_modify_data_tab_0(self):
         solution = pd.DataFrame()
         solution[self.view.x_var.get()] = pd.DataFrame(self.x_exam_pts_4)
         solution[self.view.y_var.get()] = pd.DataFrame(self.y_exam_pts_4)
@@ -398,7 +401,15 @@ class Controller:
         solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
 
 
-    ######################################################################################################################
+
+    def export_modyfied_data_tab_0(self):
+        return(self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4)
+
+
+
+
+######################################################################################################################
+#tab_1
 ######################################################################################################################
 
     def open_data_tab_1(self):
@@ -500,5 +511,77 @@ class Controller:
 
         solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
 
-    def export_data_tab_1(self):
-        print('ok')
+
+
+
+#########################################################################################################################
+#tab2
+########################################################################################################################
+    def trans_01_tab_2(self):
+        self.temporary_chart_1_data =  self.export_nature_data_tab_0()
+        if self.view.switch_modyfied_export == True:
+            self.temporary_chart_1_data = self.export_modyfied_data_tab_0()
+        #print(self.temporary_chart_1_data)
+
+
+
+    def trans_02_tab_2(self):
+        self.temporary_chart_2_data = self.export_nature_data_tab_0()
+        if self.view.switch_modyfied_export == True:
+            self.temporary_chart_2_data = self.export_modyfied_data_tab_0()
+        #print(self.temporary_chart_2_data)
+
+    def trans_03_tab_2(self):
+        self.temporary_chart_3_data = self.export_nature_data_tab_0()
+        if self.view.switch_modyfied_export == True:
+            self.temporary_chart_3_data = self.export_modyfied_data_tab_0()
+        #print(self.temporary_chart_3_data)
+
+
+    def trans_04_tab_2(self):
+        self.temporary_chart_4_data =  self.export_nature_data_tab_0()
+        if self.view.switch_modyfied_export == True:
+            self.temporary_chart_4_data = self.export_modyfied_data_tab_0()
+        #print(self.temporary_chart_4_data)
+
+    def trans_05_tab_2(self):
+        self.temporary_chart_5_data = self.export_nature_data_tab_0()
+
+        if self.view.switch_modyfied_export == True:
+            self.temporary_chart_5_data = self.export_modyfied_data_tab_0()
+        # print(self.temporary_chart_5_data)
+
+    def trans_06_tab_2(self):
+        self.temporary_chart_6_data =  self.export_nature_data_tab_0()
+
+        if self.view.switch_modyfied_export == True:
+            self.temporary_chart_6_data = self.export_modyfied_data_tab_0()
+       # print(self.temporary_chart_6_data)
+
+
+
+
+    def united_chart_execution_tab_2(self):
+
+        print(list(self.temporary_chart_1_data[0]))
+        print(list(self.temporary_chart_1_data[1]))
+        print(list(self.temporary_chart_1_data[2]))
+        print(list(self.temporary_chart_1_data[3]))
+
+
+
+        def chart(x, y, x_trend, y_trend):
+            fig = plt.figure()
+            ax1 = fig.add_subplot(111)
+            ax2 = ax1.twiny()
+
+            ax1.plot(x, y, "-o")
+            ax1.plot(x_trend, y_trend, "-s")
+
+            ax2.set_xlim(0, 100)
+
+            plt.show()
+
+
+
+        chart(self.temporary_chart_1_data[0], self.temporary_chart_1_data[1], self.temporary_chart_1_data[2], self.temporary_chart_1_data[3])

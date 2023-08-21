@@ -18,6 +18,7 @@ window.geometry('790x700')
 tab_parent = ttk.Notebook(window)
 tab0 = ttk.Frame(tab_parent)
 tab1 = ttk.Frame(tab_parent)
+tab2 = ttk.Frame(tab_parent)
 
 
 
@@ -56,11 +57,13 @@ class View(ttk.Frame):
         self.up_scope_var_tab_1 = tk.StringVar()
         self.down_scope_var_tab_1 = tk.StringVar()
 
+        self.switch_modyfied_export = False
 
 
 
         # create widgets
         ####################
+        #tab0
         #####################
         lf1 = ttk.LabelFrame(tab0, width=500, height=180, text = "Dane", )
         lf1.grid(column = 1, row = 0, padx=15 , pady=15)
@@ -74,12 +77,16 @@ class View(ttk.Frame):
 
 
 
+
+
+
+
         ####################
         self.label = ttk.Label(lf1)
         self.label.grid(row=5,column = 0)
 
 
-        self.show_file = ttk.Button(lf1, text='Wskaż plik csv', command=self.show_open_file_clicked)
+        self.show_file = ttk.Button(lf1, text='Wskaż plik csv', command=self.show_open_file_clicked_tab_0)
 
         self.show_file.grid(row=10, column=0, padx=10)
 
@@ -176,21 +183,27 @@ class View(ttk.Frame):
         self.label.grid(row=32, column=0)
 
 
-        self.count_button_count = ttk.Button(lf2, text='Przelicz', command=self.count_button_clicked)
+        self.count_button_count = ttk.Button(lf2, text='Przelicz', command=self.count_button_clicked_tab_0)
         self.count_button_count.grid(row=35, column=0, padx=10)
 
 
         self.open_button_draw_natural = ttk.Button(lf2, text='Rysuj wykres naturalny',
-                                                   command=self.natural_chart_clicked)
+                                                   command=self.draw_natural_chart_clicked_tab_0)
 
         self.open_button_draw_natural.grid(row=35, column=1, padx=10)
 
 
-        self.open_button = ttk.Button(lf2, text='Zapisz', command=self.nature_data_button_clicked)
-        self.open_button.grid(row=35, column=3, padx=10)
+
+        self.open_button = ttk.Button(lf2, text='Zapisz', command=self.save_natural_button_clicked_tab_0)
+        self.open_button.grid(row=35, column=2, padx=10)
+
+
+        self.export_button_natural_data_tab_0 = ttk.Button(lf2, text='Export', command=self.export_nature_data_button_clicked_tab_0)
+        self.export_button_natural_data_tab_0.grid(row=35, column=3, padx=10)
 
 
         #######################
+
 
 
         self.label = ttk.Label(lf3)
@@ -263,28 +276,37 @@ class View(ttk.Frame):
         self.label.grid(row=110, column=0)
 
 
-        self.count_button_count = ttk.Button(lf3, text='Przelicz', command=self.count_button_clicked)
+        self.count_button_count = ttk.Button(lf3, text='Przelicz', command=self.count_button_clicked_tab_0)
         self.count_button_count.grid(row=100, column=0, padx=10)
 
         #############################
 
 
 
-
-
-
-        self.open_button_draw_modified = ttk.Button(lf3, text='Rysuj wykres obrobiony', command=self.modified_chart_clicked)
+        self.open_button_draw_modified = ttk.Button(lf3, text='Rysuj wykres obrobiony', command=self.draw_modyfied_chart_clicked_tab_0)
         self.open_button_draw_modified.grid(row=100, column=1, padx=10)
+
+
 
         ############################
 
 
         #
-        self.open_button_save_data= ttk.Button(lf3, text='Zapisz dane', command=self.save_modify_button_clicked)
-        self.open_button_save_data.grid(row=100, column=3, padx=10)
+        self.open_button_save_data= ttk.Button(lf3, text='Zapisz dane', command=self.save_modify_button_clicked_tab_0)
+        self.open_button_save_data.grid(row=100, column=2, padx=10)
+
+
+
+        ##########################
+
+
+
+        self.open_button = ttk.Button(lf3, text='Export', command=self.export_modyfied_button_clicked_tab_0)
+        self.open_button.grid(row=100, column=3, padx=10)
 
         ######################################################################################################################################################
-        ######################################################################################################################################################
+       #tab1
+       ######################################################################################################################################################
 
         lf101 = ttk.LabelFrame(tab1, width=500, height=180, text="Dane" )
         lf101.grid(column=0, row=0, padx=15, pady=15)
@@ -339,7 +361,7 @@ class View(ttk.Frame):
 
         self.draw_natural_tab1 = ttk.Button(lf101, text='Rysuj wykres ', command=self.natural_chart_clicked_tab_1)
 
-        self.draw_natural_tab1.grid(row=23, column=3, padx=10)
+        self.draw_natural_tab1.grid(row=23, column=4, padx=10)
 
 
         #############################################################
@@ -380,15 +402,73 @@ class View(ttk.Frame):
         self.set_button_count_tab_1.grid(row=20, column=0, padx=10)
 
         self.draw_slice_button_count_tab_1 = ttk.Button(lf102, text='Rysuj wykres', command=self.draw_slice_button_clicked_tab_1)
-        self.draw_slice_button_count_tab_1.grid(row=20, column=1, padx=10)
+        self.draw_slice_button_count_tab_1.grid(row=20, column=2, padx=10)
 
         self.save_button_tab_1 = ttk.Button(lf102, text='Zapisz', command=self.save_modyfied_data_clicked_tab_1)
-        self.save_button_tab_1.grid(row=20, column=2, padx=10)
+        self.save_button_tab_1.grid(row=20, column=4, padx=10)
 
-        self.export_button_tab_1 = ttk.Button(lf102, text='Export', command=self.export_button_clicked_tab_1)
-        self.export_button_tab_1.grid(row=20, column=3, padx=10)
 
-        ##########################
+        ###############################################################################################################################
+
+
+        # tab 2
+        ###############################################################################################################################
+
+        lf301 = ttk.LabelFrame(tab2, width=500, height=180, text="Pobierz")
+        lf301.grid(column=0, row=0, padx=15, pady=15)
+
+        lf302 = ttk.LabelFrame(tab2, width=500, height=180, text="Łącz")
+        lf302.grid(column=0, row=1, padx=15, pady=15)
+
+        lf303 = ttk.LabelFrame(tab2, width=500, height=180, text="Wynik")
+        lf303.grid(column=0, row=2, padx=15, pady=15)
+
+        ###############################################################################################################################
+        self.label = ttk.Label(lf301)
+        self.label.grid(row=0, column=0)
+
+        self.open_button_chart_01_tab_2 = ttk.Button(lf301, text='Wykres 1', command=self.data_trans_chart_01_tab_2)
+        self.open_button_chart_01_tab_2.grid(row=0, column=0, padx=10)
+
+
+        self.open_button_chart_02_tab_2 = ttk.Button(lf301, text='Wykres 2', command=self.data_trans_chart_02_tab_2)
+        self.open_button_chart_02_tab_2.grid(row=0, column=1, padx=10)
+
+        self.open_button_chart_03_tab_2 = ttk.Button(lf301, text='Wykres 3', command=self.data_trans_chart_03_tab_2)
+        self.open_button_chart_03_tab_2.grid(row=0, column=3, padx=10)
+
+        self.open_button_chart_04_tab_2 = ttk.Button(lf301, text='Wykres 4', command=self.data_trans_chart_04_tab_2)
+        self.open_button_chart_04_tab_2.grid(row=0, column=4, padx=10)
+
+        self.open_button_chart_05_tab_2 = ttk.Button(lf301, text='Wykres 5', command=self.data_trans_chart_05_tab_2)
+        self.open_button_chart_05_tab_2.grid(row=0, column=5, padx=10)
+
+        self.open_button_chart_06_tab_2 = ttk.Button(lf301, text='Wykres 6', command=self.data_trans_chart_06_tab_2)
+        self.open_button_chart_06_tab_2.grid(row=0, column=6, padx=10)
+
+
+        #########################################################################################################################
+
+        self.aggregation_button_tab_2 = ttk.Button(lf302, text='Agreguj', command=self.aggregation_united_data_clicked_tab_2)
+        self.aggregation_button_tab_2.grid(row=0, column=0, padx=10)
+
+        #########################################################################################################################
+
+
+
+        self.united_chart_button_tab_2 = ttk.Button(lf303, text='Wykres zespolony', command=self.draw_united_data_clicked_tab_2)
+        self.united_chart_button_tab_2.grid(row=2, column=0, padx=10)
+
+        self.label = ttk.Label(lf303)
+        self.label.grid(row=3, column=0)
+
+
+        self.open_button_tab_2 = ttk.Button(lf303, text='Export danych', command=self.data_export_clicked_tab_2)
+        self.open_button_tab_2.grid(row=4, column=0, padx=10)
+
+
+
+
 
 
 
@@ -401,7 +481,8 @@ class View(ttk.Frame):
         """
         self.controller = controller
 
-    def show_open_file_clicked(self):
+
+    def show_open_file_clicked_tab_0(self):
 
         file1 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r', filetypes=[('CSV Files', '*.csv')])
 
@@ -429,28 +510,123 @@ class View(ttk.Frame):
 
 
 
-    def nature_data_button_clicked(self):
-
-        if self.controller:
-            self.controller.save_nature_data()
-
-
-    def save_modify_button_clicked(self):
-        if self.controller:
-            self.controller.save_modify_data()
 
 
 
-    def count_button_clicked(self):
+
+
+#########################################################################################################################
+
+
+
+
+    def count_button_clicked_tab_0(self):
 
         self.controller.counter()
 
-    def natural_chart_clicked(self):
-        self.controller.natural_chart_execution()
+    def draw_natural_chart_clicked_tab_0(self):
+        self.controller.natural_chart_execution_tab_0()
 
 
-    def modified_chart_clicked(self):
-        self.controller.modified_chart_execution()
+    def save_natural_button_clicked_tab_0(self):
+        self.controller.save_nature_data_tab_0()
+
+
+
+    def export_nature_data_button_clicked_tab_0(self):
+        self.controller.export_nature_data_tab_0()
+        self.switch_modyfied_export = False
+
+
+
+######
+
+    def draw_modyfied_chart_clicked_tab_0(self):
+        self.controller.modyfied_chart_execution_tab_0()
+
+
+
+    def save_modify_button_clicked_tab_0(self):
+        self.controller.save_modify_data_tab_0()
+
+
+    def export_modyfied_button_clicked_tab_0(self):
+        self.controller.export_modyfied_data_tab_0()
+        self.switch_modyfied_export = True
+
+
+#####################################################################################################################
+
+
+
+
+    def show_open_file_clicked_tab_1(self):
+
+        file11 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r',
+                            filetypes=[('CSV Files', '*.csv')])
+
+        self.open_name_var.set(str(file11.name))
+
+
+    def get_data_button_clicked_tab_1(self):
+        """
+        Handle button click event
+        :return:
+        """
+        if self.controller:
+            self.controller.open_data_tab_1()
+
+
+
+    def natural_chart_clicked_tab_1(self):
+        #self.controller.natural_chart_execution()
+        self.controller.draw_data_tab_1()
+
+    def set_button_clicked_tab_1(self):
+        if self.controller:
+            #self.controller.open_data()
+            self.controller.set_data_tab_1()
+
+    def draw_slice_button_clicked_tab_1(self):
+        self.controller.draw_slice_data_tab_1()
+
+    def save_modyfied_data_clicked_tab_1(self):
+        self.controller.save_modyfied_data_clicked_tab_1()
+
+
+###################################################################################################################################
+    def data_trans_chart_01_tab_2(self):
+       self.controller.trans_01_tab_2()
+       self.open_button_chart_01_tab_2.config(state=DISABLED)
+    def data_trans_chart_02_tab_2(self):
+       self.controller.trans_02_tab_2()
+       self.open_button_chart_02_tab_2.config(state=DISABLED)
+    def data_trans_chart_03_tab_2(self):
+       self.controller.trans_03_tab_2()
+       self.open_button_chart_03_tab_2.config(state=DISABLED)
+    def data_trans_chart_04_tab_2(self):
+       self.controller.trans_04_tab_2()
+       self.open_button_chart_04_tab_2.config(state=DISABLED)
+    def data_trans_chart_05_tab_2(self):
+        self.controller.trans_05_tab_2()
+        self.open_button_chart_05_tab_2.config(state=DISABLED)
+    def data_trans_chart_06_tab_2(self):
+        self.controller.trans_06_tab_2()
+        self.open_button_chart_06_tab_2.config(state=DISABLED)
+
+    ####################################################################################################################################
+
+    def aggregation_united_data_clicked_tab_2(self):
+        print ("aggregacja")
+    def draw_united_data_clicked_tab_2(self):
+        self.controller.united_chart_execution_tab_2()
+
+    def data_export_clicked_tab_2(self):
+        print("export")
+
+
+#######################################################################################################################################
+
 
 
     def show_error(self, message):
@@ -491,39 +667,11 @@ class View(ttk.Frame):
 
 
 
-    def show_open_file_clicked_tab_1(self):
 
-        file11 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r',
-                            filetypes=[('CSV Files', '*.csv')])
-
-        self.open_name_var.set(str(file11.name))
-
-
-    def get_data_button_clicked_tab_1(self):
-        """
-        Handle button click event
-        :return:
-        """
-        if self.controller:
-            self.controller.open_data_tab_1()
+#######################################################################################################################
+#######################################################################################################################
 
 
 
-    def natural_chart_clicked_tab_1(self):
-        #self.controller.natural_chart_execution()
-        self.controller.draw_data_tab_1()
 
-    def set_button_clicked_tab_1(self):
-        if self.controller:
-            #self.controller.open_data()
-
-            self.controller.set_data_tab_1()
-
-    def draw_slice_button_clicked_tab_1(self):
-        self.controller.draw_slice_data_tab_1()
-
-    def save_modyfied_data_clicked_tab_1(self):
-        self.controller.save_modyfied_data_clicked_tab_1()
-
-    def export_button_clicked_tab_1(self):
-        self.controller.export_data_tab_1()
+########################################################################################################################
