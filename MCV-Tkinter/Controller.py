@@ -518,7 +518,7 @@ class Controller:
 #tab2
 ########################################################################################################################
     def trans_01_tab_2(self):
-        self.temporary_chart_1_data =  self.export_nature_data_tab_0()
+        self.temporary_chart_1_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_1_data = self.export_modyfied_data_tab_0()
         #print(self.temporary_chart_1_data)
@@ -559,16 +559,25 @@ class Controller:
        # print(self.temporary_chart_6_data)
 
 
+    def agg_tab_2(self):
+        agg = []
+        if self.temporary_chart_1_data != 0 :
+            agg.append(self.temporary_chart_1_data)
+        if self.temporary_chart_2_data != 0:
+            agg.append(self.temporary_chart_2_data)
+        if self.temporary_chart_3_data != 0:
+            agg.append(self.temporary_chart_3_data)
+        if self.temporary_chart_4_data != 0:
+            agg.append(self.temporary_chart_4_data)
+        if self.temporary_chart_5_data != 0:
+            agg.append(self.temporary_chart_5_data)
+        if self.temporary_chart_6_data != 0:
+            agg.append(self.temporary_chart_6_data)
 
+        return agg
 
     def united_chart_execution_tab_2(self):
-
-        print(list(self.temporary_chart_1_data[0]))
-        print(list(self.temporary_chart_1_data[1]))
-        print(list(self.temporary_chart_1_data[2]))
-        print(list(self.temporary_chart_1_data[3]))
-
-
+        print(f'długość{len(self.agg_tab_2())}')
 
         def chart(x, y, x_trend, y_trend):
             fig = plt.figure()
@@ -582,6 +591,9 @@ class Controller:
 
             plt.show()
 
+        chart(self.agg_tab_2()[0][0],self.agg_tab_2()[0][1],self.agg_tab_2()[0][2],self.agg_tab_2()[0][3])
 
 
-        chart(self.temporary_chart_1_data[0], self.temporary_chart_1_data[1], self.temporary_chart_1_data[2], self.temporary_chart_1_data[3])
+
+
+

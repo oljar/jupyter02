@@ -617,7 +617,7 @@ class View(ttk.Frame):
     ####################################################################################################################################
 
     def aggregation_united_data_clicked_tab_2(self):
-        print ("aggregacja")
+        self.controller.agg_tab_2()
     def draw_united_data_clicked_tab_2(self):
         self.controller.united_chart_execution_tab_2()
 
