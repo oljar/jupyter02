@@ -579,19 +579,23 @@ class Controller:
     def united_chart_execution_tab_2(self):
         print(f'długość{len(self.agg_tab_2())}')
 
-        def chart(x, y, x_trend, y_trend):
+        def chart(x, y, x_trend, y_trend,x1,y1,x1_trend,y1_trend):
             fig = plt.figure()
             ax1 = fig.add_subplot(111)
-            ax2 = ax1.twiny()
+            #ax2 = ax1.twiny()
 
             ax1.plot(x, y, "-o")
             ax1.plot(x_trend, y_trend, "-s")
 
-            ax2.set_xlim(0, 100)
+            ax1.plot(x1, y1, "-o")
+            ax1.plot(x1_trend, y1_trend, "-s")
+
+            #ax2.set_xlim(0, 100)
 
             plt.show()
 
-        chart(self.agg_tab_2()[0][0],self.agg_tab_2()[0][1],self.agg_tab_2()[0][2],self.agg_tab_2()[0][3])
+        chart(self.agg_tab_2()[0][0],self.agg_tab_2()[0][1],self.agg_tab_2()[0][2],self.agg_tab_2()[0][3],
+              self.agg_tab_2()[1][0],self.agg_tab_2()[1][1],self.agg_tab_2()[1][2],self.agg_tab_2()[1][3])
 
 
 
