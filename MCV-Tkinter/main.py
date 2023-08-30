@@ -40,11 +40,29 @@ y1_var_tab1 = tk.StringVar()
 y2_var_tab1 = tk.StringVar()
 down_scope_var_tab_1 = tk.StringVar()
 up_scope_var_tab_1 =  tk.StringVar()
+name_of_chart_var = tk.StringVar()
+
+name_of_X_axis_var = tk.StringVar()
+unit_of_X_axis_var = tk.StringVar()
+scope_min_of_X_axis_var = tk.StringVar()
+scope_max_of_X_axis_var = tk.StringVar()
+
+name_of_Y_axis_var = tk.StringVar()
+unit_of_Y_axis_var = tk.StringVar()
+scope_min_of_Y_axis_var = tk.StringVar()
+scope_max_of_Y_axis_var = tk.StringVar()
+
+name_serial_var = tk.StringVar()
+
 
 
 
 model = Model(name,dist_border,dens_factor,modify_down_scope,modify_up_scope,x_var,y_var,x_math_form,y_math_form,polynominal_degree, limit_down_scope, limit_up_scope
-              ,step, time_var_tab1, y1_var_tab1, y2_var_tab1, down_scope_var_tab_1, up_scope_var_tab_1)
+              ,step, time_var_tab1, y1_var_tab1, y2_var_tab1, down_scope_var_tab_1, up_scope_var_tab_1,
+              name_of_chart_var,
+              name_of_X_axis_var,unit_of_X_axis_var,scope_min_of_X_axis_var,scope_max_of_X_axis_var,
+              name_of_Y_axis_var,unit_of_Y_axis_var,scope_min_of_Y_axis_var,scope_max_of_Y_axis_var,
+              name_serial_var)
 
 
 
@@ -61,6 +79,7 @@ view.set_controller(controller)
 
 V.tab_parent.add(V.tab1,text = 'zakres')
 V.tab_parent.add(V.tab0,text = 'ustawienia')
+V.tab_parent.add(V.tab3,text = 'jednostki')
 V.tab_parent.add(V.tab2,text = 'agregacja')
 
 

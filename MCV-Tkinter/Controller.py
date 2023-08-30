@@ -30,44 +30,55 @@ class Controller:
 
     def open_data(self):
 
-        if  isinstance(self.model.time_var_tab1, str):
-
-
-            try:
-                self.view.x_var.set(self.view.y1_var_tab1.get())
-                self.view.y_var.set(self.view.y2_var_tab1.get())
-
-                self.model.x_var = (self.view.x_var.get())
-                self.model.y_var = (self.view.y_var.get())
-                self.df1 = pd.DataFrame()
-                self.df1[self.model.time_var_tab1] = pd.DataFrame(self.time_modyfied_tab1_exam_pts)
-                self.df1[self.model.y1_var_tab1] = pd.DataFrame(self.y1_modyfied_tab1_exam_pts)
-                self.df1[self.model.y2_var_tab1] = pd.DataFrame(self.y2_modyfied_tab1_exam_pts)
-
-                print(self.df1)
-
-            except ValueError as error:
-                # show an error message
-                self.view.show_error(error)
-
-        else:
-
-
-            try:
-                self.model.name = self.view.open_name_var.get()
-
-                self.model.x_var = (self.view.x_var.get())
-                self.model.y_var = (self.view.y_var.get())
 
 
 
-                self.df1 = self.model.open_data()
 
-                print(self.df1)
+            #     self.view.x_var.set(self.view.y1_var_tab1.get())
+            #     self.view.y_var.set(self.view.y2_var_tab1.get())
+            #
+            #     self.model.x_var = (self.view.x_var.get())
+            #     self.model.y_var = (self.view.y_var.get())
+            #     self.df1 = pd.DataFrame()
+            #     self.df1[self.model.time_var_tab1] = pd.DataFrame(self.time_modyfied_tab1_exam_pts)
+            #     self.df1[self.model.y1_var_tab1] = pd.DataFrame(self.y1_modyfied_tab1_exam_pts)
+            #     self.df1[self.model.y2_var_tab1] = pd.DataFrame(self.y2_modyfied_tab1_exam_pts)
+            #
+            #     print(self.df1)
+            #
 
-            except ValueError as error:
-                # show an error message
-                self.view.show_error(error)
+
+
+
+
+
+        self.model.name = self.view.open_name_var.get()
+
+        self.model.x_var = (self.view.x_var.get())
+        self.model.y_var = (self.view.y_var.get())
+
+
+
+        self.df1 = self.model.open_data()
+
+        print(self.df1)
+
+
+
+    def export_to_tab_0(self):
+
+            self.view.x_var.set(self.view.y1_var_tab1.get())
+            self.view.y_var.set(self.view.y2_var_tab1.get())
+
+            self.model.x_var = (self.view.x_var.get())
+            self.model.y_var = (self.view.y_var.get())
+            self.df1 = pd.DataFrame()
+            self.df1[self.model.time_var_tab1] = pd.DataFrame(self.time_modyfied_tab1_exam_pts)
+            self.df1[self.model.y1_var_tab1] = pd.DataFrame(self.y1_modyfied_tab1_exam_pts)
+            self.df1[self.model.y2_var_tab1] = pd.DataFrame(self.y2_modyfied_tab1_exam_pts)
+
+            print(self.df1)
+#
 
 
 
@@ -378,7 +389,28 @@ class Controller:
 
 
     def export_nature_data_tab_0(self):
-        return(self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1)
+
+        self.model.name_of_chart_var = self.view.name_of_chart_var.get()
+
+        self.model.name_of_X_axis_var = self.view.name_of_X_axis_var.get()
+        self.model.unit_of_X_axis_var = self.view.unit_of_X_axis_var.get()
+        self.model.scope_min_of_X_axis_var = self.view.scope_min_of_X_axis_var.get()
+        self.model.scope_max_of_X_axis_var = self.view.scope_max_of_X_axis_var.get
+
+        self.model.name_of_Y_axis_var = self.view.name_of_Y_axis_var.get()
+        self.model.unit_of_Y_axis_var = self.view.unit_of_Y_axis_var.get()
+        self.model.scope_min_of_Y_axis_var = self.view.scope_min_of_Y_axis_var.get()
+        self.model.scope_max_of_Y_axis_var = self.view.scope_max_of_Y_axis_var.get()
+        self.model.name_serial_var = self.view.name_serial_var.get()
+
+        return(self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1,
+               self.model.name_of_chart_var,
+               self.model.name_of_X_axis_var,self.model.unit_of_X_axis_var,
+               self.model.scope_min_of_X_axis_var,self.model.scope_max_of_X_axis_var,
+               self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
+               self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var,
+               self.model.name_serial_var)
+
 
 
 
@@ -403,16 +435,35 @@ class Controller:
 
 
     def export_modyfied_data_tab_0(self):
-        return(self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4)
+
+        self.model.name_of_chart_var = self.view.name_of_chart_var.get()
+
+        self.model.name_of_X_axis_var = self.view.name_of_X_axis_var.get()
+        self.model.unit_of_X_axis_var = self.view.unit_of_X_axis_var.get()
+        self.model.scope_min_of_X_axis_var = self.view.scope_min_of_X_axis_var.get()
+        self.model.scope_max_of_X_axis_var = self.view.scope_max_of_X_axis_var.get
+
+        self.model.name_of_Y_axis_var = self.view.name_of_Y_axis_var.get()
+        self.model.unit_of_Y_axis_var = self.view.unit_of_Y_axis_var.get()
+        self.model.scope_min_of_Y_axis_var = self.view.scope_min_of_Y_axis_var.get()
+        self.model.scope_max_of_Y_axis_var = self.view.scope_max_of_Y_axis_var.get()
+
+        return(self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4,
+                self.model.name_of_chart_var,
+                self.model.name_of_X_axis_var, self.model.unit_of_X_axis_var,
+                self.model.scope_min_of_X_axis_var, self.model.scope_max_of_X_axis_var,
+                self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
+                self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var,
+                self.model.name_serial_var)
 
 
 
-
-######################################################################################################################
+        ######################################################################################################################
 #tab_1
 ######################################################################################################################
 
     def open_data_tab_1(self):
+
 
 
         self.model.name = self.view.open_name_var.get()
@@ -461,6 +512,8 @@ class Controller:
 
         chart(self.time_tab1_exam_pts, self.y1_tab1_exam_pts , self.y2_tab1_exam_pts)
 
+
+
     def set_data_tab_1(self):
         #self.model.down_scope_var_tab_1 = datetime.strptime(str(self.view.down_scope_var_tab_1.get()),"%H:%M:%S").time()
         #self.model.up_scope_var_tab_1 = datetime.strptime(str(self.view.up_scope_var_tab_1.get()),"%H:%M:%S").time()
@@ -500,6 +553,7 @@ class Controller:
             plt.show()
 
         chart( self.time_modyfied_tab1_exam_pts ,  self.y1_modyfied_tab1_exam_pts, self.y2_modyfied_tab1_exam_pts)
+        self.export_to_tab_0()
 
     def save_modyfied_data_clicked_tab_1(self):
         solution = pd.DataFrame()
@@ -521,7 +575,10 @@ class Controller:
         self.temporary_chart_1_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_1_data = self.export_modyfied_data_tab_0()
-        #print(self.temporary_chart_1_data)
+            # print(len(self.temporary_chart_1_data[0]))
+            # print(len(self.temporary_chart_1_data[1]))
+            # print(len(self.temporary_chart_1_data[2]))
+            # print(len(self.temporary_chart_1_data[3]))
 
 
 
@@ -529,34 +586,12 @@ class Controller:
         self.temporary_chart_2_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_2_data = self.export_modyfied_data_tab_0()
-        #print(self.temporary_chart_2_data)
-
-    def trans_03_tab_2(self):
-        self.temporary_chart_3_data = self.export_nature_data_tab_0()
-        if self.view.switch_modyfied_export == True:
-            self.temporary_chart_3_data = self.export_modyfied_data_tab_0()
-        #print(self.temporary_chart_3_data)
+            # print(len(self.temporary_chart_2_data[0]))
+            # print(len(self.temporary_chart_2_data[1]))
+            # print(len(self.temporary_chart_2_data[2]))
+            # print(len(self.temporary_chart_2_data[3]))
 
 
-    def trans_04_tab_2(self):
-        self.temporary_chart_4_data =  self.export_nature_data_tab_0()
-        if self.view.switch_modyfied_export == True:
-            self.temporary_chart_4_data = self.export_modyfied_data_tab_0()
-        #print(self.temporary_chart_4_data)
-
-    def trans_05_tab_2(self):
-        self.temporary_chart_5_data = self.export_nature_data_tab_0()
-
-        if self.view.switch_modyfied_export == True:
-            self.temporary_chart_5_data = self.export_modyfied_data_tab_0()
-        # print(self.temporary_chart_5_data)
-
-    def trans_06_tab_2(self):
-        self.temporary_chart_6_data =  self.export_nature_data_tab_0()
-
-        if self.view.switch_modyfied_export == True:
-            self.temporary_chart_6_data = self.export_modyfied_data_tab_0()
-       # print(self.temporary_chart_6_data)
 
 
     def agg_tab_2(self):
@@ -565,19 +600,18 @@ class Controller:
             agg.append(self.temporary_chart_1_data)
         if self.temporary_chart_2_data != 0:
             agg.append(self.temporary_chart_2_data)
-        if self.temporary_chart_3_data != 0:
-            agg.append(self.temporary_chart_3_data)
-        if self.temporary_chart_4_data != 0:
-            agg.append(self.temporary_chart_4_data)
-        if self.temporary_chart_5_data != 0:
-            agg.append(self.temporary_chart_5_data)
-        if self.temporary_chart_6_data != 0:
-            agg.append(self.temporary_chart_6_data)
+
 
         return agg
 
+
+
+
     def united_chart_execution_tab_2(self):
         print(f'długość{len(self.agg_tab_2())}')
+        print((self.agg_tab_2()[0])[13])
+
+        print((self.agg_tab_2()[1])[13])
 
         def chart(x, y, x_trend, y_trend,x1,y1,x1_trend,y1_trend):
             fig = plt.figure()
@@ -594,10 +628,56 @@ class Controller:
 
             plt.show()
 
-        chart(self.agg_tab_2()[0][0],self.agg_tab_2()[0][1],self.agg_tab_2()[0][2],self.agg_tab_2()[0][3],
-              self.agg_tab_2()[1][0],self.agg_tab_2()[1][1],self.agg_tab_2()[1][2],self.agg_tab_2()[1][3])
+        chart((self.agg_tab_2()[0])[0],(self.agg_tab_2()[0])[1],(self.agg_tab_2()[0])[2],(self.agg_tab_2()[0])[3],
+              (self.agg_tab_2()[1])[0],(self.agg_tab_2()[1])[1],(self.agg_tab_2()[1])[2],(self.agg_tab_2()[1])[3])
+
+
+
+
+        # print((self.agg_tab_2()[0])[0])
+        # print((self.agg_tab_2()[0])[1])
+        # print((self.agg_tab_2()[0])[2])`
+        # print((self.agg_tab_2()[0])[3])
+        #
+        # print((self.agg_tab_2()[1])[0])
+        # print((self.agg_tab_2()[1])[1])
+        # print((self.agg_tab_2()[1])[2])
+        # print((self.agg_tab_2()[1])[3])
+
+
+
+
+    def save_data_clicked_tab_2(self):
+        solution = pd.DataFrame()
+
+        # solution[str((self.agg_tab_2()[0])[5])] = pd.DataFrame(((self.agg_tab_2()[0])[0]))
+        solution['x1'] = pd.DataFrame(((self.agg_tab_2()[0])[0]))
+        # solution[str((self.agg_tab_2()[0])[9])] = pd.DataFrame(((self.agg_tab_2()[0])[1]))
+        solution['y1'] = pd.DataFrame(((self.agg_tab_2()[0])[1]))
+        # solution[str((self.agg_tab_2()[1])[5])] = pd.DataFrame((self.agg_tab_2()[1])[0])
+        solution['x2'] = pd.DataFrame((self.agg_tab_2()[1])[0])
+        #solution[str((self.agg_tab_2()[1])[9])] = pd.DataFrame((self.agg_tab_2()[1])[1])
+        solution['y2'] = pd.DataFrame((self.agg_tab_2()[1])[1])
+
+        print(solution)
 
 
 
 
 
+        #
+        # solution[self.model.y1_var_tab1] = (self.agg_tab_2()[0])[0]
+        #
+        # solution[self.model.y2_var_tab1] = (self.agg_tab_2()[0])[1]
+
+
+        # solution = pd.DataFrame(list(self.agg_tab_2()))
+
+        # print((self.agg_tab_2()[0])[0])
+        # print((self.agg_tab_2()[0])[1])
+
+
+
+        self.view.show_save_file_clicked()
+
+        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
