@@ -11,7 +11,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 from datetime import datetime
+import numpy as np;
 
+np.random.seed(42)
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 
@@ -612,28 +616,71 @@ class Controller:
         print((self.agg_tab_2()[0])[13])
 
         print((self.agg_tab_2()[1])[13])
+        #
+        #def chart(x, y, x_trend, y_trend,x1,y1,x1_trend,y1_trend):
+        #     fig = plt.figure()
+        #     ax1 = fig.add_subplot(111)
+        #     #ax2 = ax1.twiny()
+        #
+        #     ax1.plot(x, y, "-o")
+        #     ax1.plot(x_trend, y_trend, "-s")
+        #
+        #     ax1.plot(x1, y1, "-o")
+        #     ax1.plot(x1_trend, y1_trend, "-s")
+        #
+        #     #ax2.set_xlim(0, 100)
+        #
+        #     plt.show()
+        #
+        # chart((self.agg_tab_2()[0])[0],(self.agg_tab_2()[0])[1],(self.agg_tab_2()[0])[2],(self.agg_tab_2()[0])[3],
+        #       (self.agg_tab_2()[1])[0],(self.agg_tab_2()[1])[1],(self.agg_tab_2()[1])[2],(self.agg_tab_2()[1])[3])
 
-        def chart(x, y, x_trend, y_trend,x1,y1,x1_trend,y1_trend):
-            fig = plt.figure()
-            ax1 = fig.add_subplot(111)
-            #ax2 = ax1.twiny()
-
-            ax1.plot(x, y, "-o")
-            ax1.plot(x_trend, y_trend, "-s")
-
-            ax1.plot(x1, y1, "-o")
-            ax1.plot(x1_trend, y1_trend, "-s")
-
-            #ax2.set_xlim(0, 100)
-
-            plt.show()
-
-        chart((self.agg_tab_2()[0])[0],(self.agg_tab_2()[0])[1],(self.agg_tab_2()[0])[2],(self.agg_tab_2()[0])[3],
-              (self.agg_tab_2()[1])[0],(self.agg_tab_2()[1])[1],(self.agg_tab_2()[1])[2],(self.agg_tab_2()[1])[3])
+        #######################################
+        def chart1(x, y, x_trend, y_trend, x1, y1, x1_trend, y1_trend):
 
 
+                fig, ax = plt.subplots()
+
+                # sns.regplot(x="z", y="g", data=df2, ax=ax, label='lwwwww')
+                # sns.lineplot(x="a", y="b", data=df, color="g", ax=ax, linewidth=1, label='wwwww')
+                # sns.lineplot(x="c", y="d", data=df, color="c", ax=ax, linewidth=1, label='wwwww')
+                sns.scatterplot(x=x,y=y, c="orange", s=50, alpha=0.3, edgecolors='none', label='dsfdss')
+                sns.lineplot(x= x_trend, y=y_trend, color="g", ax=ax, linewidth=1, label='wwwww')
+
+                sns.scatterplot(x=x1, y=y1, c="red", s=50, alpha=0.3, edgecolors='none', label='dsfdss')
+                sns.lineplot(x=x1_trend, y=y1_trend, color="g", ax=ax, linewidth=1, label='wwwww')
+
+                ax.set_xlabel('Annual rainfall (mm)')
+
+                ax.set_ylabel('Likelihood of occurrence')
+
+                # ax.scatter(df1.w, df1.fi,c ="blue",linewidths = 2,marker ="^", edgecolor ="red",s = 10)
+
+                # Show the major grid and style it slightly.
+                ax.grid(which='major', color='#DDDDDD', linewidth=1.2)
+                # Show the minor grid as well. Style it in very light gray as a thin,
+                # dotted line.
+                ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=1)
+                # Make the minor ticks and gridlines show.
+                ax.minorticks_on()
+
+                # ax2.legend(handles=[a.lines[0] for a in [ax,ax2]],
+                #            labels=["f", "g"])
+
+                plt.show()
 
 
+        chart1((self.agg_tab_2()[0])[0],(self.agg_tab_2()[0])[1],(self.agg_tab_2()[0])[2],(self.agg_tab_2()[0])[3],
+            (self.agg_tab_2()[1])[0],(self.agg_tab_2()[1])[1],(self.agg_tab_2()[1])[2],(self.agg_tab_2()[1])[3])
+
+
+
+
+
+
+
+
+################
         # print((self.agg_tab_2()[0])[0])
         # print((self.agg_tab_2()[0])[1])
         # print((self.agg_tab_2()[0])[2])`
@@ -643,6 +690,10 @@ class Controller:
         # print((self.agg_tab_2()[1])[1])
         # print((self.agg_tab_2()[1])[2])
         # print((self.agg_tab_2()[1])[3])
+
+
+
+
 
 
 
