@@ -661,7 +661,7 @@ class Controller:
                 #            labels=["f", "g"])
 
                 plt.show()
-
+                print(f'długość listy{len(self.agg_tab_2())}')
 
         chart1((self.agg_tab_2()[0])[0],(self.agg_tab_2()[0])[1],(self.agg_tab_2()[0])[2],(self.agg_tab_2()[0])[3],
                (self.agg_tab_2()[0])[13],
