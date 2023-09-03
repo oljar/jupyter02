@@ -579,10 +579,7 @@ class Controller:
         self.temporary_chart_1_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_1_data = self.export_modyfied_data_tab_0()
-            # print(len(self.temporary_chart_1_data[0]))
-            # print(len(self.temporary_chart_1_data[1]))
-            # print(len(self.temporary_chart_1_data[2]))
-            # print(len(self.temporary_chart_1_data[3]))
+
 
 
 
@@ -590,10 +587,6 @@ class Controller:
         self.temporary_chart_2_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_2_data = self.export_modyfied_data_tab_0()
-            # print(len(self.temporary_chart_2_data[0]))
-            # print(len(self.temporary_chart_2_data[1]))
-            # print(len(self.temporary_chart_2_data[2]))
-            # print(len(self.temporary_chart_2_data[3]))
 
 
 
@@ -636,7 +629,7 @@ class Controller:
         #       (self.agg_tab_2()[1])[0],(self.agg_tab_2()[1])[1],(self.agg_tab_2()[1])[2],(self.agg_tab_2()[1])[3])
 
         #######################################
-        def chart1(x, y, x_trend, y_trend, x1, y1, x1_trend, y1_trend):
+        def chart1(x, y, x_trend, y_trend,name_serial_var, x1, y1, x1_trend, y1_trend,name_serial_var1):
 
 
                 fig, ax = plt.subplots()
@@ -644,11 +637,11 @@ class Controller:
                 # sns.regplot(x="z", y="g", data=df2, ax=ax, label='lwwwww')
                 # sns.lineplot(x="a", y="b", data=df, color="g", ax=ax, linewidth=1, label='wwwww')
                 # sns.lineplot(x="c", y="d", data=df, color="c", ax=ax, linewidth=1, label='wwwww')
-                sns.scatterplot(x=x,y=y, c="orange", s=50, alpha=0.3, edgecolors='none', label='dsfdss')
-                sns.lineplot(x= x_trend, y=y_trend, color="g", ax=ax, linewidth=1, label='wwwww')
+                sns.scatterplot(x=x,y=y, c="orange", s=50, alpha=0.3, edgecolors='none', label=name_serial_var)
+                sns.lineplot(x= x_trend, y=y_trend, color="g", ax=ax, linewidth=1, label=name_serial_var)
 
-                sns.scatterplot(x=x1, y=y1, c="red", s=50, alpha=0.3, edgecolors='none', label='dsfdss')
-                sns.lineplot(x=x1_trend, y=y1_trend, color="g", ax=ax, linewidth=1, label='wwwww')
+                sns.scatterplot(x=x1, y=y1, c="red", s=50, alpha=0.3, edgecolors='none', label = name_serial_var1)
+                sns.lineplot(x=x1_trend, y=y1_trend, color="g", ax=ax, linewidth=1, label = name_serial_var1)
 
                 ax.set_xlabel('Annual rainfall (mm)')
 
@@ -671,8 +664,9 @@ class Controller:
 
 
         chart1((self.agg_tab_2()[0])[0],(self.agg_tab_2()[0])[1],(self.agg_tab_2()[0])[2],(self.agg_tab_2()[0])[3],
-            (self.agg_tab_2()[1])[0],(self.agg_tab_2()[1])[1],(self.agg_tab_2()[1])[2],(self.agg_tab_2()[1])[3])
-
+               (self.agg_tab_2()[0])[13],
+               (self.agg_tab_2()[1])[0],(self.agg_tab_2()[1])[1],(self.agg_tab_2()[1])[2],(self.agg_tab_2()[1])[3],
+               (self.agg_tab_2()[1])[13])
 
 
 
