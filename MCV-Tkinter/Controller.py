@@ -629,8 +629,9 @@ class Controller:
         #       (self.agg_tab_2()[1])[0],(self.agg_tab_2()[1])[1],(self.agg_tab_2()[1])[2],(self.agg_tab_2()[1])[3])
 
         #######################################
-        def chart1(x, y, x_trend, y_trend,name_serial_var, x1, y1, x1_trend, y1_trend,name_serial_var1):
+        def chart1(x, y, x_trend, y_trend,name_serial_var, x1, y1, x1_trend, y1_trend,name_serial_var1,w):
 
+                print(f'aaa{(w[0])[0]}')
 
                 fig, ax = plt.subplots()
 
@@ -666,7 +667,7 @@ class Controller:
         chart1((self.agg_tab_2()[0])[0],(self.agg_tab_2()[0])[1],(self.agg_tab_2()[0])[2],(self.agg_tab_2()[0])[3],
                (self.agg_tab_2()[0])[13],
                (self.agg_tab_2()[1])[0],(self.agg_tab_2()[1])[1],(self.agg_tab_2()[1])[2],(self.agg_tab_2()[1])[3],
-               (self.agg_tab_2()[1])[13])
+               (self.agg_tab_2()[1])[13],self.agg_tab_2())
 
 
 
