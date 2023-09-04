@@ -18,7 +18,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-
 class Controller:
     def __init__(self, model, view):
         self.model = model
@@ -31,84 +30,58 @@ class Controller:
         self.temporary_chart_5_data = 0
         self.temporary_chart_6_data = 0
 
-
     def open_data(self):
 
-
-
-
-
-            #     self.view.x_var.set(self.view.y1_var_tab1.get())
-            #     self.view.y_var.set(self.view.y2_var_tab1.get())
-            #
-            #     self.model.x_var = (self.view.x_var.get())
-            #     self.model.y_var = (self.view.y_var.get())
-            #     self.df1 = pd.DataFrame()
-            #     self.df1[self.model.time_var_tab1] = pd.DataFrame(self.time_modyfied_tab1_exam_pts)
-            #     self.df1[self.model.y1_var_tab1] = pd.DataFrame(self.y1_modyfied_tab1_exam_pts)
-            #     self.df1[self.model.y2_var_tab1] = pd.DataFrame(self.y2_modyfied_tab1_exam_pts)
-            #
-            #     print(self.df1)
-            #
-
-
-
-
-
+        #     self.view.x_var.set(self.view.y1_var_tab1.get())
+        #     self.view.y_var.set(self.view.y2_var_tab1.get())
+        #
+        #     self.model.x_var = (self.view.x_var.get())
+        #     self.model.y_var = (self.view.y_var.get())
+        #     self.df1 = pd.DataFrame()
+        #     self.df1[self.model.time_var_tab1] = pd.DataFrame(self.time_modyfied_tab1_exam_pts)
+        #     self.df1[self.model.y1_var_tab1] = pd.DataFrame(self.y1_modyfied_tab1_exam_pts)
+        #     self.df1[self.model.y2_var_tab1] = pd.DataFrame(self.y2_modyfied_tab1_exam_pts)
+        #
+        #     print(self.df1)
+        #
 
         self.model.name = self.view.open_name_var.get()
 
         self.model.x_var = (self.view.x_var.get())
         self.model.y_var = (self.view.y_var.get())
 
-
-
         self.df1 = self.model.open_data()
 
         print(self.df1)
 
-
-
     def export_to_tab_0(self):
 
-            self.view.x_var.set(self.view.y1_var_tab1.get())
-            self.view.y_var.set(self.view.y2_var_tab1.get())
+        self.view.x_var.set(self.view.y1_var_tab1.get())
+        self.view.y_var.set(self.view.y2_var_tab1.get())
 
-            self.model.x_var = (self.view.x_var.get())
-            self.model.y_var = (self.view.y_var.get())
-            self.df1 = pd.DataFrame()
-            self.df1[self.model.time_var_tab1] = pd.DataFrame(self.time_modyfied_tab1_exam_pts)
-            self.df1[self.model.y1_var_tab1] = pd.DataFrame(self.y1_modyfied_tab1_exam_pts)
-            self.df1[self.model.y2_var_tab1] = pd.DataFrame(self.y2_modyfied_tab1_exam_pts)
+        self.model.x_var = (self.view.x_var.get())
+        self.model.y_var = (self.view.y_var.get())
+        self.df1 = pd.DataFrame()
+        self.df1[self.model.time_var_tab1] = pd.DataFrame(self.time_modyfied_tab1_exam_pts)
+        self.df1[self.model.y1_var_tab1] = pd.DataFrame(self.y1_modyfied_tab1_exam_pts)
+        self.df1[self.model.y2_var_tab1] = pd.DataFrame(self.y2_modyfied_tab1_exam_pts)
 
-            print(self.df1)
-#
+        print(self.df1)
 
-
-
+    #
 
     def counter(self):
-
-
-
 
         self.x_exam_pts_basic = []
         self.y_exam_pts_basic = []
 
-
         self.model.x_math_form.set(self.view.x_math_form.get())
         self.model.y_math_form.set(self.view.y_math_form.get())
 
-
         # examinated points
-
-
-
 
         x_tag = str(self.view.x_var.get())
         y_tag = str(self.view.y_var.get())
-
-
 
         df1 = self.df1
         df1 = df1.sort_values(by=x_tag, ascending=True)
@@ -120,36 +93,23 @@ class Controller:
         df1[x_tag] = df1[x_tag].fillna(df1[x_tag].median())
         df1[y_tag] = df1[y_tag].fillna(df1[y_tag].median())
 
-
-
         self.x_exam_pts = (df1[x_tag]).tolist()  # definition of columns -x
 
         cor_factor_x = str(self.view.x_math_form.get())
 
-
         self.x_exam_pts = [eval(cor_factor_x) for x in self.x_exam_pts]
-
 
         self.y_exam_pts = (df1[y_tag]).tolist()  # definition of columns -y
 
-
         cor_factor_y = str(self.view.y_math_form.get())
 
+        self.y_exam_pts = [eval(cor_factor_y) for y in self.y_exam_pts]
 
-        self.y_exam_pts = [ eval(cor_factor_y) for y in self.y_exam_pts]
-
-
-
-
-
-        print (self.y_exam_pts)
+        print(self.y_exam_pts)
 
         # c = 41.1  # reducer constns
         #
         # self.x_exam_pts = [(c * math.sqrt(x)) for x in x_points]
-
-
-
 
         def scope_limit(self):
 
@@ -159,10 +119,8 @@ class Controller:
             lim_a = float(self.model.limit_down_scope.get())
             lim_b = float(self.model.limit_up_scope.get())
 
-
-            lim_down = int(len(self.x_exam_pts ) * (lim_a / 100))
-            lim_up = int(len(self.x_exam_pts ) * (lim_b / 100))
-
+            lim_down = int(len(self.x_exam_pts) * (lim_a / 100))
+            lim_up = int(len(self.x_exam_pts) * (lim_b / 100))
 
             x_slice, y_slice = self.x_exam_pts[lim_down:lim_up], self.y_exam_pts[lim_down:lim_up]
 
@@ -170,29 +128,17 @@ class Controller:
             # print (f'gora {x_slice}')
             # print(f'dol {y_slice}')
 
+            return x_slice, y_slice
 
-
-            return x_slice,y_slice
-
-
-
-
-
-
-
-
-        def main_proces(ex, ey, dist_border = 10000):
-
-
+        def main_proces(ex, ey, dist_border=10000):
 
             # input filters
-
 
             self.model.polynominal_degree.set(self.view.polynominal_degree.get())
 
             self.model.step.set(self.view.step.get())
 
-            deg = int(self.model.polynominal_degree.get())               # stopień wielomianu
+            deg = int(self.model.polynominal_degree.get())  # stopień wielomianu
 
             # trend line
 
@@ -271,23 +217,11 @@ class Controller:
 
             return x_set, y_set
 
-
-
-
-
-
         print(f'SCOPE x {scope_limit(self)[0]}')
         print(f'SCOPE y {scope_limit(self)[1]}')
 
-
-
-
-
-        self.x_exam_pts_basic= scope_limit(self)[0]
+        self.x_exam_pts_basic = scope_limit(self)[0]
         self.y_exam_pts_basic = scope_limit(self)[1]
-
-
-
 
         try:
             self.model.dist_border = int(self.view.dist_border_var.get())
@@ -295,28 +229,20 @@ class Controller:
         except:
             dist_fact = 10000
 
-
-
-        x_exam_pts_2, y_exam_pts_2, self.x_trend_pts_1, self.y_trend_pts_1 = main_proces(self.x_exam_pts_basic, self.y_exam_pts_basic,dist_fact)
+        x_exam_pts_2, y_exam_pts_2, self.x_trend_pts_1, self.y_trend_pts_1 = main_proces(self.x_exam_pts_basic,
+                                                                                         self.y_exam_pts_basic,
+                                                                                         dist_fact)
 
         #
 
         x_exam_pts_3, y_exam_pts_3, self.x_trend_pts_1, self.y_trend_pts_1 = main_proces(x_exam_pts_2, y_exam_pts_2)
 
-        #chart(x_exam_pts_3, y_exam_pts_3, x_trend_pts_1, y_trend_pts_1, x_exam_pts_2)
+        # chart(x_exam_pts_3, y_exam_pts_3, x_trend_pts_1, y_trend_pts_1, x_exam_pts_2)
 
         # hier set % scope of slice
 
-
-
-
         self.model.modify_down_scope.set(self.view.down_scope_var.get())
         self.model.modify_up_scope.set(self.view.up_scope_var.get())
-
-
-
-
-
 
         try:
             a = float(self.model.modify_down_scope.get())
@@ -328,10 +254,8 @@ class Controller:
         except:
             b = 100
 
-
         print(f'zakres dół {a}')
         print(f'zakres góra {b}')
-
 
         down = int(len(x_exam_pts_3) * (a / 100))
         up = int(len(x_exam_pts_3) * (b / 100))
@@ -340,13 +264,10 @@ class Controller:
 
         #  Here set density of slice
 
-
         try:
             self.model.dens_factor.set(float(self.view.density_var.get()))
         except:
             self.model.dens_factor.set(1)
-
-
 
         x_slice_1, y_slice_1 = density_control(x_slice, y_slice, float(self.model.dens_factor.get()))
 
@@ -354,10 +275,8 @@ class Controller:
 
         x_exam_pts_3[down:up:1], y_exam_pts_3[down:up:1] = x_slice_1[::1], y_slice_1[::1]
 
-        self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4 = main_proces(x_exam_pts_3, y_exam_pts_3)
-
-
-
+        self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4 = main_proces(x_exam_pts_3,
+                                                                                                   y_exam_pts_3)
 
     def natural_chart_execution_tab_0(self):
         def chart(x, y, x_trend, y_trend):
@@ -389,9 +308,6 @@ class Controller:
 
         chart(self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4)
 
-
-
-
     def export_nature_data_tab_0(self):
 
         self.model.name_of_chart_var = self.view.name_of_chart_var.get()
@@ -407,17 +323,13 @@ class Controller:
         self.model.scope_max_of_Y_axis_var = self.view.scope_max_of_Y_axis_var.get()
         self.model.name_serial_var = self.view.name_serial_var.get()
 
-        return(self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1,
-               self.model.name_of_chart_var,
-               self.model.name_of_X_axis_var,self.model.unit_of_X_axis_var,
-               self.model.scope_min_of_X_axis_var,self.model.scope_max_of_X_axis_var,
-               self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
-               self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var,
-               self.model.name_serial_var)
-
-
-
-
+        return (self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1,
+                self.model.name_of_chart_var,
+                self.model.name_of_X_axis_var, self.model.unit_of_X_axis_var,
+                self.model.scope_min_of_X_axis_var, self.model.scope_max_of_X_axis_var,
+                self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
+                self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var,
+                self.model.name_serial_var)
 
     def save_nature_data_tab_0(self):
         solution = pd.DataFrame()
@@ -427,7 +339,6 @@ class Controller:
 
         solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
 
-
     def save_modify_data_tab_0(self):
         solution = pd.DataFrame()
         solution[self.view.x_var.get()] = pd.DataFrame(self.x_exam_pts_4)
@@ -435,8 +346,6 @@ class Controller:
         self.view.show_save_file_clicked()
 
         solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
-
-
 
     def export_modyfied_data_tab_0(self):
 
@@ -452,7 +361,7 @@ class Controller:
         self.model.scope_min_of_Y_axis_var = self.view.scope_min_of_Y_axis_var.get()
         self.model.scope_max_of_Y_axis_var = self.view.scope_max_of_Y_axis_var.get()
 
-        return(self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4,
+        return (self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4,
                 self.model.name_of_chart_var,
                 self.model.name_of_X_axis_var, self.model.unit_of_X_axis_var,
                 self.model.scope_min_of_X_axis_var, self.model.scope_max_of_X_axis_var,
@@ -460,27 +369,22 @@ class Controller:
                 self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var,
                 self.model.name_serial_var)
 
-
-
         ######################################################################################################################
-#tab_1
-######################################################################################################################
+
+    # tab_1
+    ######################################################################################################################
 
     def open_data_tab_1(self):
 
-
-
         self.model.name = self.view.open_name_var.get()
-        self.model.time_var_tab1 =  self.view.time_var_tab1.get()
+        self.model.time_var_tab1 = self.view.time_var_tab1.get()
         self.model.y1_var_tab1 = self.view.y1_var_tab1.get()
         self.model.y2_var_tab1 = self.view.y2_var_tab1.get()
         self.df11 = self.model.open_data_tab_1()
 
-
         time_tag_tab1 = self.model.time_var_tab1
         y1_tag_tab1 = str(self.model.y1_var_tab1)
         y2_tag_tab1 = str(self.model.y2_var_tab1)
-
 
         df11 = self.df11
         df11 = df11.sort_values(by=time_tag_tab1, ascending=True)
@@ -491,13 +395,9 @@ class Controller:
         df11[y1_tag_tab1] = df11[y1_tag_tab1].fillna(df11[y1_tag_tab1].median())
         df11[y2_tag_tab1] = df11[y2_tag_tab1].fillna(df11[y2_tag_tab1].median())
 
-
         self.time_tab1_exam_pts = df11[time_tag_tab1].tolist()  # definition of column - time
         self.y1_tab1_exam_pts = df11[y1_tag_tab1].tolist()  # definition of column -y1
         self.y2_tab1_exam_pts = df11[y2_tag_tab1].tolist()  # definition of column -y2
-
-
-
 
     def draw_data_tab_1(self):
 
@@ -514,32 +414,27 @@ class Controller:
             ax1.set_xticks(np.arange(-5, 200, 10))
             plt.show()
 
-        chart(self.time_tab1_exam_pts, self.y1_tab1_exam_pts , self.y2_tab1_exam_pts)
-
-
+        chart(self.time_tab1_exam_pts, self.y1_tab1_exam_pts, self.y2_tab1_exam_pts)
 
     def set_data_tab_1(self):
-        #self.model.down_scope_var_tab_1 = datetime.strptime(str(self.view.down_scope_var_tab_1.get()),"%H:%M:%S").time()
-        #self.model.up_scope_var_tab_1 = datetime.strptime(str(self.view.up_scope_var_tab_1.get()),"%H:%M:%S").time()
+        # self.model.down_scope_var_tab_1 = datetime.strptime(str(self.view.down_scope_var_tab_1.get()),"%H:%M:%S").time()
+        # self.model.up_scope_var_tab_1 = datetime.strptime(str(self.view.up_scope_var_tab_1.get()),"%H:%M:%S").time()
 
         self.model.down_scope_var_tab_1 = str(self.view.down_scope_var_tab_1.get())
         self.model.up_scope_var_tab_1 = str(self.view.up_scope_var_tab_1.get())
 
-
         df101 = pd.DataFrame(self.model.open_data_tab_1())
-        df101 = df101.loc[:,[self.model.time_var_tab1,self.model.y1_var_tab1,self.model.y2_var_tab1]]
+        df101 = df101.loc[:, [self.model.time_var_tab1, self.model.y1_var_tab1, self.model.y2_var_tab1]]
 
-        df101 = df101[(df101[self.model.time_var_tab1] > (self.model.down_scope_var_tab_1)) & (df101[self.model.time_var_tab1] < self.model.up_scope_var_tab_1)]
+        df101 = df101[(df101[self.model.time_var_tab1] > (self.model.down_scope_var_tab_1)) & (
+                    df101[self.model.time_var_tab1] < self.model.up_scope_var_tab_1)]
 
-        #df101 = df101[df101[self.model.time_var_tab1].between_time(self.model.down_scope_var_tab_1, self.model.up_scope_var_tab_1)]
+        # df101 = df101[df101[self.model.time_var_tab1].between_time(self.model.down_scope_var_tab_1, self.model.up_scope_var_tab_1)]
         #
         self.time_modyfied_tab1_exam_pts = (df101[self.model.time_var_tab1]).tolist()
         self.y1_modyfied_tab1_exam_pts = (df101[self.model.y1_var_tab1]).tolist()
         self.y2_modyfied_tab1_exam_pts = (df101[self.model.y2_var_tab1]).tolist()
         #
-
-
-
 
     def draw_slice_data_tab_1(self):
 
@@ -556,7 +451,7 @@ class Controller:
             ax1.set_xticks(np.arange(-5, 200, 10))
             plt.show()
 
-        chart( self.time_modyfied_tab1_exam_pts ,  self.y1_modyfied_tab1_exam_pts, self.y2_modyfied_tab1_exam_pts)
+        chart(self.time_modyfied_tab1_exam_pts, self.y1_modyfied_tab1_exam_pts, self.y2_modyfied_tab1_exam_pts)
         self.export_to_tab_0()
 
     def save_modyfied_data_clicked_tab_1(self):
@@ -569,48 +464,61 @@ class Controller:
 
         solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
 
-
-
-
-#########################################################################################################################
-#tab2
-########################################################################################################################
+    #########################################################################################################################
+    # tab2
+    ########################################################################################################################
     def trans_01_tab_2(self):
         self.temporary_chart_1_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_1_data = self.export_modyfied_data_tab_0()
-
-
-
 
     def trans_02_tab_2(self):
         self.temporary_chart_2_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_2_data = self.export_modyfied_data_tab_0()
 
+    def trans_03_tab_2(self):
+        self.temporary_chart_3_data = self.export_nature_data_tab_0()
+        if self.view.switch_modyfied_export == True:
+            self.temporary_chart_3_data = self.export_modyfied_data_tab_0()
 
+    def trans_04_tab_2(self):
+        self.temporary_chart_4_data = self.export_nature_data_tab_0()
+        if self.view.switch_modyfied_export == True:
+            self.temporary_chart_4_data = self.export_modyfied_data_tab_0()
 
+    def trans_05_tab_2(self):
+        self.temporary_chart_5_data = self.export_nature_data_tab_0()
+        if self.view.switch_modyfied_export == True:
+            self.temporary_chart_5_data = self.export_modyfied_data_tab_0()
+
+    def trans_06_tab_2(self):
+        self.temporary_chart_6_data = self.export_nature_data_tab_0()
+        if self.view.switch_modyfied_export == True:
+            self.temporary_chart_6_data = self.export_modyfied_data_tab_0()
 
     def agg_tab_2(self):
         agg = []
-        if self.temporary_chart_1_data != 0 :
+        if self.temporary_chart_1_data != 0:
             agg.append(self.temporary_chart_1_data)
         if self.temporary_chart_2_data != 0:
             agg.append(self.temporary_chart_2_data)
-
+        if self.temporary_chart_3_data != 0:
+            agg.append(self.temporary_chart_3_data)
+        if self.temporary_chart_4_data != 0:
+            agg.append(self.temporary_chart_4_data)
+        if self.temporary_chart_5_data != 0:
+            agg.append(self.temporary_chart_5_data)
+        if self.temporary_chart_6_data != 0:
+            agg.append(self.temporary_chart_6_data)
 
         return agg
 
-
-
-
     def united_chart_execution_tab_2(self):
-        print(f'długość{len(self.agg_tab_2())}')
-        print((self.agg_tab_2()[0])[13])
 
-        print((self.agg_tab_2()[1])[13])
+
         #
-        #def chart(x, y, x_trend, y_trend,x1,y1,x1_trend,y1_trend):
+        # def chart(x, y, x_trend, y_trend,x1,y1,x1_trend,y1_trend):
         #     fig = plt.figure()
         #     ax1 = fig.add_subplot(111)
         #     #ax2 = ax1.twiny()
@@ -629,69 +537,78 @@ class Controller:
         #       (self.agg_tab_2()[1])[0],(self.agg_tab_2()[1])[1],(self.agg_tab_2()[1])[2],(self.agg_tab_2()[1])[3])
 
         #######################################
-        def chart1(x, y, x_trend, y_trend,name_serial_var, x1, y1, x1_trend, y1_trend,name_serial_var1,w):
+        def chart1(solist):
+            fig, ax = plt.subplots()
+            num_li = len(solist)
 
-                print(f'aaa{(w[0])[0]}')
+            if num_li == 1 or num_li == 2 or num_li == 3 or num_li == 4 or num_li == 5 or num_li == 6:
+                x, y, x_trend, y_trend, name_serial_var = (solist[0])[0], (solist[0])[1], (solist[0])[2], (solist[0])[3], (self.agg_tab_2()[0])[13]
+                sns.scatterplot(x=x, y=y, c="orange", s=40, alpha=0.3, edgecolors='none', label=name_serial_var)
+                sns.lineplot(x=x_trend, y=y_trend, color="g", ax=ax, linewidth=1, label=name_serial_var)
 
-                fig, ax = plt.subplots()
+            if num_li == 2 or num_li == 3 or num_li == 4 or num_li == 5 or num_li == 6:
+                x1, y1, x1_trend, y1_trend, name_serial_var1 = (solist[1])[0], (solist[1])[1], (solist[1])[2],(solist[1])[3], (self.agg_tab_2()[1])[13]
+                sns.scatterplot(x=x1, y=y1, c="red", s=40, alpha=0.3, edgecolors='none', label=name_serial_var1)
+                sns.lineplot(x=x1_trend, y=y1_trend, color="g", ax=ax, linewidth=1, label=name_serial_var1)
 
-                # sns.regplot(x="z", y="g", data=df2, ax=ax, label='lwwwww')
-                # sns.lineplot(x="a", y="b", data=df, color="g", ax=ax, linewidth=1, label='wwwww')
-                # sns.lineplot(x="c", y="d", data=df, color="c", ax=ax, linewidth=1, label='wwwww')
-                sns.scatterplot(x=x,y=y, c="orange", s=50, alpha=0.3, edgecolors='none', label=name_serial_var)
-                sns.lineplot(x= x_trend, y=y_trend, color="g", ax=ax, linewidth=1, label=name_serial_var)
+            if num_li == 3 or num_li == 4 or num_li == 5 or num_li == 6:
+                x2, y2, x2_trend, y2_trend, name_serial_var2 = (solist[2])[0], (solist[2])[1], (solist[2])[2],(solist[2])[3], (self.agg_tab_2()[2])[13]
+                sns.scatterplot(x=x2, y=y2, c="red", s=40, alpha=0.3, edgecolors='none', label=name_serial_var2)
+                sns.lineplot(x=x2_trend, y=y2_trend, color="g", ax=ax, linewidth=1, label=name_serial_var2)
 
-                sns.scatterplot(x=x1, y=y1, c="red", s=50, alpha=0.3, edgecolors='none', label = name_serial_var1)
-                sns.lineplot(x=x1_trend, y=y1_trend, color="g", ax=ax, linewidth=1, label = name_serial_var1)
+            if num_li == 4 or num_li == 5 or num_li == 6:
+                x3, y3, x3_trend, y3_trend, name_serial_var3 = (solist[3])[0], (solist[3])[1], (solist[3])[2],(solist[3])[3], (self.agg_tab_2()[3])[13]
+                sns.scatterplot(x=x3, y=y3, c="orange", s=40, alpha=0.3, edgecolors='none', label=name_serial_var3)
+                sns.lineplot(x=x3_trend, y=y3_trend, color="g", ax=ax, linewidth=1, label=name_serial_var3)
 
-                ax.set_xlabel('Annual rainfall (mm)')
+            if num_li == 5 or num_li == 6:
+                x4, y4, x4_trend, y4_trend, name_serial_var4 = (solist[4])[0], (solist[4])[1], (solist[4])[2],(solist[4])[3], (self.agg_tab_2()[4])[13]
+                sns.scatterplot(x=x4, y=y4, c="red", s=40, alpha=0.3, edgecolors='none', label=name_serial_var4)
+                sns.lineplot(x=x4_trend, y=y4_trend, color="g", ax=ax, linewidth=1, label=name_serial_var4)
 
-                ax.set_ylabel('Likelihood of occurrence')
+            if num_li == 6:
+                x5, y5, x5_trend, y5_trend, name_serial_var5 = (solist[5])[0], (solist[5])[1], (solist[5])[2],(solist[5])[3], (self.agg_tab_2()[5])[13]
+                sns.scatterplot(x=x5, y=y5, c="red", s=40, alpha=0.3, edgecolors='none', label=name_serial_var5)
+                sns.lineplot(x=x5_trend, y=y5_trend, color="g", ax=ax, linewidth=1, label=name_serial_var5)
 
-                # ax.scatter(df1.w, df1.fi,c ="blue",linewidths = 2,marker ="^", edgecolor ="red",s = 10)
+            # sns.regplot(x="z", y="g", data=df2, ax=ax, label='lwwwww')
+            # sns.lineplot(x="a", y="b", data=df, color="g", ax=ax, linewidth=1, label='wwwww')
+            # sns.lineplot(x="c", y="d", data=df, color="c", ax=ax, linewidth=1, label='wwwww')
 
-                # Show the major grid and style it slightly.
-                ax.grid(which='major', color='#DDDDDD', linewidth=1.2)
-                # Show the minor grid as well. Style it in very light gray as a thin,
-                # dotted line.
-                ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=1)
-                # Make the minor ticks and gridlines show.
-                ax.minorticks_on()
-
-                # ax2.legend(handles=[a.lines[0] for a in [ax,ax2]],
-                #            labels=["f", "g"])
-
-                plt.show()
-                print(f'długość listy{len(self.agg_tab_2())}')
-
-        chart1((self.agg_tab_2()[0])[0],(self.agg_tab_2()[0])[1],(self.agg_tab_2()[0])[2],(self.agg_tab_2()[0])[3],
-               (self.agg_tab_2()[0])[13],
-               (self.agg_tab_2()[1])[0],(self.agg_tab_2()[1])[1],(self.agg_tab_2()[1])[2],(self.agg_tab_2()[1])[3],
-               (self.agg_tab_2()[1])[13],self.agg_tab_2())
-
-
-
+            ax.set_xlabel((solist[0])[5]+' ['+ (solist[0])[6]+']')
+            ax.set_ylabel((solist[0])[9]+' ['+ (solist[0])[10]+']')
 
 
 
 
-################
-        # print((self.agg_tab_2()[0])[0])
-        # print((self.agg_tab_2()[0])[1])
-        # print((self.agg_tab_2()[0])[2])`
-        # print((self.agg_tab_2()[0])[3])
-        #
-        # print((self.agg_tab_2()[1])[0])
-        # print((self.agg_tab_2()[1])[1])
-        # print((self.agg_tab_2()[1])[2])
-        # print((self.agg_tab_2()[1])[3])
+            # ax.scatter(df1.w, df1.fi,c ="blue",linewidths = 2,marker ="^", edgecolor ="red",s = 10)
 
+            # Show the major grid and style it slightly.
+            ax.grid(which='major', color='#DDDDDD', linewidth=1.2)
+            # Show the minor grid as well. Style it in very light gray as a thin,
+            # dotted line.
+            ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=1)
+            # Make the minor ticks and gridlines show.
+            ax.minorticks_on()
 
+            # ax2.legend(handles=[a.lines[0] for a in [ax,ax2]],
+            #            labels=["f", "g"])
+            plt.title((solist[0])[4])
+            plt.show()
+            print(f'długość listy{len(self.agg_tab_2())}')
 
+        chart1(self.agg_tab_2())
 
-
-
-
+    ################
+    # print((self.agg_tab_2()[0])[0])
+    # print((self.agg_tab_2()[0])[1])
+    # print((self.agg_tab_2()[0])[2])`
+    # print((self.agg_tab_2()[0])[3])
+    #
+    # print((self.agg_tab_2()[1])[0])
+    # print((self.agg_tab_2()[1])[1])
+    # print((self.agg_tab_2()[1])[2])
+    # print((self.agg_tab_2()[1])[3])
 
     def save_data_clicked_tab_2(self):
         solution = pd.DataFrame()
@@ -702,27 +619,20 @@ class Controller:
         solution['y1'] = pd.DataFrame(((self.agg_tab_2()[0])[1]))
         # solution[str((self.agg_tab_2()[1])[5])] = pd.DataFrame((self.agg_tab_2()[1])[0])
         solution['x2'] = pd.DataFrame((self.agg_tab_2()[1])[0])
-        #solution[str((self.agg_tab_2()[1])[9])] = pd.DataFrame((self.agg_tab_2()[1])[1])
+        # solution[str((self.agg_tab_2()[1])[9])] = pd.DataFrame((self.agg_tab_2()[1])[1])
         solution['y2'] = pd.DataFrame((self.agg_tab_2()[1])[1])
 
         print(solution)
-
-
-
-
 
         #
         # solution[self.model.y1_var_tab1] = (self.agg_tab_2()[0])[0]
         #
         # solution[self.model.y2_var_tab1] = (self.agg_tab_2()[0])[1]
 
-
         # solution = pd.DataFrame(list(self.agg_tab_2()))
 
         # print((self.agg_tab_2()[0])[0])
         # print((self.agg_tab_2()[0])[1])
-
-
 
         self.view.show_save_file_clicked()
 
