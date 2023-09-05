@@ -346,11 +346,13 @@ class View(ttk.Frame):
        ######################################################################################################################################################
 
         lf101 = ttk.LabelFrame(tab1, width=500, height=180, text="Dane" )
-        lf101.grid(column=0, row=0, padx=15, pady=15)
+        lf101.grid(column=0, row=0, padx=15, pady=15,sticky=W)
 
         lf102 = ttk.LabelFrame(tab1, width=500, height=180, text="Zmiana zakresu")
-        lf102.grid(column=0, row=1, padx=15, pady=15)
+        lf102.grid(column=0, row=1, padx=15, pady=15,sticky=W)
 
+        lf103 = ttk.LabelFrame(tab1, width=150, height=50, text="Podziałka wykresu czasu")
+        lf103.grid(column=0, row=2, padx=15, pady=15,sticky=W)
 
         #########################################
 
@@ -449,10 +451,17 @@ class View(ttk.Frame):
         self.draw_slice_button_count_tab_1 = ttk.Button(lf102, text='Dalej', command=self.export_clicked_tab_1)
         self.draw_slice_button_count_tab_1.grid(row=20, column=4, padx=10)
 
+        self.up_scope_entry_tab_1 = ttk.Entry(lf103, textvariable=self.up_scope_var_tab_1, width=25)
+        self.up_scope_entry_tab_1.grid(row=1, column=1, sticky=tk.NSEW)
+
+
+
 
         ###############################################################################################################################
 
 
+
+        ###############################################################################################################################
         # tab 2
         ###############################################################################################################################
 
