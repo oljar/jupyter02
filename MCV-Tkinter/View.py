@@ -78,6 +78,8 @@ class View(ttk.Frame):
 
         self.scale_time_chart = tk.StringVar()
 
+        self.is_on_canal_01 = True
+
 
 
 
@@ -480,7 +482,7 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf301)
         self.label.grid(row=0, column=0)
 
-        self.open_button_chart_01_tab_2 = ttk.Button(lf301, text='Wykres 1', command=self.data_trans_chart_01_tab_2)
+        self.open_button_chart_01_tab_2 = ttk.Button(lf301, text='Wykres 1', command=self.canal_01)
         self.open_button_chart_01_tab_2.grid(row=0, column=0, padx=10)
 
 
@@ -750,9 +752,22 @@ class View(ttk.Frame):
 
 
 ###################################################################################################################################
+    def canal_01(self):
+
+        if self.is_on_canal_01:
+            self.data_trans_chart_01_tab_2()
+            self.is_on_canal_01 = False
+            self.open_button_chart_01_tab_2.config(text = 'on')
+
+        else:
+            self.is_on_canal_01 = True
+            self.open_button_chart_01_tab_2.config(text = 'off'  )
+
+
+###################################################################################################################################
     def data_trans_chart_01_tab_2(self):
        self.controller.trans_01_tab_2()
-       self.open_button_chart_01_tab_2.config(state=DISABLED)
+
     def data_trans_chart_02_tab_2(self):
        self.controller.trans_02_tab_2()
        self.open_button_chart_02_tab_2.config(state=DISABLED)
