@@ -9,7 +9,8 @@ class Model:
                  name_of_chart_var,
                  name_of_X_axis_var, unit_of_X_axis_var,scope_min_of_X_axis_var,scope_max_of_X_axis_var,
                  name_of_Y_axis_var,unit_of_Y_axis_var,scope_min_of_Y_axis_var,scope_max_of_Y_axis_var,
-                 name_serial_var):
+                 name_serial_var,
+                 scale_time_chart):
 
         self.name = name
 
@@ -48,6 +49,9 @@ class Model:
         self.scope_max_of_Y_axis_var = scope_max_of_Y_axis_var
 
         self.name_serial_var = name_serial_var
+        self.scale_time_chart = scale_time_chart
+
+
 
 
 

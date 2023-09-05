@@ -54,6 +54,8 @@ scope_max_of_Y_axis_var = tk.StringVar()
 
 name_serial_var = tk.StringVar()
 
+scale_time_chart = tk.StringVar()
+
 
 
 
@@ -62,7 +64,8 @@ model = Model(name,dist_border,dens_factor,modify_down_scope,modify_up_scope,x_v
               name_of_chart_var,
               name_of_X_axis_var,unit_of_X_axis_var,scope_min_of_X_axis_var,scope_max_of_X_axis_var,
               name_of_Y_axis_var,unit_of_Y_axis_var,scope_min_of_Y_axis_var,scope_max_of_Y_axis_var,
-              name_serial_var)
+              name_serial_var,
+              scale_time_chart)
 
 
 

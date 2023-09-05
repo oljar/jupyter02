@@ -411,7 +411,7 @@ class Controller:
         self.y1_tab1_exam_pts = df11[y1_tag_tab1].tolist()  # definition of column -y1
         self.y2_tab1_exam_pts = df11[y2_tag_tab1].tolist()  # definition of column -y2
 
-    def chart(self, x, y1, y2):
+    def chart(self, x, y1, y2,scale_time):
         fig = plt.figure()
         ax1 = fig.add_subplot(111)
 
@@ -431,7 +431,7 @@ class Controller:
         range_time = time_2_s - time_1_s
 
 
-        ax1.set_xticks(np.arange(-5, range_time, 30))
+        ax1.set_xticks(np.arange(-5, range_time, scale_time))
 
         # Show the major grid and style it slightly.
         ax1.grid(which='major', color='#DDDDDD', linewidth=1.2)
@@ -446,7 +446,11 @@ class Controller:
         time_tab1_exam_pts = self.time_tab1_exam_pts
         y1_tab1_exam_pts = self.y1_tab1_exam_pts
         y2_tab1_exam_pts = self.y2_tab1_exam_pts
-        self.chart(time_tab1_exam_pts, y1_tab1_exam_pts, y2_tab1_exam_pts)
+        self.model.scale_time_chart = self.view.scale_time_chart.get()
+        scale_time_chart = int(self.model.scale_time_chart)
+
+
+        self.chart(time_tab1_exam_pts, y1_tab1_exam_pts, y2_tab1_exam_pts, scale_time_chart)
 
     def set_data_tab_1(self):
         # self.model.down_scope_var_tab_1 = datetime.strptime(str(self.view.down_scope_var_tab_1.get()),"%H:%M:%S").time()
@@ -472,8 +476,10 @@ class Controller:
         time_modyfied_tab1_exam_pts = self.time_modyfied_tab1_exam_pts
         y1_modyfied_tab1_exam_pts = self.y1_modyfied_tab1_exam_pts
         y2_modyfied_tab1_exam_pts = self.y2_modyfied_tab1_exam_pts
+        self.model.scale_time_chart = self.view.scale_time_chart.get()
+        scale_time_chart = int(self.model.scale_time_chart)
 
-        self.chart(time_modyfied_tab1_exam_pts, y1_modyfied_tab1_exam_pts, y2_modyfied_tab1_exam_pts)
+        self.chart(time_modyfied_tab1_exam_pts, y1_modyfied_tab1_exam_pts, y2_modyfied_tab1_exam_pts,scale_time_chart)
 
     def save_modyfied_data_clicked_tab_1(self):
         solution = pd.DataFrame()
