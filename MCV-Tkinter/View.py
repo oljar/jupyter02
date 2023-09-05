@@ -757,11 +757,12 @@ class View(ttk.Frame):
         if self.is_on_canal_01:
             self.data_trans_chart_01_tab_2()
             self.is_on_canal_01 = False
-            self.open_button_chart_01_tab_2.config(text = 'on')
+            self.open_button_chart_01_tab_2.config(text="on")
+
 
         else:
             self.is_on_canal_01 = True
-            self.open_button_chart_01_tab_2.config(text = 'off'  )
+            self.open_button_chart_01_tab_2.config(text="off")
 
 
 ###################################################################################################################################
