@@ -411,7 +411,7 @@ class Controller:
         self.y1_tab1_exam_pts = df11[y1_tag_tab1].tolist()  # definition of column -y1
         self.y2_tab1_exam_pts = df11[y2_tag_tab1].tolist()  # definition of column -y2
 
-    def chart(self, x, y1, y2,scale_time):
+    def chart(self, x, y1, y2, scale_time):
         fig = plt.figure()
         ax1 = fig.add_subplot(111)
 
@@ -430,7 +430,6 @@ class Controller:
         time_2_s = time_2.hour * 3600 + time_2.minute * 60 + time_2.second
         range_time = time_2_s - time_1_s
 
-
         ax1.set_xticks(np.arange(-5, range_time, scale_time))
 
         # Show the major grid and style it slightly.
@@ -448,7 +447,6 @@ class Controller:
         y2_tab1_exam_pts = self.y2_tab1_exam_pts
         self.model.scale_time_chart = self.view.scale_time_chart.get()
         scale_time_chart = int(self.model.scale_time_chart)
-
 
         self.chart(time_tab1_exam_pts, y1_tab1_exam_pts, y2_tab1_exam_pts, scale_time_chart)
 
@@ -479,7 +477,7 @@ class Controller:
         self.model.scale_time_chart = self.view.scale_time_chart.get()
         scale_time_chart = int(self.model.scale_time_chart)
 
-        self.chart(time_modyfied_tab1_exam_pts, y1_modyfied_tab1_exam_pts, y2_modyfied_tab1_exam_pts,scale_time_chart)
+        self.chart(time_modyfied_tab1_exam_pts, y1_modyfied_tab1_exam_pts, y2_modyfied_tab1_exam_pts, scale_time_chart)
 
     def save_modyfied_data_clicked_tab_1(self):
         solution = pd.DataFrame()
@@ -523,6 +521,31 @@ class Controller:
         self.temporary_chart_6_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_6_data = self.export_modyfied_data_tab_0()
+
+    ############################################################################
+    def data_delete_chart_01(self):
+        self.agg_tab_2().remove(self.temporary_chart_1_data)
+        print(len(self.agg_tab_2()))
+
+
+    def data_delete_chart_02(self):
+        self.agg_tab_2().remove(self.temporary_chart_2_data)
+        print(len(self.agg_tab_2()))
+
+    def data_delete_chart_03(self):
+        self.agg_tab_2().remove(self.temporary_chart_3_data)
+        print(len(self.agg_tab_2()))
+
+    def data_delete_chart_04(self):
+        self.agg_tab_2().remove(self.temporary_chart_4_data)
+        print(len(self.agg_tab_2()))
+    def data_delete_chart_05(self):
+        self.agg_tab_2().remove(self.temporary_chart_5_data)
+        print(len(self.agg_tab_2()))
+
+    def data_delete_chart_06(self):
+        self.agg_tab_2().remove(self.temporary_chart_6_data)
+        print(len(self.agg_tab_2()))
 
     def agg_tab_2(self):
         agg = []
