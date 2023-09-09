@@ -32,6 +32,14 @@ class Controller:
         self.temporary_chart_4_data = 0
         self.temporary_chart_5_data = 0
         self.temporary_chart_6_data = 0
+        self.trans_perm_01 = False
+        self.trans_perm_02 = False
+        self.trans_perm_03 = False
+        self.trans_perm_04 = False
+        self.trans_perm_05 = False
+        self.trans_perm_06 = False
+        self.agg = []
+
 
     def open_data(self):
 
@@ -158,7 +166,7 @@ class Controller:
 
             # coefficients od polynomial 2-grade (trend)
             coefs = poly.polyfit(x_exam_points, y_exam_points, deg)
-
+            print(f'współczynniki wielomianu{coefs}')
             y_trend_points = poly.polyval(x_trend_points, coefs)
 
             def distance_point_to_curve(x0, y0, x_curve, y_curve):
@@ -502,32 +510,67 @@ class Controller:
         self.temporary_chart_1_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_1_data = self.export_modyfied_data_tab_0()
+        self.trans_perm_01 = True
+        self.trans_perm_02 = False
+        self.trans_perm_03 = False
+        self.trans_perm_04 = False
+        self.trans_perm_05 = False
+        self.trans_perm_06 = False
 
 
     def trans_02_tab_2(self):
         self.temporary_chart_2_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_2_data = self.export_modyfied_data_tab_0()
+        self.trans_perm_01 = False
+        self.trans_perm_02 = True
+        self.trans_perm_03 = False
+        self.trans_perm_04 = False
+        self.trans_perm_05 = False
+        self.trans_perm_06 = False
 
     def trans_03_tab_2(self):
         self.temporary_chart_3_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_3_data = self.export_modyfied_data_tab_0()
-
+        self.trans_perm_01 = False
+        self.trans_perm_02 = False
+        self.trans_perm_03 = True
+        self.trans_perm_04 = False
+        self.trans_perm_05 = False
+        self.trans_perm_06 = False
     def trans_04_tab_2(self):
         self.temporary_chart_4_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_4_data = self.export_modyfied_data_tab_0()
+        self.trans_perm_01 = False
+        self.trans_perm_02 = False
+        self.trans_perm_03 = False
+        self.trans_perm_04 = True
+        self.trans_perm_05 = False
+        self.trans_perm_06 = False
 
     def trans_05_tab_2(self):
         self.temporary_chart_5_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_5_data = self.export_modyfied_data_tab_0()
+        self.trans_perm_01 = False
+        self.trans_perm_02 = False
+        self.trans_perm_03 = False
+        self.trans_perm_04 = False
+        self.trans_perm_05 = True
+        self.trans_perm_06 = False
 
     def trans_06_tab_2(self):
         self.temporary_chart_6_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_6_data = self.export_modyfied_data_tab_0()
+        self.trans_perm_01 = False
+        self.trans_perm_02 = False
+        self.trans_perm_03 = False
+        self.trans_perm_04 = False
+        self.trans_perm_05 = False
+        self.trans_perm_06 = True
 
     ############################################################################
     def data_delete_chart_01(self):
@@ -555,23 +598,35 @@ class Controller:
         print(self.agg_tab_2_final)
 
     def agg_tab_2(self):
-        agg = []
-        if self.temporary_chart_1_data != 0:
-            agg.append(self.temporary_chart_1_data)
-        if self.temporary_chart_2_data != 0:
-            agg.append(self.temporary_chart_2_data)
-        if self.temporary_chart_3_data != 0:
-            agg.append(self.temporary_chart_3_data)
-        if self.temporary_chart_4_data != 0:
-            agg.append(self.temporary_chart_4_data)
-        if self.temporary_chart_5_data != 0:
-            agg.append(self.temporary_chart_5_data)
-        if self.temporary_chart_6_data != 0:
-            agg.append(self.temporary_chart_6_data)
 
-        self.agg_tab_2_final = copy.copy(agg)
+        print(f'perm01{self.trans_perm_01}')
+        print(f'perm02{self.trans_perm_02}')
+        print(f'perm03{self.trans_perm_03}')
+        print(f'perm04{self.trans_perm_04}')
+        print(f'perm05{self.trans_perm_05}')
+        print(f'perm06{self.trans_perm_06}')
+        if self.temporary_chart_1_data != 0 and self.trans_perm_01:
+            self.agg.append(self.temporary_chart_1_data)
+            print('append1')
+        if self.temporary_chart_2_data != 0 and self.trans_perm_02:
+            self.agg.append(self.temporary_chart_2_data)
+            print('append2')
+        if self.temporary_chart_3_data != 0 and self.trans_perm_03:
+            self.agg.append(self.temporary_chart_3_data)
+            print('append3')
+        if self.temporary_chart_4_data != 0 and self.trans_perm_04:
+            self.agg.append(self.temporary_chart_4_data)
+            print('append4')
+        if self.temporary_chart_5_data != 0 and self.trans_perm_05:
+            self.agg.append(self.temporary_chart_5_data)
+            print('append5')
+        if self.temporary_chart_6_data != 0 and self.trans_perm_06:
+            self.agg.append(self.temporary_chart_6_data)
+            print('append6')
 
-        return agg
+        self.agg_tab_2_final = self.agg
+
+        return self.agg
 
     def chart1(self, solist):
         fig, ax = plt.subplots()
@@ -605,13 +660,13 @@ class Controller:
 
         if num_li == 5 or num_li == 6:
             x4, y4, x4_trend, y4_trend, name_serial_var4 = (solist[4])[0], (solist[4])[1], (solist[4])[2], (solist[4])[
-                3], (self.agg_tab_2()[4])[13]
+                3], (solist[4])[13]
             sns.scatterplot(x=x4, y=y4, c="red", s=40, alpha=0.3, edgecolors='none', label=name_serial_var4)
             sns.lineplot(x=x4_trend, y=y4_trend, color="g", ax=ax, linewidth=1, label=name_serial_var4)
 
         if num_li == 6:
             x5, y5, x5_trend, y5_trend, name_serial_var5 = (solist[5])[0], (solist[5])[1], (solist[5])[2], (solist[5])[
-                3], (self.agg_tab_2()[5])[13]
+                3], (solist[5])[13]
             sns.scatterplot(x=x5, y=y5, c="red", s=40, alpha=0.3, edgecolors='none', label=name_serial_var5)
             sns.lineplot(x=x5_trend, y=y5_trend, color="g", ax=ax, linewidth=1, label=name_serial_var5)
 
