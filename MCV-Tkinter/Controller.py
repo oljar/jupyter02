@@ -711,11 +711,26 @@ class Controller:
         xyz = self.agg_tab_2_final
         self.z = pd.DataFrame()
         z = pd.DataFrame()
+        label = None
+        unit = None
 
         for i in (range(0, len(xyz))):
             for j in range(0, 4):
-                w = pd.DataFrame(np.array((xyz[i])[j]).T, columns=[i])
-                self.z = pd.concat([w, self.z], axis=1)
+                if j == 0 :
+                    label = (xyz[i])[5]
+                    unit = (xyz[i])[6]
+                elif j == 1:
+                    label = (xyz[i])[9]
+                    unit = (xyz[i])[10]
+                elif j == 2:
+                    label = 'linia trendu x'
+                    unit = (xyz[i])[6]
+                elif j == 3:
+                    label = 'linia trendu y'
+                    unit = (xyz[i])[10]
+
+                w = pd.DataFrame(np.array((xyz[i])[j]).T, columns=[f'{(xyz[i])[13]}-{label}[{unit}]'])
+                self.z = pd.concat([self.z, w], axis=1)
         solution = pd.DataFrame(self.z)
 
 
