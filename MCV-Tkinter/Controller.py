@@ -688,8 +688,8 @@ class Controller:
         # Make the minor ticks and gridlines show.
         ax.minorticks_on()
 
-        # img = mpimg.imread('Figure_1.png')
-        # plt.imshow(img, extent=[200, 500,0, 30], aspect='auto')
+        # img = mpimg.imread('Figure_3.jpg')
+        # plt.imshow(img, extent=[200, 500,0, 20], aspect='auto', alpha= 0.5)
 
 
         # ax2.legend(handles=[a.lines[0] for a in [ax,ax2]],
