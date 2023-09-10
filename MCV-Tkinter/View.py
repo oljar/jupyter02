@@ -882,7 +882,8 @@ class View(ttk.Frame):
         self.controller.united_chart_execution_tab_2()
 
     def data_save_clicked_tab_2(self):
-        self.controller.save_data_clicked_tab_2()
+        # self.controller.save_data_clicked_tab_2()
+        self.controller.save_trend_line_clicked_tab_2()
 
 
     #######################################################################################################################################

@@ -43,6 +43,7 @@ class Controller:
         self.trans_perm_05 = False
         self.trans_perm_06 = False
         self.agg = []
+        self.coefs = []
 
     def open_data(self):
 
@@ -168,9 +169,9 @@ class Controller:
             x_trend_points = sequence
 
             # coefficients od polynomial 2-grade (trend)
-            coefs = poly.polyfit(x_exam_points, y_exam_points, deg)
-            print(f'współczynniki wielomianu{coefs}')
-            y_trend_points = poly.polyval(x_trend_points, coefs)
+            self.coefs = poly.polyfit(x_exam_points, y_exam_points, deg)
+            print(f'współczynniki wielomianu {self.coefs}')
+            y_trend_points = poly.polyval(x_trend_points, self.coefs)
 
             def distance_point_to_curve(x0, y0, x_curve, y_curve):
                 distances = np.sqrt((x0 - x_curve) ** 2 + (y0 - y_curve) ** 2)
@@ -211,7 +212,7 @@ class Controller:
             # print(sol_trend)
 
             print('y trend')
-            print(f'współcznimmiki lini trendu {coefs}')
+            print(f'współcznimmiki lini trendu {self.coefs}')
 
             # distance border
             filtred = sol_exam[sol_exam['dist'] < dist_border]
@@ -349,6 +350,7 @@ class Controller:
         self.model.scope_min_of_Y_axis_var = self.view.scope_min_of_Y_axis_var.get()
         self.model.scope_max_of_Y_axis_var = self.view.scope_max_of_Y_axis_var.get()
         self.model.name_serial_var = self.view.name_serial_var.get()
+        self.model.www = 'przesłanie'
 
         return [self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1,
                 self.model.name_of_chart_var,
@@ -356,7 +358,7 @@ class Controller:
                 self.model.scope_min_of_X_axis_var, self.model.scope_max_of_X_axis_var,
                 self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
                 self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var,
-                self.model.name_serial_var]
+                self.model.name_serial_var, self.coefs]
 
     def save_nature_data_tab_0(self):
         solution = pd.DataFrame()
@@ -733,6 +735,27 @@ class Controller:
                 self.z = pd.concat([self.z, w], axis=1)
         solution = pd.DataFrame(self.z)
 
+        print (self.model.www)
+
+        self.view.show_save_file_clicked()
+
+        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
+
+    def save_trend_line_clicked_tab_2(self):
+
+
+        xyz = self.agg_tab_2_final
+        self.z = pd.DataFrame()
+        z = pd.DataFrame()
+        label = None
+        unit = None
+
+        for i in (range(0, len(xyz))):
+                (xyz[i])[14] = (xyz[i])[14][::-1]
+                w = pd.DataFrame(np.array((xyz[i])[14]).T, columns=[f'{(xyz[i])[13]}'])
+
+                self.z = pd.concat([self.z, w], axis=1)
+        solution = pd.DataFrame(self.z)
 
 
         self.view.show_save_file_clicked()
