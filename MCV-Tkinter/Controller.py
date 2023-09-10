@@ -18,6 +18,7 @@ import numpy as np
 
 
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 import seaborn as sns
 import copy
 
@@ -686,6 +687,10 @@ class Controller:
         ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=1)
         # Make the minor ticks and gridlines show.
         ax.minorticks_on()
+
+        # img = mpimg.imread('Figure_1.png')
+        # plt.imshow(img, extent=[200, 500,0, 30], aspect='auto')
+
 
         # ax2.legend(handles=[a.lines[0] for a in [ax,ax2]],
         #            labels=["f", "g"])
