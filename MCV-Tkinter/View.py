@@ -8,6 +8,7 @@ from tkinter import *
 from tkinter.ttk import *
 from tkinter.filedialog import askopenfile
 from tkinter.filedialog import asksaveasfile
+from data_source import *
 
 
 
@@ -21,7 +22,7 @@ tab1 = ttk.Frame(tab_parent)
 tab2 = ttk.Frame(tab_parent)
 tab3 = ttk.Frame(tab_parent)
 
-
+get_data = GetData()
 
 
 
@@ -98,6 +99,8 @@ class View(ttk.Frame):
 
 
 
+
+
         # create widgets
         ####################
         #tab0
@@ -135,22 +138,22 @@ class View(ttk.Frame):
 
         self.distance_label = ttk.Label(lf1, text='nazwa kolumny - x')
         self.distance_label.grid(row=20, column=0)
-
         self.name_col_x_entry = ttk.Entry(lf1, textvariable=self.x_var, width=10)
+        self.name_col_x_entry.insert(0, get_data.name_col_x_tab0)
         self.name_col_x_entry.grid(row=20, column=1, sticky=tk.NSEW)
 
 
 
         self.distance_label = ttk.Label(lf1, text='nazwa kolumny - y')
         self.distance_label.grid(row=20, column=2)
-
         self.name_col_y_entry = ttk.Entry(lf1, textvariable=self.y_var, width=10)
+        self.name_col_y_entry.insert(0, get_data.name_col_y_tab_0)
         self.name_col_y_entry.grid(row=20, column=3, sticky=tk.NSEW)
-
         self.distance_label = ttk.Label(lf1, text='nazwa serii')
         self.distance_label.grid(row=20, column=4)
 
         self.name_serial_entry = ttk.Entry(lf1, textvariable=self.name_serial_var, width=35)
+        self.name_serial_entry.insert(0, get_data.name_serial_var)
         self.name_serial_entry.grid(row=20, column=5, sticky=tk.NSEW)
 
 
@@ -162,8 +165,8 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf1)
         self.label.grid(row=22, column=0)
 
-        self.open_button = ttk.Button(lf1, text='Pobierz dane', command=self.open_button_clicked)
-        self.open_button.grid(row=23, column=0, padx=10)
+        self.open_button_tab0 = ttk.Button(lf1, text='Pobierz dane', command=self.open_button_clicked)
+        self.open_button_tab0.grid(row=23, column=0, padx=10)
 
 
 
@@ -174,9 +177,9 @@ class View(ttk.Frame):
 
         self.distance_label = ttk.Label(lf2, text='st. wielomianu lini trendu')
         self.distance_label.grid(row=26, column=0)
-
-        self.name_col_x_entry = ttk.Entry(lf2, textvariable=self.polynominal_degree, width=10)
-        self.name_col_x_entry.grid(row=26, column=1, sticky=tk.NSEW)
+        self.polynom_degree_entry = ttk.Entry(lf2, textvariable=self.polynominal_degree, width=10)
+        self.polynom_degree_entry.insert(0, get_data.polynom_degree)
+        self.polynom_degree_entry.grid(row=26, column=1, sticky=tk.NSEW)
 
         ################################################################
 
@@ -184,8 +187,9 @@ class View(ttk.Frame):
         self.distance_label = ttk.Label(lf2, text='krok')
         self.distance_label.grid(row=26, column=2)
 
-        self.name_col_x_entry = ttk.Entry(lf2, textvariable=self.step , width=10)
-        self.name_col_x_entry.grid(row=26, column=3, sticky=tk.NSEW)
+        self.step_value_entry = ttk.Entry(lf2, textvariable=self.step , width=10)
+        self.step_value_entry.insert(0, get_data.step_value)
+        self.step_value_entry.grid(row=26, column=3, sticky=tk.NSEW)
 
 
 
@@ -193,16 +197,18 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf2)
         self.label.grid(row=27, column=0)
 
-        self.total_scope_label = ttk.Label(lf2, text='dolny zakres:')
-        self.total_scope_label.grid(row=28, column=0)
+        self.label = ttk.Label(lf2, text='dolny zakres:')
+        self.label.grid(row=28, column=0)
 
-        self.total_scope_entry = ttk.Entry(lf2, textvariable=self.total_down_scope_var, width=30)
-        self.total_scope_entry.grid(row=28, column=1, sticky=tk.NSEW)
+        self.scope_down_entry = ttk.Entry(lf2, textvariable=self.total_down_scope_var, width=30)
+        self.scope_down_entry.insert(0, get_data.scope_down_entry_tab0)
+        self.scope_down_entry.grid(row=28, column=1, sticky=tk.NSEW)
 
         self.total_scope_label = ttk.Label(lf2, text='górny zakres:')
         self.total_scope_label.grid(row=28, column=2)
-        self.total_scope_entry = ttk.Entry(lf2, textvariable=self.total_up_scope_var, width=30)
-        self.total_scope_entry.grid(row=28, column=3, sticky=tk.NSEW)
+        self.scope_up_entry = ttk.Entry(lf2, textvariable=self.total_up_scope_var, width=30)
+        self.scope_up_entry.insert(0, get_data.scope_up_entry_tab0)
+        self.scope_up_entry.grid(row=28, column=3, sticky=tk.NSEW)
 
         ############################################
 
@@ -213,14 +219,16 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf2, text='wzór korekcyjny - x')
         self.label.grid(row=30, column=0)
 
-        self.name_col_x_entry = ttk.Entry(lf2, textvariable = self.x_math_form , width=10)
-        self.name_col_x_entry.grid(row=30, column=1, sticky=tk.NSEW)
+        self.formula_x_entry = ttk.Entry(lf2, textvariable = self.x_math_form , width=10)
+        self.formula_x_entry.insert(0,get_data.formula_x)
+        self.formula_x_entry .grid(row=30, column=1, sticky=tk.NSEW)
 
         self.label = ttk.Label(lf2, text='wzór korekcyjny - y')
         self.label.grid(row=30, column=2)
 
-        self.name_col_y_entry = ttk.Entry(lf2, textvariable = self.y_math_form , width=10)
-        self.name_col_y_entry.grid(row=30, column=3, sticky=tk.NSEW)
+        self.formula_y_entry = ttk.Entry(lf2, textvariable = self.y_math_form , width=10)
+        self.formula_y_entry.insert(0, get_data.formula_y)
+        self.formula_y_entry.grid(row=30, column=3, sticky=tk.NSEW)
 
         self.distance_label = ttk.Label(lf2)
         self.distance_label.grid(row=31, column=0)
@@ -228,10 +236,8 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf3)
         self.label.grid(row=32, column=0)
 
-
         self.count_button_count = ttk.Button(lf2, text='Przelicz', command=self.count_button_clicked_tab_0)
         self.count_button_count.grid(row=35, column=0, padx=10)
-
 
         self.open_button_draw_natural = ttk.Button(lf2, text='Rysuj wykres naturalny',
                                                    command=self.draw_natural_chart_clicked_tab_0)
@@ -378,23 +384,25 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf101, text='nazwa kolumny - czas')
         self.label.grid(row=20, column=0)
 
-        self.name_col_x_entry_tab_1 = ttk.Entry(lf101, textvariable=self.time_var_tab1, width=10)
-        self.name_col_x_entry_tab_1.grid(row=20, column=1, sticky=tk.NSEW)
+        self.time_tag_entry = ttk.Entry(lf101, textvariable=self.time_var_tab1, width=10)
+        self.time_tag_entry.insert(0, get_data.time_tag)
+        self.time_tag_entry.grid(row=20, column=1, sticky=tk.NSEW)
 
 
 
         self.label = ttk.Label(lf101, text='nazwa kolumny - x')
         self.label.grid(row=20, column=2)
-
-        self.name_col_y1_entry_tab_1 = ttk.Entry(lf101, textvariable=self.y1_var_tab1, width=10)
-        self.name_col_y1_entry_tab_1.grid(row=20, column=3, sticky=tk.NSEW)
+        self.column_x_tag_tab1_entry = ttk.Entry(lf101, textvariable=self.y1_var_tab1, width=10)
+        self.column_x_tag_tab1_entry.insert(0, get_data.column_x_tag_tab1)
+        self.column_x_tag_tab1_entry .grid(row=20, column=3, sticky=tk.NSEW)
 
 
         self.label = ttk.Label(lf101, text='nazwa kolumny - y')
         self.label.grid(row=20, column=4)
 
-        self.name_col_y2_entry_tab_1 = ttk.Entry(lf101, textvariable=self.y2_var_tab1, width=10)
-        self.name_col_y2_entry_tab_1.grid(row=20, column=5, sticky=tk.NSEW)
+        self.column_y_tag_tab1_entry= ttk.Entry(lf101, textvariable=self.y2_var_tab1, width=10)
+        self.column_y_tag_tab1_entry.insert(0, get_data.column_y_tag_tab1)
+        self.column_y_tag_tab1_entry.grid(row=20, column=5, sticky=tk.NSEW)
 
 
         #############################################################
@@ -424,6 +432,7 @@ class View(ttk.Frame):
 
 
         self.down_scope_entry_tab_1 = ttk.Entry(lf102, textvariable=self.down_scope_var_tab_1, width=30)
+        self.down_scope_entry_tab_1.insert(0, get_data.down_scope_tab1)
         self.down_scope_entry_tab_1.grid(row = 10, column=1, sticky=tk.NSEW)
 
         #######################
@@ -435,6 +444,7 @@ class View(ttk.Frame):
 
 
         self.up_scope_entry_tab_1 = ttk.Entry(lf102, textvariable=self.up_scope_var_tab_1, width=30)
+        self.up_scope_entry_tab_1.insert(0, get_data.up_scope_tab_1)
         self.up_scope_entry_tab_1.grid(row = 10, column=3, sticky=tk.NSEW)
 
 
@@ -460,8 +470,9 @@ class View(ttk.Frame):
         self.draw_slice_button_count_tab_1 = ttk.Button(lf102, text='Dalej', command=self.export_clicked_tab_1)
         self.draw_slice_button_count_tab_1.grid(row=20, column=4, padx=10)
 
-        self.up_scope_entry_tab_1 = ttk.Entry(lf103, textvariable=self.scale_time_chart, width=15)
-        self.up_scope_entry_tab_1.grid(row=1, column=1, sticky=tk.NSEW)
+        self.scale_time_chart_entry_tab_1 = ttk.Entry(lf103, textvariable=self.scale_time_chart, width=15)
+        self.scale_time_chart_entry_tab_1.insert(0,get_data.scale_time_chart)
+        self.scale_time_chart_entry_tab_1.grid(row=1, column=1, sticky=tk.NSEW)
 
 
 
@@ -523,10 +534,14 @@ class View(ttk.Frame):
         self.label.grid(row=3, column=0)
 
 
-        self.open_button_tab_2 = ttk.Button(lf303, text='Zapisz', command=self.data_save_clicked_tab_2)
-        self.open_button_tab_2.grid(row=4, column=0, padx=10)
+        self.save_data_button_tab_2 = ttk.Button(lf303, text='Zapisz dane', command=self.data_save_clicked_tab_2)
+        self.save_data_button_tab_2.grid(row=4, column=0, padx=10)
 
+        self.label = ttk.Label(lf303)
+        self.label.grid(row=5, column=0)
 
+        self.save_trend_button_tab_2 = ttk.Button(lf303, text='Zapisz trend', command=self.trend_save_clicked_tab_2)
+        self.save_trend_button_tab_2.grid(row=6, column=0, padx=10)
 
         #######################################################################################################################################
         # units - tab3
@@ -542,26 +557,24 @@ class View(ttk.Frame):
         lf303 = ttk.LabelFrame(tab3, width=500, height=180, text="Nazwy i jednostki - oś Y")
         lf303.grid(column=0, row=2, padx=15, pady=15)
 
-
         ####################################################################################################################
 
         self.label = ttk.Label(lf301)
         self.label.grid(row=1, column=0)
-
-
-
-        self.name_of_chart = ttk.Entry(lf301, textvariable=self.name_of_chart_var, width=10)
-        self.name_of_chart.grid(row=1, column=1, sticky=tk.NSEW, ipadx=200)
-
+        self.name_of_chart_entry_tab3 = ttk.Entry(lf301, textvariable=self.name_of_chart_var, width=10)
+        self.name_of_chart_entry_tab3.insert(0,get_data.name_of_chart)
+        self.name_of_chart_entry_tab3.grid(row=1, column=1, sticky=tk.NSEW, ipadx=200)
         #####################################################################################################################
-        self.distance_label = ttk.Label(lf302).grid(row=0, column=0)
 
+        self.distance_label = ttk.Label(lf302)
+        self.distance_label.grid(row=0, column=0)
         self.label = ttk.Label(lf302, text='nazwa osi X')
         self.label.grid(row=10, column=1)
 
 
-        self.name_of_X_axis = ttk.Entry(lf302, textvariable=self.name_of_X_axis_var, width=10)
-        self.name_of_X_axis.grid(row=10, column=2,ipadx=90)
+        self.name_of_X_axis_entry = ttk.Entry(lf302, textvariable=self.name_of_X_axis_var, width=10)
+        self.name_of_X_axis_entry.insert(0, get_data.name_of_X_axis_tab3)
+        self.name_of_X_axis_entry.grid(row=10, column=2,ipadx=90)
 
         ##################
 
@@ -570,16 +583,17 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf302, text='jednostka')
         self.label.grid(row=30, column=1)
 
-        self.unit_of_X_axis = ttk.Entry(lf302, textvariable=self.unit_of_X_axis_var, width=10)
-        self.unit_of_X_axis.grid(row=30, column=2, sticky=tk.W)
+        self.unit_of_X_axis_entry = ttk.Entry(lf302, textvariable=self.unit_of_X_axis_var, width=10)
+        self.unit_of_X_axis_entry.insert(0, get_data.unit_of_X_axis_tab3)
+        self.unit_of_X_axis_entry.grid(row=30, column=2, sticky=tk.W)
         ####################
 
-
-        self.distance_label = ttk.Label(lf302).grid(row=40, column=0)
-
+        self.distance_label = ttk.Label(lf302)
+        self.distance_label.grid(row=40, column=0)
         self.label = ttk.Label(lf302, text='zakres - min')
         self.label.grid(row=50, column=1)
         self.scope_min_of_X_axis = ttk.Entry(lf302, textvariable=self.scope_min_of_X_axis_var, width=10)
+        self.scope_min_of_X_axis.config(state= "disabled")
         self.scope_min_of_X_axis.grid(row=50, column=2, sticky=tk.W)
 
         ###################
@@ -590,16 +604,18 @@ class View(ttk.Frame):
         self.label.grid(row=70, column=1)
 
         self.scope_max_of_X_axis = ttk.Entry(lf302, textvariable=self.scope_max_of_X_axis_var, width=10)
+        self.scope_max_of_X_axis.config(state="disabled")
         self.scope_max_of_X_axis.grid(row=70, column=2, sticky=tk.W)
 
         ##########################################################################################################################################
-        self.distance_label = ttk.Label(lf303).grid(row=0, column=0)
-
+        self.distance_label = ttk.Label(lf303)
+        self.distance_label.grid(row=0, column=0)
         self.label = ttk.Label(lf303, text='nazwa osi Y')
         self.label.grid(row=10, column=1)
 
-        self.name_of_Y_axis = ttk.Entry(lf303, textvariable=self.name_of_Y_axis_var, width=10)
-        self.name_of_Y_axis.grid(row=10, column=2, ipadx=90)
+        self.name_of_Y_axis_entry_tab3 = ttk.Entry(lf303, textvariable=self.name_of_Y_axis_var, width=10)
+        self.name_of_Y_axis_entry_tab3.insert(0, get_data.name_of_Y_axis_tab3)
+        self.name_of_Y_axis_entry_tab3.grid(row=10, column=2, ipadx=90)
 
         ##################
 
@@ -608,8 +624,9 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf303, text='jednostka')
         self.label.grid(row=30, column=1)
 
-        self.unit_of_Y_axis = ttk.Entry(lf303, textvariable=self.unit_of_Y_axis_var, width=10)
-        self.unit_of_Y_axis.grid(row=30, column=2, sticky=tk.W)
+        self.unit_of_Y_axis_entry_tab3 = ttk.Entry(lf303, textvariable=self.unit_of_Y_axis_var, width=10)
+        self.unit_of_Y_axis_entry_tab3.insert(0,get_data.unit_of_Y_axis_tab3)
+        self.unit_of_Y_axis_entry_tab3.grid(row=30, column=2, sticky=tk.W)
         ####################
 
         self.distance_label = ttk.Label(lf303).grid(row=40, column=0)
@@ -617,6 +634,7 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf303, text='zakres - min')
         self.label.grid(row=50, column=1)
         self.scope_min_of_Y_axis = ttk.Entry(lf303, textvariable=self.scope_min_of_Y_axis_var, width=10)
+        self.scope_min_of_Y_axis.config(state = 'disabled')
         self.scope_min_of_Y_axis.grid(row=50, column=2, sticky=tk.W)
 
         ###################
@@ -627,6 +645,7 @@ class View(ttk.Frame):
         self.label.grid(row=70, column=1)
 
         self.scope_max_of_Y_axis = ttk.Entry(lf303, textvariable=self.scope_max_of_Y_axis_var, width=10)
+        self.scope_max_of_Y_axis.config(state='disabled')
         self.scope_max_of_Y_axis.grid(row=70, column=2, sticky=tk.W)
 
 
@@ -751,6 +770,7 @@ class View(ttk.Frame):
 
     def export_clicked_tab_1(self):
         self.controller.export_to_tab_0()
+
 
     def save_modyfied_data_clicked_tab_1(self):
         self.controller.save_modyfied_data_clicked_tab_1()
@@ -883,7 +903,12 @@ class View(ttk.Frame):
 
     def data_save_clicked_tab_2(self):
         # self.controller.save_data_clicked_tab_2()
-        self.controller.save_trend_line_clicked_tab_2()
+        self.controller.save_data_clicked_tab_2()
+
+    def trend_save_clicked_tab_2(self):
+        # self.controller.save_data_clicked_tab_2()
+        self.controller.save_trend_clicked_tab_2()
+
 
 
     #######################################################################################################################################

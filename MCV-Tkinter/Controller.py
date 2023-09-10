@@ -15,9 +15,8 @@ import numpy as np
 import math
 from datetime import datetime
 import numpy as np
-import datetime as dt
 
-np.random.seed(42)
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 import copy
@@ -709,7 +708,6 @@ class Controller:
 
     def save_data_clicked_tab_2(self):
 
-
         xyz = self.agg_tab_2_final
         self.z = pd.DataFrame()
         z = pd.DataFrame()
@@ -735,29 +733,21 @@ class Controller:
                 self.z = pd.concat([self.z, w], axis=1)
         solution = pd.DataFrame(self.z)
 
-        print (self.model.www)
-
         self.view.show_save_file_clicked()
 
         solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
 
-    def save_trend_line_clicked_tab_2(self):
-
+    def save_trend_clicked_tab_2(self):
 
         xyz = self.agg_tab_2_final
         self.z = pd.DataFrame()
         z = pd.DataFrame()
-        label = None
-        unit = None
 
         for i in (range(0, len(xyz))):
-                (xyz[i])[14] = (xyz[i])[14][::-1]
-                w = pd.DataFrame(np.array((xyz[i])[14]).T, columns=[f'{(xyz[i])[13]}'])
-
-                self.z = pd.concat([self.z, w], axis=1)
+            (xyz[i])[14] = (xyz[i])[14][::-1]
+            w = pd.DataFrame(np.array((xyz[i])[14]).T, columns=[f'{(xyz[i])[13]}'])
+            self.z = pd.concat([self.z, w], axis=1)
         solution = pd.DataFrame(self.z)
-
-
         self.view.show_save_file_clicked()
 
-        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
+        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=True)

@@ -98,7 +98,7 @@ class Model:
             if str(self.time_var_tab1) in str(row):
                 result_row_number.append(row_number)
 
-        print(int(result_row_number[0]))
+
         df1 = pd.read_csv(self.name, sep=';', decimal=',', header=int(result_row_number[0]))
         df1.sort_values(by=self.time_var_tab1, ascending=True)
         return df1
