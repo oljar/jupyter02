@@ -56,6 +56,17 @@ name_serial_var = tk.StringVar()
 
 scale_time_chart = tk.StringVar()
 
+scope_up_back_entry_x_var = tk.StringVar()
+scope_down_back_entry_x_var = tk.StringVar()
+
+scope_up_back_entry_y_var = tk.StringVar()
+scope_down_back_entry_y_var = tk.StringVar()
+switch_background = tk.BooleanVar()
+
+name_picture = tk.StringVar()
+trans_picture = tk.StringVar()
+
+
 
 
 
@@ -65,19 +76,20 @@ model = Model(name,dist_border,dens_factor,modify_down_scope,modify_up_scope,x_v
               name_of_X_axis_var,unit_of_X_axis_var,scope_min_of_X_axis_var,scope_max_of_X_axis_var,
               name_of_Y_axis_var,unit_of_Y_axis_var,scope_min_of_Y_axis_var,scope_max_of_Y_axis_var,
               name_serial_var,
-              scale_time_chart)
-
-
+              scale_time_chart,
+              scope_up_back_entry_x_var,
+              scope_down_back_entry_x_var,
+              scope_up_back_entry_y_var,
+              scope_down_back_entry_y_var,
+              switch_background,
+              name_picture,
+              trans_picture
+              )
 
 controller = Controller(model, view)
 
-
-
 # set the controller to view
 view.set_controller(controller)
-
-
-
 
 
 V.tab_parent.add(V.tab1,text = 'zakres')

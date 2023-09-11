@@ -14,7 +14,7 @@ from data_source import *
 
 window = tk.Tk()
 window.title("Data modificator")
-window.geometry('790x700')
+window.geometry('790x850')
 
 tab_parent = ttk.Notebook(window)
 tab0 = ttk.Frame(tab_parent)
@@ -60,7 +60,7 @@ class View(ttk.Frame):
         self.down_scope_var_tab_1 = tk.StringVar()
 
         self.switch_modyfied_export = False
-
+        self.switch_background = False
         self.name_of_chart_var = tk.StringVar()
 
         self.name_of_X_axis_var  = tk.StringVar()
@@ -86,19 +86,17 @@ class View(ttk.Frame):
         self.is_on_canal_05 = True
         self.is_on_canal_06 = True
 
+        self.total_down_scope_background_var = tk.StringVar()
+        self.total_up_scope_background_var = tk.StringVar()
 
+        self.scope_up_back_entry_x_var = tk.StringVar()
+        self.scope_down_back_entry_x_var = tk.StringVar()
 
+        self.scope_up_back_entry_y_var = tk.StringVar()
+        self.scope_down_back_entry_y_var = tk.StringVar()
 
-
-
-
-
-
-
-
-
-
-
+        self.name_picture = tk.StringVar()
+        self.trans_picture = tk.StringVar()
 
 
         # create widgets
@@ -114,9 +112,8 @@ class View(ttk.Frame):
         lf3 = ttk.LabelFrame(tab0, width=500, height=180, text="Modyfikacje")
         lf3.grid(column=1, row=3, padx=15, pady=15)
 
-
-
-
+        lf4 = ttk.LabelFrame(tab0, width=600, height=100, text="Wstaw tło")
+        lf4.grid(column=1, row=4, padx=15, pady=15)
 
 
 
@@ -355,6 +352,75 @@ class View(ttk.Frame):
 
         self.open_button = ttk.Button(lf3, text='Dalej', command=self.export_modyfied_button_clicked_tab_0)
         self.open_button.grid(row=100, column=3, padx=10)
+
+
+        ############################
+
+        self.distance_label = ttk.Label(lf4)
+        self.distance_label.grid(row=0, column=0)
+
+        self.label_down_background_x_entry = ttk.Label(lf4, text='dolny zakres x:')
+        self.label_down_background_x_entry.grid(row=10, column=0)
+        self.scope_down_background_x_entry = ttk.Entry(lf4, textvariable = self.scope_down_back_entry_x_var, width=30)
+        self.scope_down_background_x_entry.insert(0, get_data.scope_down_x_background_entry_tab0)
+        self.scope_down_background_x_entry.grid(row=10, column=3, sticky=tk.NSEW)
+
+
+
+        self.label_up_background_x_entry = ttk.Label(lf4, text='górny zakres x:')
+        self.label_up_background_x_entry.grid(row=10, column=4)
+
+        self.scope_up_background_x_entry = ttk.Entry(lf4, textvariable = self.scope_up_back_entry_x_var, width=30)
+        self.scope_up_background_x_entry.insert(0, get_data.scope_up_x_background_entry_tab0)
+        self.scope_up_background_x_entry.grid(row=10, column=5, sticky=tk.NSEW)
+
+        self.distance_label = ttk.Label(lf4)
+        self.distance_label.grid(row=15, column=0)
+
+        self.scope_down_background_y_label = ttk.Label(lf4, text='dolny zakres y:')
+        self.scope_down_background_y_label.grid(row=20, column=0)
+        self.scope_down_background_y_entry = ttk.Entry(lf4, textvariable=self.scope_down_back_entry_y_var, width=30)
+        self.scope_down_background_y_entry.insert(0, get_data.scope_down_y_background_entry_tab0)
+        self.scope_down_background_y_entry.grid(row=20, column=3, sticky=tk.NSEW)
+
+        self.scope_up_background_y_label = ttk.Label(lf4, text='górny zakres y:')
+        self.scope_up_background_y_label.grid(row=20, column=4)
+
+        self.scope_up_background_y_entry = ttk.Entry(lf4, textvariable=self.scope_up_back_entry_y_var, width=30)
+        self.scope_up_background_y_entry.insert(0, get_data.scope_up_y_background_entry_tab0)
+        self.scope_up_background_y_entry.grid(row=20, column=5, sticky=tk.NSEW)
+
+        self.distance_label = ttk.Label(lf4)
+        self.distance_label.grid(row=25, column=0)
+
+        self.choice_button_foto_background = ttk.Button(lf4, text='wybierz tło', command=self.show_open_picture_clicked_tab_0)
+        self.choice_button_foto_background.grid(row=30, column=2, padx=10)
+
+        self.label_trans_picture = ttk.Label(lf4, text='przeźroczystość - ')
+        self.label_trans_picture.grid(row=30, column=3, sticky=tk.E)
+
+        self.trans_picture_entry = ttk.Entry(lf4, textvariable=self.trans_picture, width=5)
+        self.trans_picture_entry.insert(0, get_data.trasparency_picture)
+        self.trans_picture_entry.grid(row=30, column=4, sticky=tk.W)
+
+
+
+        self.draw_chart_button_background = ttk.Button(lf4, text='wykres bez tła', command=self.draw_btn_foto_back_clicked_tab_0)
+        self.draw_chart_button_background.grid(row=30, column=5, padx=10)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         ######################################################################################################################################################
        #tab1
@@ -676,6 +742,18 @@ class View(ttk.Frame):
 
 
 
+    def show_open_picture_clicked_tab_0(self):
+
+        picture1 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r', filetypes=[
+                    ("image", ".jpeg"),
+                    ("image", ".png"),
+                    ("image", ".jpg"),
+                    ("image", ".bmp")
+                ])
+
+        self.name_picture.set(str(picture1.name))
+
+
     def open_button_clicked(self):
         """
         Handle button click event
@@ -730,6 +808,20 @@ class View(ttk.Frame):
     def export_modyfied_button_clicked_tab_0(self):
         self.switch_modyfied_export = True
         self.controller.export_modyfied_data_tab_0()
+
+    def choice_btn_foto_back_clicked_tab_0(self):
+        self.controller.choice_btn_foto_back_tab_0()
+
+    def draw_btn_foto_back_clicked_tab_0(self):
+        if self.switch_background :
+            self.draw_chart_button_background.config(text='wykres bez tła')
+            self.switch_background = False
+        else :
+            self.draw_chart_button_background.config(text='wykres z tłem')
+            self.switch_background = True
+            self.controller.draw_btn_foto_back_tab_0()
+
+
 
 
 
@@ -908,6 +1000,7 @@ class View(ttk.Frame):
     def trend_save_clicked_tab_2(self):
         # self.controller.save_data_clicked_tab_2()
         self.controller.save_trend_clicked_tab_2()
+
 
 
 

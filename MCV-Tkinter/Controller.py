@@ -47,18 +47,6 @@ class Controller:
 
     def open_data(self):
 
-        #     self.view.x_var.set(self.view.y1_var_tab1.get())
-        #     self.view.y_var.set(self.view.y2_var_tab1.get())
-        #
-        #     self.model.x_var = (self.view.x_var.get())
-        #     self.model.y_var = (self.view.y_var.get())
-        #     self.df1 = pd.DataFrame()
-        #     self.df1[self.model.time_var_tab1] = pd.DataFrame(self.time_modyfied_tab1_exam_pts)
-        #     self.df1[self.model.y1_var_tab1] = pd.DataFrame(self.y1_modyfied_tab1_exam_pts)
-        #     self.df1[self.model.y2_var_tab1] = pd.DataFrame(self.y2_modyfied_tab1_exam_pts)
-        #
-        #     print(self.df1)
-        #
 
         self.model.name = self.view.open_name_var.get()
 
@@ -632,6 +620,16 @@ class Controller:
         return self.agg
 
     def chart1(self, solist):
+        self.model.switch_background = self.view.switch_background
+        self.model.scope_down_back_entry_x_var = self.view.scope_down_back_entry_x_var.get()
+        self.model.scope_up_back_entry_x_var = self.view.scope_up_back_entry_x_var.get()
+        self.model.scope_down_back_entry_y_var = self.view.scope_down_back_entry_y_var.get()
+        self.model.scope_up_back_entry_y_var = self.view.scope_up_back_entry_y_var.get()
+        self.model.name_picture = str(self.view.name_picture.get())
+        self.model.trans_picture = float(self.view.trans_picture.get())
+        print(f'prezro{self.model.trans_picture}')
+        print(self.model.name_picture)
+
         fig, ax = plt.subplots()
         num_li = len(solist)
 
@@ -668,12 +666,10 @@ class Controller:
         if num_li == 6:
             x5, y5, x5_trend, y5_trend, name_serial_var5 = (solist[5])[0], (solist[5])[1], (solist[5])[2], (solist[5])[
                 3], (solist[5])[13]
-            sns.scatterplot(x=x5, y=y5, c="red", s=40, alpha=0.3, edgecolors='none', label=name_serial_var5)
+            sns.scatterplot(x=x5, y=y5, c="red", s=40, alpha=self.model.trans_picture, edgecolors='none', label=name_serial_var5)
             sns.lineplot(x=x5_trend, y=y5_trend, color="g", ax=ax, linewidth=1, label=name_serial_var5)
 
-        # sns.regplot(x="z", y="g", data=df2, ax=ax, label='lwwwww')
-        # sns.lineplot(x="a", y="b", data=df, color="g", ax=ax, linewidth=1, label='wwwww')
-        # sns.lineplot(x="c", y="d", data=df, color="c", ax=ax, linewidth=1, label='wwwww')
+
 
         ax.set_xlabel((solist[0])[5] + ' [' + (solist[0])[6] + ']')
         ax.set_ylabel((solist[0])[9] + ' [' + (solist[0])[10] + ']')
@@ -688,12 +684,10 @@ class Controller:
         # Make the minor ticks and gridlines show.
         ax.minorticks_on()
 
-        # img = mpimg.imread('Figure_3.jpg')
-        # plt.imshow(img, extent=[200, 500,0, 20], aspect='auto', alpha= 0.5)
+        if self.model.switch_background:
+            img = mpimg.imread(self.model.name_picture )
+            plt.imshow(img, extent=[int(self.model.scope_down_back_entry_x_var),int(self.model.scope_up_back_entry_x_var),int(self.model.scope_down_back_entry_y_var), int(self.model.scope_up_back_entry_y_var)], aspect='auto', alpha= self.model.trans_picture)
 
-
-        # ax2.legend(handles=[a.lines[0] for a in [ax,ax2]],
-        #            labels=["f", "g"])
         plt.title((solist[0])[4])
         plt.show()
 
@@ -756,3 +750,10 @@ class Controller:
         self.view.show_save_file_clicked()
 
         solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=True)
+
+    # def choice_btn_foto_back_tab_0(self):
+    #
+     # print(self.model.open_name_var.get())
+
+    def draw_btn_foto_back_tab_0(self):
+        print(self.model.name)
