@@ -384,7 +384,7 @@ class Controller:
                 self.model.scope_min_of_X_axis_var, self.model.scope_max_of_X_axis_var,
                 self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
                 self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var,
-                self.model.name_serial_var]
+                self.model.name_serial_var, self.coefs]
 
         ######################################################################################################################
 
