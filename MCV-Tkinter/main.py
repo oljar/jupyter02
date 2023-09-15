@@ -92,9 +92,9 @@ controller = Controller(model, view)
 view.set_controller(controller)
 
 
+V.tab_parent.add(V.tab3,text = 'jednostki')
 V.tab_parent.add(V.tab1,text = 'zakres')
 V.tab_parent.add(V.tab0,text = 'ustawienia')
-V.tab_parent.add(V.tab3,text = 'jednostki')
 V.tab_parent.add(V.tab2,text = 'agregacja')
 
 

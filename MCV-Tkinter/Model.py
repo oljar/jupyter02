@@ -81,10 +81,8 @@ class Model:
         """
         # with open('emails.txt', 'a') as f:
 
-
-        print(f'asdsa{self.name}')
         data_list = []
-        with open(self.name, 'r') as f:
+        with open(self.name, 'r', encoding='utf-8') as f:
             data = csv.reader(f)
             for i in data:
                 data_list.append(i)

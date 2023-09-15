@@ -648,25 +648,25 @@ class Controller:
         if num_li == 3 or num_li == 4 or num_li == 5 or num_li == 6:
             x2, y2, x2_trend, y2_trend, name_serial_var2 = (solist[2])[0], (solist[2])[1], (solist[2])[2], (solist[2])[
                 3], (solist[2])[13]
-            sns.scatterplot(x=x2, y=y2, c="red", s=40, alpha=0.3, edgecolors='none', label=name_serial_var2)
+            sns.scatterplot(x=x2, y=y2, c="brown", s=40, alpha=0.3, edgecolors='none', label=name_serial_var2)
             sns.lineplot(x=x2_trend, y=y2_trend, color="g", ax=ax, linewidth=1, label=name_serial_var2)
 
         if num_li == 4 or num_li == 5 or num_li == 6:
             x3, y3, x3_trend, y3_trend, name_serial_var3 = (solist[3])[0], (solist[3])[1], (solist[3])[2], (solist[3])[
                 3], (solist[3])[13]
-            sns.scatterplot(x=x3, y=y3, c="orange", s=40, alpha=0.3, edgecolors='none', label=name_serial_var3)
+            sns.scatterplot(x=x3, y=y3, c="yellow", s=40, alpha=0.3, edgecolors='none', label=name_serial_var3)
             sns.lineplot(x=x3_trend, y=y3_trend, color="g", ax=ax, linewidth=1, label=name_serial_var3)
 
         if num_li == 5 or num_li == 6:
             x4, y4, x4_trend, y4_trend, name_serial_var4 = (solist[4])[0], (solist[4])[1], (solist[4])[2], (solist[4])[
                 3], (solist[4])[13]
-            sns.scatterplot(x=x4, y=y4, c="red", s=40, alpha=0.3, edgecolors='none', label=name_serial_var4)
+            sns.scatterplot(x=x4, y=y4, c="purple", s=40, alpha=0.3, edgecolors='none', label=name_serial_var4)
             sns.lineplot(x=x4_trend, y=y4_trend, color="g", ax=ax, linewidth=1, label=name_serial_var4)
 
         if num_li == 6:
             x5, y5, x5_trend, y5_trend, name_serial_var5 = (solist[5])[0], (solist[5])[1], (solist[5])[2], (solist[5])[
                 3], (solist[5])[13]
-            sns.scatterplot(x=x5, y=y5, c="red", s=40, alpha=self.model.trans_picture, edgecolors='none', label=name_serial_var5)
+            sns.scatterplot(x=x5, y=y5, c="grey", s=40, alpha=self.model.trans_picture, edgecolors='none', label=name_serial_var5)
             sns.lineplot(x=x5_trend, y=y5_trend, color="g", ax=ax, linewidth=1, label=name_serial_var5)
 
 
