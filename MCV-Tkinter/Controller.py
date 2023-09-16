@@ -349,8 +349,9 @@ class Controller:
                 self.model.name_serial_var, self.coefs]
 
     def save_cfg_data_tab0(self):
-        #self.view.
-        pass
+        dict_to_save={}
+        dict_to_save['name_col_x_tab0'] = self.view.x_var_var.get()
+
 
 
     def save_nature_data_tab_0(self):
