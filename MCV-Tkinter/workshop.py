@@ -1,19 +1,24 @@
-# # import tkinter as tk
-
-
-
-slownik = {}
-keys=[]
-values=[]
-# Wydrukuj słownik
-with open('nota.txt', 'r') as plik:
-
-    linie = plik.readlines()
-
-for linia in linie:
-    klucz, wartosc = linia.strip('\n').split('=')
-    slownik[klucz] = wartosc
-print(slownik)
-#
-
+self.name_serial_var = start_parser()['name_serial_var']
+        self.polynom_degree = start_parser()['polynom_degree']
+        self.step_value = start_parser()['step_value']
+        self.scope_down_entry_tab0 = start_parser()['scope_down_entry_tab0']
+        self.scope_up_entry_tab0 = start_parser()['scope_up_entry_tab0']
+        self.formula_x = start_parser()['formula_x']
+        self.formula_y = start_parser()['formula_y']
+        self.time_tag = start_parser()['time_tag']
+        self.column_x_tag_tab1 = start_parser()['column_x_tag_tab1']
+        self.column_y_tag_tab1 = start_parser()['column_y_tag_tab1']
+        self.down_scope_tab1 = start_parser()['down_scope_tab1']
+        self.up_scope_tab_1 = start_parser()['up_scope_tab_1']
+        self.scale_time_chart = start_parser()['scale_time_chart']
+        self.name_of_chart = start_parser()['name_of_chart']
+        self.name_of_X_axis_tab3 = start_parser()['name_of_X_axis_tab3']
+        self.unit_of_X_axis_tab3 = start_parser()['unit_of_X_axis_tab3']
+        self.name_of_Y_axis_tab3 = start_parser()['name_of_Y_axis_tab3']
+        self.unit_of_Y_axis_tab3 = start_parser()['unit_of_Y_axis_tab3']
+        self.scope_down_x_background_entry_tab0 = start_parser()['scope_down_x_background_entry_tab0']
+        self.scope_up_x_background_entry_tab0 = start_parser()['scope_up_x_background_entry_tab0']
+        self.scope_down_y_background_entry_tab0 = start_parser()['scope_down_y_background_entry_tab0']
+        self.scope_up_y_background_entry_tab0 = start_parser()['scope_up_y_background_entry_tab0']
+        self.trasparency_picture = start_parser()['trasparency_picture']
 

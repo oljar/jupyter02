@@ -32,8 +32,8 @@ class View(ttk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
 
-
         self.open_name_var = StringVar()
+        self.open_name_cfg_var = StringVar()
         self.save_name_var = StringVar()
         self.dist_border_var = StringVar()
         self.total_up_scope_var = StringVar()
@@ -141,7 +141,7 @@ class View(ttk.Frame):
         self.distance_label = ttk.Label(lf1, text='nazwa kolumny - x')
         self.distance_label.grid(row=20, column=0)
         self.name_col_x_entry = ttk.Entry(lf1, textvariable=self.x_var, width=10)
-        self.name_col_x_entry.insert(0, get_data.name_col_x_tab0)
+        self.name_col_x_entry.insert(0, get_data.name_col_x_tab0.get())
         self.name_col_x_entry.grid(row=20, column=1, sticky=tk.NSEW)
 
 
@@ -411,7 +411,7 @@ class View(ttk.Frame):
         self.draw_chart_button_background = ttk.Button(lf4, text='wykres bez tła', command=self.draw_btn_foto_back_clicked_tab_0)
         self.draw_chart_button_background.grid(row=30, column=5, padx=10)
 
-        self.button_save_config = ttk.Button(lf5, text='cfg', command=self.show_open_file_clicked_tab_0,width=6)
+        self.button_save_config = ttk.Button(lf5, text='cfg', command=self.show_open_file_cfg_clicked_tab_0,width=6)
         self.button_save_config.grid(row=0, column=0,ipady=90 )
 
 
@@ -442,7 +442,7 @@ class View(ttk.Frame):
 
         ########################################
 
-        self.open_button_data_tab_1 = ttk.Button(lf104, text='*.cfg',command=self.show_open_file_clicked_tab_1)
+        self.open_button_data_tab_1 = ttk.Button(lf104, text='*.cfg',command=self.show_open_file_cfg_clicked_tab_0)
         self.open_button_data_tab_1.grid(row=1, column=0, padx=10)
 
 
@@ -749,12 +749,19 @@ class View(ttk.Frame):
         """
         self.controller = controller
 
+    def show_open_file_cfg_clicked_tab_0(self):
+
+        get_data.dicto_paresr()
+        aaaa = str(get_data.name_col_x_tab0.get())
+        self.name_col_x_entry.delete(0, END)
+        self.name_col_x_entry.insert(0, aaaa)
+
 
     def show_open_file_clicked_tab_0(self):
 
         file1 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r', filetypes=[('CSV Files', '*.csv')])
 
-        self.open_name_var.set(str(file1.name))
+
 
 
     def show_save_file_clicked(self):
@@ -861,6 +868,9 @@ class View(ttk.Frame):
                             filetypes=[('CSV Files', '*.csv')])
 
         self.open_name_var.set(str(file11.name))
+
+
+
 
 
     def get_data_button_clicked_tab_1(self):

@@ -1,4 +1,4 @@
-name_col_x_tab0=x
+name_col_x_tab0=xhghfhfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 name_col_y_tab_0=y
 name_serial_var=seria X
 polynom_degree=2
