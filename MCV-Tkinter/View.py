@@ -811,8 +811,10 @@ class View(ttk.Frame):
     def show_save_file_cfg_clicked_tab_0(self):
 
         file44 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r',filetypes=[('CSV Files', '*.csv')])
-        self.save_name_cfg_var.set(str(file44))
+
         self.controller.save_cfg_data_tab0()
+
+        # self.save_name_cfg_var.set(str(file44))
 
 
 
@@ -927,7 +929,7 @@ class View(ttk.Frame):
     def show_open_file_clicked_tab_1(self):
 
         file11 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r',
-                            filetypes=[('CSV Files', '*.csv')])
+                            filetypes=[('CSV Files', '*.csv')],)
 
         self.open_name_var.set(str(file11.name))
 

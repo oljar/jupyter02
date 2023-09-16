@@ -350,8 +350,31 @@ class Controller:
 
     def save_cfg_data_tab0(self):
         dict_to_save={}
-        dict_to_save['name_col_x_tab0'] = self.view.x_var_var.get()
 
+        dict_to_save['name_col_x_tab0'] = self.view.x_var.get()
+        dict_to_save['name_col_y_tab_0'] = self.view.y_var.get()
+        dict_to_save['name_serial_var'] = self.view.name_serial_var.get()
+        dict_to_save['polynom_degree'] = self.view.polynominal_degree.get()
+        dict_to_save['step_value'] = self.view.step.get()
+        dict_to_save['scope_down_entry_tab0'] = self.view.total_down_scope_var.get()
+        dict_to_save['scope_up_entry_tab0'] = self.view.total_up_scope_var.get()
+        dict_to_save['formula_x'] = self.view.x_math_form.get()
+        dict_to_save['formula_y'] = self.view.y_math_form.get()
+        dict_to_save['time_tag'] = self.view.time_var_tab1.get()
+        dict_to_save['column_x_tag_tab1'] = self.view.y1_var_tab1.get()
+        dict_to_save['column_y_tag_tab1'] = self.view.y2_var_tab1.get()
+        dict_to_save['down_scope_tab1'] = self.view.down_scope_var_tab_1.get()
+        dict_to_save['up_scope_tab_1'] = self.view.up_scope_var_tab_1.get()
+        dict_to_save['scale_time_chart'] = self.view.up_scope_var_tab_1.get()
+        dict_to_save['name_of_chart'] = self.view.name_of_chart_var.get()
+        dict_to_save['name_of_X_axis_tab3'] = self.view.name_of_X_axis_var.get()
+        dict_to_save['unit_of_X_axis_tab3'] = self.view.unit_of_X_axis_var.get()
+        dict_to_save['name_of_Y_axis_tab3'] = self.view.name_of_Y_axis_var.get()
+        dict_to_save['unit_of_Y_axis_tab3'] = self.view.unit_of_Y_axis_var.get()
+
+        with open('plik.txt', 'w', encoding='utf-8') as f:
+            for key,value in dict_to_save.items():
+                f.write(f'{key}={value}\n')
 
 
     def save_nature_data_tab_0(self):
@@ -360,7 +383,7 @@ class Controller:
         solution[self.view.y_var.get()] = pd.DataFrame(self.y_exam_pts_basic)
         self.view.show_save_file_clicked()
 
-        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
+        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False,encoding='utf-8')
 
     def save_modify_data_tab_0(self):
         solution = pd.DataFrame()
@@ -368,7 +391,7 @@ class Controller:
         solution[self.view.y_var.get()] = pd.DataFrame(self.y_exam_pts_4)
         self.view.show_save_file_clicked()
 
-        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
+        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False,encoding='utf-8')
 
     def export_modyfied_data_tab_0(self):
 
@@ -743,7 +766,7 @@ class Controller:
 
         self.view.show_save_file_clicked()
 
-        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
+        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False, encoding='utf-8')
 
     def save_trend_clicked_tab_2(self):
 
@@ -758,7 +781,7 @@ class Controller:
         solution = pd.DataFrame(self.z)
         self.view.show_save_file_clicked()
 
-        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=True)
+        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=True, encoding='utf-8')
 
     # def choice_btn_foto_back_tab_0(self):
     #

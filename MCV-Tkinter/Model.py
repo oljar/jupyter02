@@ -104,7 +104,7 @@ class Model:
     def open_data_tab_1(self):
 
         data_list = []
-        with open(self.name, 'r') as f:
+        with open(self.name, 'r', encoding='utf-8') as f:
             data = csv.reader(f)
             for i in data:
                 data_list.append(i)
@@ -115,6 +115,6 @@ class Model:
                 result_row_number.append(row_number)
 
 
-        df1 = pd.read_csv(self.name, sep=';', decimal=',', header=int(result_row_number[0]))
+        df1 = pd.read_csv(self.name, sep=';', decimal=',', header=int(result_row_number[0]), encoding='utf-8')
         df1.sort_values(by=self.time_var_tab1, ascending=True)
         return df1
