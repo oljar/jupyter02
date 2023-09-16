@@ -348,6 +348,11 @@ class Controller:
                 self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var,
                 self.model.name_serial_var, self.coefs]
 
+    def save_cfg_data_tab0(self):
+        #self.view.
+        pass
+
+
     def save_nature_data_tab_0(self):
         solution = pd.DataFrame()
         solution[self.view.x_var.get()] = pd.DataFrame(self.x_exam_pts_basic)
@@ -493,6 +498,9 @@ class Controller:
         self.view.show_save_file_clicked()
 
         solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
+
+
+
 
     #########################################################################################################################
     # tab2

@@ -411,7 +411,7 @@ class View(ttk.Frame):
         self.draw_chart_button_background = ttk.Button(lf4, text='wykres bez tła', command=self.draw_btn_foto_back_clicked_tab_0)
         self.draw_chart_button_background.grid(row=30, column=5, padx=10)
 
-        self.button_save_config = ttk.Button(lf5, text='cfg', command=self.show_open_file_cfg_clicked_tab_0,width=6)
+        self.button_save_config = ttk.Button(lf5, text='cfg', command=self.show_save_file_cfg_clicked_tab_0,width=6)
         self.button_save_config.grid(row=0, column=0,ipady=90 )
 
 
@@ -806,10 +806,23 @@ class View(ttk.Frame):
         self.name_of_Y_axis_entry_tab3.insert(0, get_data.name_of_Y_axis_tab3.get())
         self.unit_of_Y_axis_entry_tab3.insert(0, get_data.unit_of_Y_axis_tab3.get())
 
+
+
+    def show_save_file_cfg_clicked_tab_0(self):
+
+        file44 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r',filetypes=[('CSV Files', '*.csv')])
+        self.save_name_cfg_var.set(str(file44))
+        self.controller.save_cfg_data_tab0()
+
+
+
+
+
     def show_open_file_clicked_tab_0(self):
 
         file1 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r', filetypes=[('CSV Files', '*.csv')])
-
+        self.open_name_var.set(str(file1.name))
+        print('ok')
 
 
 
