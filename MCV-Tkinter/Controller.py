@@ -372,7 +372,7 @@ class Controller:
         dict_to_save['name_of_Y_axis_tab3'] = self.view.name_of_Y_axis_var.get()
         dict_to_save['unit_of_Y_axis_tab3'] = self.view.unit_of_Y_axis_var.get()
 
-        with open('plik.txt', 'w', encoding='utf-8') as f:
+        with open(self.view.save_name_cfg_var.get(), 'w', encoding='utf-8') as f:
             for key,value in dict_to_save.items():
                 f.write(f'{key}={value}\n')
 

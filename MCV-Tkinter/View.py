@@ -100,6 +100,8 @@ class View(ttk.Frame):
         self.name_picture = tk.StringVar()
         self.trans_picture = tk.StringVar()
 
+        self.save_name_cfg_var = tk.StringVar()
+
 
         # create widgets
         ####################
@@ -811,10 +813,10 @@ class View(ttk.Frame):
     def show_save_file_cfg_clicked_tab_0(self):
 
         file44 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r',filetypes=[('CSV Files', '*.csv')])
-
+        self.save_name_cfg_var.set(str(file44.name))
         self.controller.save_cfg_data_tab0()
 
-        # self.save_name_cfg_var.set(str(file44))
+
 
 
 
