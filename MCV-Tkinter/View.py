@@ -812,7 +812,7 @@ class View(ttk.Frame):
 
     def show_save_file_cfg_clicked_tab_0(self):
 
-        file44 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r',filetypes=[('CSV Files', '*.csv')])
+        file44 = asksaveasfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02',defaultextension = '*.txt', mode='w',filetypes=[('TXT Files', '*.txt')])
         self.save_name_cfg_var.set(str(file44.name))
         self.controller.save_cfg_data_tab0()
 
