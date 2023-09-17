@@ -29,6 +29,8 @@ get_data = GetData()
 
 
 class View(ttk.Frame):
+
+
     def __init__(self, parent):
         super().__init__(parent)
 
@@ -101,6 +103,33 @@ class View(ttk.Frame):
         self.trans_picture = tk.StringVar()
 
         self.save_name_cfg_var = tk.StringVar()
+#########################################################################################################################
+# validation
+#########################################################################################################################
+        def validate_number(input):
+
+            if input.isdigit():
+                print(input)
+                return True
+
+            elif input is "":
+                print(input)
+                return True
+
+            else:
+                print(input)
+
+                return False
+
+        def on_invalid_number():
+            # MessageBox.ERROR('Wpisano literę. Muszą być cyfry', 'Błędny wpis')
+            messagebox.showerror('Błąd', 'Wpisano literę')
+
+        self.vcmd_number = (window.register(validate_number), '%P')
+        self.ivcmd_number = (self.register(on_invalid_number),)
+
+#####################################################################################################################
+
 
 
         # create widgets
@@ -173,24 +202,7 @@ class View(ttk.Frame):
 
 
         ###########################################################
-        def validate(input):
 
-            if input.isdigit():
-                print(input)
-                return True
-
-            elif input is "":
-                print(input)
-                return True
-
-            else:
-                print(input)
-
-                return False
-
-        def on_invalid():
-            # MessageBox.ERROR('Wpisano literę. Muszą być cyfry', 'Błędny wpis')
-            messagebox.showerror('Błąd', 'Wpisano literę')
 
         self.label = ttk.Label(lf2 )
         self.label.grid(row=24, column=0)
@@ -199,20 +211,16 @@ class View(ttk.Frame):
         self.distance_label.grid(row=26, column=0)
         self.polynom_degree_entry = ttk.Entry(lf2, textvariable=self.polynominal_degree, width=10)
         self.polynom_degree_entry.insert(0, get_data.polynom_degree.get())
-        vcmd = (lf2.register(validate), '%P')
-        ivcmd = (self.register(on_invalid),)
-
-        self.polynom_degree_entry.config(validate="key", validatecommand=vcmd, invalidcommand=ivcmd)
-
+        self.polynom_degree_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
         self.polynom_degree_entry.grid(row=26, column=1, sticky=tk.NSEW)
         ################################################################
 
 
         self.distance_label = ttk.Label(lf2, text='krok')
         self.distance_label.grid(row=26, column=2)
-
         self.step_value_entry = ttk.Entry(lf2, textvariable=self.step , width=10)
         self.step_value_entry.insert(0, get_data.step_value.get())
+        self.step_value_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
         self.step_value_entry.grid(row=26, column=3, sticky=tk.NSEW)
 
 
