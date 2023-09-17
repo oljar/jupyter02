@@ -9,7 +9,7 @@ from tkinter.ttk import *
 from tkinter.filedialog import askopenfile
 from tkinter.filedialog import asksaveasfile
 from data_source import *
-
+from tkinter import messagebox
 
 
 window = tk.Tk()
@@ -173,6 +173,24 @@ class View(ttk.Frame):
 
 
         ###########################################################
+        def validate(input):
+
+            if input.isdigit():
+                print(input)
+                return True
+
+            elif input is "":
+                print(input)
+                return True
+
+            else:
+                print(input)
+
+                return False
+
+        def on_invalid():
+            # MessageBox.ERROR('Wpisano literę. Muszą być cyfry', 'Błędny wpis')
+            messagebox.showerror('Błąd', 'Wpisano literę')
 
         self.label = ttk.Label(lf2 )
         self.label.grid(row=24, column=0)
@@ -181,8 +199,12 @@ class View(ttk.Frame):
         self.distance_label.grid(row=26, column=0)
         self.polynom_degree_entry = ttk.Entry(lf2, textvariable=self.polynominal_degree, width=10)
         self.polynom_degree_entry.insert(0, get_data.polynom_degree.get())
-        self.polynom_degree_entry.grid(row=26, column=1, sticky=tk.NSEW)
+        vcmd = (lf2.register(validate), '%P')
+        ivcmd = (self.register(on_invalid),)
 
+        self.polynom_degree_entry.config(validate="key", validatecommand=vcmd, invalidcommand=ivcmd)
+
+        self.polynom_degree_entry.grid(row=26, column=1, sticky=tk.NSEW)
         ################################################################
 
 
