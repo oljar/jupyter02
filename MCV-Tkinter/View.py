@@ -781,7 +781,7 @@ class View(ttk.Frame):
         self.name_of_Y_axis_entry_tab3.delete(0, END)
         self.unit_of_Y_axis_entry_tab3.delete(0, END)
 
-        self.name_col_x_entry.insert(0, str(get_data.name_col_x_tab0.get()))
+
         self.name_col_x_entry.insert(0, get_data.name_col_x_tab0.get())
         self.name_col_y_entry.insert(0, get_data.name_col_y_tab_0.get())
         self.name_serial_entry.insert(0, get_data.name_serial_var.get())
