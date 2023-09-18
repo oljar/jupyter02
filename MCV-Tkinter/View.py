@@ -309,19 +309,16 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf3)
         self.label.grid(row=32, column=0)
 
-        self.count_button_count = ttk.Button(lf2, text='Przelicz', command=self.count_button_clicked_tab_0)
-        self.count_button_count.grid(row=35, column=0, padx=10)
+        self.count_button_count_basic_tab0 = ttk.Button(lf2, text='Przelicz', command=self.count_button_clicked_tab_0)
+        self.count_button_count_basic_tab0.grid(row=35, column=0, padx=10)
 
         self.open_button_draw_natural = ttk.Button(lf2, text='Rysuj wykres naturalny',
                                                    command=self.draw_natural_chart_clicked_tab_0)
 
         self.open_button_draw_natural.grid(row=35, column=1, padx=10)
 
-
-
-        self.open_button = ttk.Button(lf2, text='Zapisz', command=self.save_natural_button_clicked_tab_0)
-        self.open_button.grid(row=35, column=2, padx=10)
-
+        self.save_natural_button_tab0 = ttk.Button(lf2, text='Zapisz', command=self.save_natural_button_clicked_tab_0)
+        self.save_natural_button_tab0.grid(row=35, column=2, padx=10)
 
         self.export_button_natural_data_tab_0 = ttk.Button(lf2, text='Dalej', command=self.export_nature_data_button_clicked_tab_0)
         self.export_button_natural_data_tab_0.grid(row=35, column=3, padx=10)
@@ -401,8 +398,8 @@ class View(ttk.Frame):
         self.label.grid(row=110, column=0)
 
 
-        self.count_button_count_basic_tab0 = ttk.Button(lf3, text='Przelicz', command=self.count_button_clicked_tab_0)
-        self.count_button_count_basic_tab0.grid(row=100, column=0, padx=10)
+        self.count_button_count = ttk.Button(lf3, text='Przelicz', command=self.count_button_clicked_tab_0)
+        self.count_button_count.grid(row=100, column=0, padx=10)
 
         #############################
 
@@ -940,6 +937,10 @@ class View(ttk.Frame):
 
         try:
             self.controller.open_data()
+            self.open_button_tab0.config(text='ok')
+            self.open_button_tab0.after(self.delay_time,lambda: self.open_button_tab0.config(text='Pobierz dane'))
+
+
 
         except:
             errors.err_bad_data()
@@ -965,15 +966,20 @@ class View(ttk.Frame):
 
 
         except:
-            errors.err_export_count()
+            errors.err_basic_count()
 
     def draw_natural_chart_clicked_tab_0(self):
         self.controller.natural_chart_execution_tab_0()
 
 
     def save_natural_button_clicked_tab_0(self):
-        self.controller.save_nature_data_tab_0()
 
+        try:
+            self.controller.save_nature_data_tab_0()
+            self.save_natural_button_tab0.config(text='ok')
+            self.save_natural_button_tab0.after(self.delay_time, lambda: self.save_natural_button_tab0.config(text='Pobierz dane'))
+        except:
+            errors.err_save_problem()
 
 
     def export_nature_data_button_clicked_tab_0(self):
