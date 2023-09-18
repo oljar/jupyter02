@@ -1,5 +1,6 @@
 import pandas as pd
 import csv
+from tkinter import messagebox
 
 
 
@@ -115,6 +116,9 @@ class Model:
                 result_row_number.append(row_number)
 
 
+
         df1 = pd.read_csv(self.name, sep=';', decimal=',', header=int(result_row_number[0]), encoding='utf-8')
         df1.sort_values(by=self.time_var_tab1, ascending=True)
+
+
         return df1

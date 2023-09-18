@@ -114,9 +114,3 @@ class GetData:
         self.unit_of_X_axis_tab3.set(diction['unit_of_X_axis_tab3'])
         self.name_of_Y_axis_tab3.set(diction['name_of_Y_axis_tab3'])
         self.unit_of_Y_axis_tab3.set(diction['unit_of_Y_axis_tab3'])
-        # self.scope_down_x_background_entry_tab0.set(diction['scope_down_x_background_entry_tab0'])
-        # self.scope_up_x_background_entry_tab0.set(diction['scope_up_x_background_entry_tab0'])
-        # self.scope_down_y_background_entry_tab0.set(diction['scope_down_y_background_entry_tab0'])
-        # self.scope_up_y_background_entry_tab0.set(diction['scope_up_y_background_entry_tab0'])
-        # self.trasparency_picture.set(diction['trasparency_picture'])
-

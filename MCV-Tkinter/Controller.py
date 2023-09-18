@@ -365,7 +365,7 @@ class Controller:
         dict_to_save['column_y_tag_tab1'] = self.view.y2_var_tab1.get()
         dict_to_save['down_scope_tab1'] = self.view.down_scope_var_tab_1.get()
         dict_to_save['up_scope_tab_1'] = self.view.up_scope_var_tab_1.get()
-        dict_to_save['scale_time_chart'] = self.view.up_scope_var_tab_1.get()
+        dict_to_save['scale_time_chart'] = self.view.scale_time_chart.get()
         dict_to_save['name_of_chart'] = self.view.name_of_chart_var.get()
         dict_to_save['name_of_X_axis_tab3'] = self.view.name_of_X_axis_var.get()
         dict_to_save['unit_of_X_axis_tab3'] = self.view.unit_of_X_axis_var.get()
