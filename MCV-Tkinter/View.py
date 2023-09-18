@@ -309,7 +309,7 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf3)
         self.label.grid(row=32, column=0)
 
-        self.count_button_count_basic_tab0 = ttk.Button(lf2, text='Przelicz', command=self.count_button_clicked_tab_0)
+        self.count_button_count_basic_tab0 = ttk.Button(lf2, text='Przelicz', command=self.count_natural_button_clicked_tab_0)
         self.count_button_count_basic_tab0.grid(row=35, column=0, padx=10)
 
         self.open_button_draw_natural = ttk.Button(lf2, text='Rysuj wykres naturalny',
@@ -397,7 +397,7 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf3)
         self.label.grid(row=110, column=0)
 
-        self.count_button_modify_count = ttk.Button(lf3, text='Przelicz', command=self.count_button_clicked_tab_0)
+        self.count_button_modify_count = ttk.Button(lf3, text='Przelicz', command=self.count_modify_button_clicked_tab_0)
         self.count_button_modify_count.grid(row=100, column=0, padx=10)
 
         #############################
@@ -413,8 +413,8 @@ class View(ttk.Frame):
 
 
         #
-        self.open_button_save_data= ttk.Button(lf3, text='Zapisz', command=self.save_modify_button_clicked_tab_0)
-        self.open_button_save_data.grid(row=100, column=2, padx=10)
+        self.open_button_save_modify_data = ttk.Button(lf3, text='Zapisz', command=self.save_modify_button_clicked_tab_0)
+        self.open_button_save_modify_data.grid(row=100, column=2, padx=10)
 
 
 
@@ -422,8 +422,8 @@ class View(ttk.Frame):
 
 
 
-        self.open_button = ttk.Button(lf3, text='Dalej', command=self.export_modyfied_button_clicked_tab_0)
-        self.open_button.grid(row=100, column=3, padx=10)
+        self.export_button_modify_data_tab_0 = ttk.Button(lf3, text='Dalej', command=self.export_modyfied_button_clicked_tab_0)
+        self.export_button_modify_data_tab_0.grid(row=100, column=3, padx=10)
 
 
         ############################
@@ -696,7 +696,6 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf303)
         self.label.grid(row=3, column=0)
 
-
         self.save_data_button_tab_2 = ttk.Button(lf303, text='Zapisz dane', command=self.data_save_clicked_tab_2)
         self.save_data_button_tab_2.grid(row=4, column=0, padx=10)
 
@@ -886,9 +885,16 @@ class View(ttk.Frame):
 
     def show_save_file_cfg_clicked_tab_0(self):
 
-        file44 = asksaveasfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02',defaultextension = '*.txt', mode='w',filetypes=[('TXT Files', '*.txt')])
-        self.save_name_cfg_var.set(str(file44.name))
-        self.controller.save_cfg_data_tab0()
+        try:
+            file44 = asksaveasfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02',defaultextension = '*.txt', mode='w',filetypes=[('TXT Files', '*.txt')])
+            self.save_name_cfg_var.set(str(file44.name))
+            self.controller.save_cfg_data_tab0()
+            self.button_save_config.config(text='ok')
+            self.button_save_config.after(self.delay_time,lambda: self.button_save_config.config(text='cfg'))
+
+
+        except:
+            errors.err_save_problem()
 
 
 
@@ -922,15 +928,19 @@ class View(ttk.Frame):
 
     def show_open_picture_clicked_tab_0(self):
 
-        picture1 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r', filetypes=[
-                    ("image", ".jpeg"),
-                    ("image", ".png"),
-                    ("image", ".jpg"),
-                    ("image", ".bmp")
-                ])
+        try:
+            picture1 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r', filetypes=[
+                        ("image", ".jpeg"),
+                        ("image", ".png"),
+                        ("image", ".jpg"),
+                        ("image", ".bmp")
+                    ])
 
-        self.name_picture.set(str(picture1.name))
-
+            self.name_picture.set(str(picture1.name))
+            self.choice_button_foto_background.config(text='ok')
+            self.choice_button_foto_background.after(self.delay_time, lambda: self.choice_button_foto_background.config(text='Pobierz dane'))
+        except:
+            errors.err_background_open()
 
     def open_button_clicked(self):
 
@@ -956,16 +966,29 @@ class View(ttk.Frame):
 
 
 
-    def count_button_clicked_tab_0(self):
+    def count_natural_button_clicked_tab_0(self):
         try:
             self.controller.counter()
             self.count_button_count_basic_tab0.config(text='ok')
             self.count_button_count_basic_tab0.after(self.delay_time,lambda: self.count_button_count_basic_tab0.config(text='Przelicz'))
 
-
-
         except:
             errors.err_basic_count()
+
+
+    def count_modify_button_clicked_tab_0(self):
+        try:
+            self.controller.counter()
+            self.count_button_modify_count.config(text='ok')
+            self.count_button_modify_count.after(self.delay_time,lambda: self.count_button_modify_count.config(text='Przelicz'))
+
+        except:
+            errors.err_modify_count()
+
+
+
+
+
 
     def draw_natural_chart_clicked_tab_0(self):
         self.controller.natural_chart_execution_tab_0()
@@ -983,7 +1006,7 @@ class View(ttk.Frame):
             self.controller.export_nature_data_tab_0()
             self.switch_modyfied_export = False
             self.export_button_natural_data_tab_0.config(text='ok')
-            self.export_button_natural_data_tab_0.after(self.delay_time, lambda: self.export_button_natural_data_tab_0.config(text='Pobierz dane'))
+            self.export_button_natural_data_tab_0.after(self.delay_time, lambda: self.export_button_natural_data_tab_0.config(text='dalej'))
         except:
             errors.err_export_problem()
 
@@ -999,12 +1022,24 @@ class View(ttk.Frame):
 
 
     def save_modify_button_clicked_tab_0(self):
-        self.controller.save_modify_data_tab_0()
+        try:
+            self.controller.save_modify_data_tab_0()
+            self.open_button_save_modify_data.config(text='ok')
+            self.open_button_save_modify_data.after(self.delay_time,lambda: self.open_button_save_modify_data.config(text='Zapisz'))
 
+
+        except:
+            errors.err_save_problem()
 
     def export_modyfied_button_clicked_tab_0(self):
-        self.switch_modyfied_export = True
-        self.controller.export_modyfied_data_tab_0()
+
+        try:
+            self.switch_modyfied_export = True
+            self.controller.export_modyfied_data_tab_0()
+            self.export_button_modify_data_tab_0.config(text='ok')
+            self.export_button_modify_data_tab_0.after(self.delay_time,lambda: self.export_button_modify_data_tab_0.config(text='Dalej'))
+        except:
+            errors.err_export_problem()
 
     def choice_btn_foto_back_clicked_tab_0(self):
         self.controller.choice_btn_foto_back_tab_0()
@@ -1234,12 +1269,21 @@ class View(ttk.Frame):
         self.controller.united_chart_execution_tab_2()
 
     def data_save_clicked_tab_2(self):
-        # self.controller.save_data_clicked_tab_2()
-        self.controller.save_data_clicked_tab_2()
+        try:
+            self.controller.save_data_clicked_tab_2()
+            self.save_data_button_tab_2.config(text='ok')
+            self.save_data_button_tab_2.after(self.delay_time, lambda: self.save_data_button_tab_2.config(text='Zapisz dane'))
+        except:
+            errors.err_save_problem()
 
     def trend_save_clicked_tab_2(self):
-        # self.controller.save_data_clicked_tab_2()
-        self.controller.save_trend_clicked_tab_2()
+        try:
+            self.controller.save_trend_clicked_tab_2()
+            self.save_trend_button_tab_2.config(text='ok')
+            self.save_trend_button_tab_2.after(self.delay_time, lambda: self.save_trend_button_tab_2 .config(text='Zapisz trend'))
+        except:
+            errors.err_save_problem()
+
 
 
 
