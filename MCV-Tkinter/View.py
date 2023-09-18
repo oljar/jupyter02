@@ -971,9 +971,7 @@ class View(ttk.Frame):
     def draw_natural_chart_clicked_tab_0(self):
         self.controller.natural_chart_execution_tab_0()
 
-
     def save_natural_button_clicked_tab_0(self):
-
         try:
             self.controller.save_nature_data_tab_0()
             self.save_natural_button_tab0.config(text='ok')
@@ -981,10 +979,16 @@ class View(ttk.Frame):
         except:
             errors.err_save_problem()
 
-
     def export_nature_data_button_clicked_tab_0(self):
-        self.controller.export_nature_data_tab_0()
-        self.switch_modyfied_export = False
+        try:
+            self.controller.export_nature_data_tab_0()
+            self.switch_modyfied_export = False
+            self.export_button_natural_data_tab_0.config(text='ok')
+            self.export_button_natural_data_tab_0.after(self.delay_time, lambda: self.export_button_natural_data_tab_0.config(text='Pobierz dane'))
+        except:
+            errors.err_export_problem()
+
+
 
 
 
