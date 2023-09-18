@@ -397,9 +397,8 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf3)
         self.label.grid(row=110, column=0)
 
-
-        self.count_button_count = ttk.Button(lf3, text='Przelicz', command=self.count_button_clicked_tab_0)
-        self.count_button_count.grid(row=100, column=0, padx=10)
+        self.count_button_modify_count = ttk.Button(lf3, text='Przelicz', command=self.count_button_clicked_tab_0)
+        self.count_button_modify_count.grid(row=100, column=0, padx=10)
 
         #############################
 
