@@ -1,7 +1,4 @@
-import re
 import tkinter as tk
-from tkinter import ttk
-import source
 from Controller import Controller
 from Model import Model
 from View import View
@@ -94,6 +91,8 @@ V.tab_parent.add(V.tab3,text = 'jednostki')
 V.tab_parent.add(V.tab1,text = 'zakres')
 V.tab_parent.add(V.tab0,text = 'ustawienia')
 V.tab_parent.add(V.tab2,text = 'agregacja')
+
+
 
 
 V.tab_parent.pack(expand = 1, fill = 'both')

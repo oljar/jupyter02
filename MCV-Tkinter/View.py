@@ -1,25 +1,16 @@
-import re
 import tkinter as tk
 from tkinter import ttk
-
-import error_list
-import source
-from Controller import Controller
-from Model import Model
-from tkinter import *
-from tkinter.ttk import *
-from tkinter.filedialog import askopenfile
-from tkinter.filedialog import asksaveasfile
+from formula_source import *
 from data_source import *
-from tkinter import messagebox
 import datetime
 from error_list import *
-import time
+import math
+
 
 
 window = tk.Tk()
-window.title("Chart plotter")
-window.geometry('790x850')
+window.title("Chart plotter v.1.2")
+window.geometry('790x890')
 
 tab_parent = ttk.Notebook(window)
 tab0 = ttk.Frame(tab_parent)
@@ -28,6 +19,7 @@ tab2 = ttk.Frame(tab_parent)
 tab3 = ttk.Frame(tab_parent)
 
 get_data = GetData()
+get_formula = GetFormula()
 
 errors = Errors()
 
@@ -109,6 +101,8 @@ class View(ttk.Frame):
 
         self.delay_time = 500
 
+        self.combobox_list_value = tk.StringVar()
+
 
 #########################################################################################################################
 # validation
@@ -122,7 +116,7 @@ class View(ttk.Frame):
                 print(input)
                 return True
 
-            elif input is "":
+            elif input == "":
                 print(input)
                 return True
 
@@ -133,7 +127,7 @@ class View(ttk.Frame):
 
         def on_invalid_number():
 
-            messagebox.showerror('ERROR', 'Wpisano literę')
+            messagebox.showerror('ERROR', 'Wpisano literę- wpisz liczbę')
 
         self.vcmd_number = (window.register(validate_number), '%P')
         self.ivcmd_number = (window.register(on_invalid_number),)
@@ -160,10 +154,65 @@ class View(ttk.Frame):
 
         self.vcmd_time = (window.register(validate_time), '%P')
         self.ivcmd_time = (window.register(on_invalid_time),)
+######################################################################################################################
+
+        def validate_fraction01(input):
+            try:
+                input = eval(input)
+                if isinstance(input, float) and 0 < input <1:
+                    return True
+
+
+                elif input == 1 :
+                    return True
+
+                else:
+
+                    return False
+            except:
+                return False
+
+        def on_invalid_fraction01():
+
+            messagebox.showerror('ERROR', 'Wpisano nieprawidłową wartość - wpisz (0,1>')
+
+        self.vcmd_fraction_01 = (window.register(validate_fraction01), '%P')
+        self.ivcmd_fraction_01 = (window.register(on_invalid_fraction01),)
+
+#########################################################################################################################
+
+        def validate_proc(input):
+            try:
+                input = eval(input)
+                if isinstance(input, int) and 0 < input < 100:
+                    return True
+
+
+                elif input == 0:
+                    return True
+
+                elif input == 100:
+                    return True
+
+
+                else:
+
+                    return False
+            except:
+                return False
 
 
 
-####################################################################################################################
+        def on_invalid_proc():
+
+            messagebox.showerror('ERROR', 'Wpisano nieprawidłową wartość- wpisz liczbę <0,100>')
+
+
+
+        self.vcmd_proc = (window.register(validate_proc), '%P')
+        self.ivcmd_proc = (window.register(on_invalid_proc),)
+
+        ####################################################################################################################
 #errors
 ####################################################################################################################
 
@@ -268,19 +317,19 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf2)
         self.label.grid(row=27, column=0)
 
-        self.label = ttk.Label(lf2, text='dolny zakres:')
+        self.label = ttk.Label(lf2, text='dolny zakres: [%]')
         self.label.grid(row=28, column=0)
 
         self.scope_down_entry = ttk.Entry(lf2, textvariable=self.total_down_scope_var, width=30)
         self.scope_down_entry.insert(0, get_data.scope_down_entry_tab0.get())
-        self.scope_down_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
+        self.scope_down_entry.config(validate="focusout", validatecommand=self.vcmd_proc, invalidcommand=self.ivcmd_proc)
         self.scope_down_entry.grid(row=28, column=1, sticky=tk.NSEW)
 
-        self.total_scope_label = ttk.Label(lf2, text='górny zakres:')
+        self.total_scope_label = ttk.Label(lf2, text='górny zakres: [%]')
         self.total_scope_label.grid(row=28, column=2)
         self.scope_up_entry = ttk.Entry(lf2, textvariable=self.total_up_scope_var, width=30)
         self.scope_up_entry.insert(0, get_data.scope_up_entry_tab0.get())
-        self.scope_up_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
+        self.scope_up_entry.config(validate="focusout", validatecommand=self.vcmd_proc, invalidcommand=self.ivcmd_proc)
         self.scope_up_entry.grid(row=28, column=3, sticky=tk.NSEW)
 
         ############################################
@@ -296,6 +345,7 @@ class View(ttk.Frame):
         self.formula_x_entry.insert(0,get_data.formula_x.get())
         self.formula_x_entry .grid(row=30, column=1, sticky=tk.NSEW)
 
+
         self.label = ttk.Label(lf2, text='wzór korekcyjny - y')
         self.label.grid(row=30, column=2)
 
@@ -306,8 +356,45 @@ class View(ttk.Frame):
         self.distance_label = ttk.Label(lf2)
         self.distance_label.grid(row=31, column=0)
 
-        self.label = ttk.Label(lf3)
-        self.label.grid(row=32, column=0)
+        def formula_field_fill(event):
+            temp = self.combobox_measure_reducer.get()
+            if temp == "zwężka-110":
+                self.formula_x_entry.delete(0, END)
+                self.formula_x_entry.insert(0, get_formula.get_formula_110)
+            elif temp == "zwężka-160":
+                self.formula_x_entry.delete(0, END)
+                self.formula_x_entry.insert(0, get_formula.get_formula_160)
+            elif temp == "zwężka-200":
+                self.formula_x_entry.delete(0, END)
+                self.formula_x_entry.insert(0, get_formula.get_formula_200)
+            elif temp == "user1":
+                self.formula_x_entry.delete(0, END)
+                self.formula_x_entry.insert(0, get_formula.get_user_1)
+            elif temp == "user2":
+                self.formula_x_entry.delete(0, END)
+                self.formula_x_entry.insert(0, get_formula.get_user_2)
+            elif temp == "user3":
+                self.formula_x_entry.delete(0, END)
+                self.formula_x_entry.insert(0, get_formula.get_user_3)
+
+
+
+
+        self.distance_label = ttk.Label(lf2,text = 'typ testu')
+        self.distance_label.grid(row=32, column=0)
+        self.combobox_measure_reducer = ttk.Combobox(lf2, values = ('zwężka-110','zwężka-160','zwężka-200','user1','user2','user3'), )
+        self.combobox_measure_reducer.bind('<<ComboboxSelected>>', formula_field_fill)
+
+        self.combobox_measure_reducer.grid(row=32, column=1)
+
+
+
+
+
+
+        self.label = ttk.Label(lf2)
+        self.label.grid(row=33, column=0)
+
 
         self.count_button_count_basic_tab0 = ttk.Button(lf2, text='Przelicz', command=self.count_natural_button_clicked_tab_0)
         self.count_button_count_basic_tab0.grid(row=35, column=0, padx=10)
@@ -322,6 +409,8 @@ class View(ttk.Frame):
 
         self.export_button_natural_data_tab_0 = ttk.Button(lf2, text='Dalej', command=self.export_nature_data_button_clicked_tab_0)
         self.export_button_natural_data_tab_0.grid(row=35, column=3, padx=10)
+
+
 
 
         #######################
@@ -356,7 +445,7 @@ class View(ttk.Frame):
 
 
         self.density_entry = ttk.Entry(lf3, textvariable=self.density_var, width=30)
-        self.density_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
+        self.density_entry.config(validate="focusout", validatecommand=self.vcmd_fraction_01, invalidcommand=self.ivcmd_fraction_01)
         self.density_entry.grid(row = 60, column=1, sticky=tk.NSEW)
 
 
@@ -366,20 +455,20 @@ class View(ttk.Frame):
         self.label.grid(row=70, column=0)
 
 
-        self.down_scope_label = ttk.Label(lf3, text='dolny zakres:')
+        self.down_scope_label = ttk.Label(lf3, text='dolny zakres [%]:')
         self.down_scope_label.grid(row = 80, column=0)
         self.down_scope_entry = ttk.Entry(lf3, textvariable=self.down_scope_var, width=30)
-        self.down_scope_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
+        self.down_scope_entry.config(validate="focusout", validatecommand=self.vcmd_proc, invalidcommand=self.ivcmd_proc)
         self.down_scope_entry.grid(row = 80, column=1, sticky=tk.NSEW)
 
         #######################
 
 
 
-        self.up_scope_label = ttk.Label(lf3, text='górny zakres:')
+        self.up_scope_label = ttk.Label(lf3, text='górny zakres [%]:')
         self.up_scope_label.grid(row = 80, column=2)
         self.up_scope_entry = ttk.Entry(lf3, textvariable=self.up_scope_var, width=30)
-        self.up_scope_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
+        self.up_scope_entry.config(validate="focusout", validatecommand=self.vcmd_proc, invalidcommand=self.ivcmd_proc)
         self.up_scope_entry.grid(row = 80, column=3, sticky=tk.NSEW)
 
 
@@ -431,16 +520,16 @@ class View(ttk.Frame):
         self.distance_label = ttk.Label(lf4)
         self.distance_label.grid(row=0, column=0)
 
-        self.label_down_background_x_entry = ttk.Label(lf4, text='dolny zakres x:')
+        self.label_down_background_x_entry = ttk.Label(lf4, text='dolny zakres x: [int]')
         self.label_down_background_x_entry.grid(row=10, column=0)
         self.scope_down_background_x_entry = ttk.Entry(lf4, textvariable = self.scope_down_back_entry_x_var, width=30)
         self.scope_down_background_x_entry.insert(0, get_data.scope_down_x_background_entry_tab0.get())
         self.scope_down_background_x_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
-        self.scope_down_background_x_entry.grid(row=10, column=3, sticky=tk.NSEW)
+        self.scope_down_background_x_entry.grid(row=10, column=2, sticky=tk.NSEW)
 
 
 
-        self.label_up_background_x_entry = ttk.Label(lf4, text='górny zakres x:')
+        self.label_up_background_x_entry = ttk.Label(lf4, text='górny zakres x: [int]')
         self.label_up_background_x_entry.grid(row=10, column=4)
 
         self.scope_up_background_x_entry = ttk.Entry(lf4, textvariable = self.scope_up_back_entry_x_var, width=30)
@@ -451,14 +540,14 @@ class View(ttk.Frame):
         self.distance_label = ttk.Label(lf4)
         self.distance_label.grid(row=15, column=0)
 
-        self.scope_down_background_y_label = ttk.Label(lf4, text='dolny zakres y:')
+        self.scope_down_background_y_label = ttk.Label(lf4, text='dolny zakres y: [int]')
         self.scope_down_background_y_label.grid(row=20, column=0)
         self.scope_down_background_y_entry = ttk.Entry(lf4, textvariable=self.scope_down_back_entry_y_var, width=30)
         self.scope_down_background_y_entry.insert(0, get_data.scope_down_y_background_entry_tab0.get())
         self.scope_down_background_y_entry.config(validate="key", validatecommand=self.vcmd_number,invalidcommand=self.ivcmd_number)
-        self.scope_down_background_y_entry.grid(row=20, column=3, sticky=tk.NSEW)
+        self.scope_down_background_y_entry.grid(row=20, column=2, sticky=tk.NSEW)
 
-        self.scope_up_background_y_label = ttk.Label(lf4, text='górny zakres y:')
+        self.scope_up_background_y_label = ttk.Label(lf4, text='górny zakres y: [int]')
         self.scope_up_background_y_label.grid(row=20, column=4)
 
         self.scope_up_background_y_entry = ttk.Entry(lf4, textvariable=self.scope_up_back_entry_y_var, width=30)
@@ -477,6 +566,7 @@ class View(ttk.Frame):
 
         self.trans_picture_entry = ttk.Entry(lf4, textvariable=self.trans_picture, width=5)
         self.trans_picture_entry.insert(0, get_data.trasparency_picture.get())
+        self.trans_picture_entry.config(validate="focusout", validatecommand=self.vcmd_fraction_01,invalidcommand=self.ivcmd_fraction_01)
         self.trans_picture_entry.grid(row=30, column=4, sticky=tk.W)
 
 
@@ -906,7 +996,7 @@ class View(ttk.Frame):
             file1 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r', filetypes=[('CSV Files', '*.csv')])
             self.open_name_var.set(str(file1.name))
             self.show_file_tab0.config(text='ok')
-            self.show_file_tab0.after(self.delay_time,lambda: self.show_file_tab0.config(text='Pobierz dane'))
+            self.show_file_tab0.after(self.delay_time,lambda: self.show_file_tab0.config(text='Wskaż plik csv'))
 
 
 
@@ -967,13 +1057,13 @@ class View(ttk.Frame):
 
 
     def count_natural_button_clicked_tab_0(self):
-        try:
-            self.controller.counter()
-            self.count_button_count_basic_tab0.config(text='ok')
-            self.count_button_count_basic_tab0.after(self.delay_time,lambda: self.count_button_count_basic_tab0.config(text='Przelicz'))
+        # try:
+        self.controller.counter()
+        self.count_button_count_basic_tab0.config(text='ok')
+        self.count_button_count_basic_tab0.after(self.delay_time,lambda: self.count_button_count_basic_tab0.config(text='Przelicz'))
 
-        except:
-            errors.err_basic_count()
+  #      except:
+   #         errors.err_basic_count()
 
 
     def count_modify_button_clicked_tab_0(self):
@@ -997,18 +1087,23 @@ class View(ttk.Frame):
         try:
             self.controller.save_nature_data_tab_0()
             self.save_natural_button_tab0.config(text='ok')
-            self.save_natural_button_tab0.after(self.delay_time, lambda: self.save_natural_button_tab0.config(text='Pobierz dane'))
+            self.save_natural_button_tab0.after(self.delay_time, lambda: self.save_natural_button_tab0.config(text='Zapisz'))
         except:
             errors.err_save_problem()
 
     def export_nature_data_button_clicked_tab_0(self):
+        self.turn_on_button_pull_data()
         try:
             self.controller.export_nature_data_tab_0()
             self.switch_modyfied_export = False
             self.export_button_natural_data_tab_0.config(text='ok')
-            self.export_button_natural_data_tab_0.after(self.delay_time, lambda: self.export_button_natural_data_tab_0.config(text='dalej'))
+            self.export_button_natural_data_tab_0.after(self.delay_time, lambda: self.export_button_natural_data_tab_0.config(text='Dalej'))
+            tab_parent.select(tab2)
+
+
         except:
             errors.err_export_problem()
+
 
 
 
@@ -1032,12 +1127,13 @@ class View(ttk.Frame):
             errors.err_save_problem()
 
     def export_modyfied_button_clicked_tab_0(self):
-
+        self.turn_on_button_pull_data()
         try:
             self.switch_modyfied_export = True
             self.controller.export_modyfied_data_tab_0()
             self.export_button_modify_data_tab_0.config(text='ok')
             self.export_button_modify_data_tab_0.after(self.delay_time,lambda: self.export_button_modify_data_tab_0.config(text='Dalej'))
+            tab_parent.select(tab2)
         except:
             errors.err_export_problem()
 
@@ -1056,8 +1152,15 @@ class View(ttk.Frame):
 
 
 
+    def turn_on_button_pull_data(self):
+        self.open_button_tab0.config(state="enabled")
+        self.show_file_tab0.config(state="enabled")
 
-#####################################################################################################################
+    def turn_off_button_pull_data(self):
+        self.open_button_tab0.config(state="disabled")
+        self.show_file_tab0.config(state="disabled")
+
+    #####################################################################################################################
 
 
 
@@ -1070,7 +1173,7 @@ class View(ttk.Frame):
 
             self.open_name_var.set(str(file11.name))
             self.open_button_data_tab_1.config(text='ok')
-            self.open_button_data_tab_1.after(self.delay_time,lambda: self.open_button_data_tab_1.config(text='Pobierz dane'))
+            self.open_button_data_tab_1.after(self.delay_time,lambda: self.open_button_data_tab_1.config(text='Wskaż plik csv'))
         except:
 
             errors.err_lack_of_file()
@@ -1124,10 +1227,14 @@ class View(ttk.Frame):
 
 
             self.export_button_count_tab_1.config(text='ok')
-            self.export_button_count_tab_1.after(self.delay_time, lambda: self.export_button_count_tab_1.config(text='Zapisz'))
+            self.export_button_count_tab_1.after(self.delay_time, lambda: self.export_button_count_tab_1.config(text='Dalej'))
+            tab_parent.select(tab0)
+
 
         except:
             errors.err_export_problem()
+
+        self.turn_off_button_pull_data()
 
 
 

@@ -1,18 +1,8 @@
-import re
-import tkinter as tk
-from tkinter import ttk
 
-import pandas
-
-import source
-
-import csv
 import pandas as pd
-from scipy.spatial import distance
+
 import numpy.polynomial.polynomial as poly
-import matplotlib.pyplot as plt
-import numpy as np
-import math
+
 from datetime import datetime
 import numpy as np
 
@@ -20,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import seaborn as sns
-import copy
+import math
 
 
 class Controller:
@@ -98,7 +88,7 @@ class Controller:
 
         self.x_exam_pts = (df1[x_tag]).tolist()  # definition of columns -x
 
-        cor_factor_x = str(self.view.x_math_form.get())
+        cor_factor_x = self.view.x_math_form.get()
 
         self.x_exam_pts = [eval(cor_factor_x) for x in self.x_exam_pts]
 
@@ -721,6 +711,8 @@ class Controller:
             plt.imshow(img, extent=[int(self.model.scope_down_back_entry_x_var),int(self.model.scope_up_back_entry_x_var),int(self.model.scope_down_back_entry_y_var), int(self.model.scope_up_back_entry_y_var)], aspect='auto', alpha= self.model.trans_picture)
 
         plt.title((solist[0])[4])
+        plt.xlim(0)
+        plt.ylim(0)
         plt.show()
 
     def united_chart_execution_tab_2(self):
